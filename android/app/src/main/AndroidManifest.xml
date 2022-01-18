@@ -6,6 +6,11 @@
    <application
         android:label="أحب محمدا"
         android:icon="@mipmap/ic_launcher">
+       <meta-data
+           android:name="com.google.firebase.messaging.default_notification_icon"
+           android:resource="@drawable/ic_action_name" />
+       <meta-data android:name="com.google.firebase.messaging.default_notification_color"
+           android:resource="@color/notificationColor" />
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
@@ -30,11 +35,16 @@
               android:name="io.flutter.embedding.android.SplashScreenDrawable"
               android:resource="@drawable/launch_background"
               />
+            <meta-data
+                android:name="io.flutter.app.android.SplashScreenUntilFirstFrame"
+                android:value="true" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+
        <meta-data android:name="com.google.firebase.messaging.default_notification_channel_id"
            android:value="HobAlNabi"/>
         <!-- Don't delete the meta-data below.

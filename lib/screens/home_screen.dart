@@ -7,18 +7,19 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
         body: Directionality(
           textDirection: TextDirection.rtl,
           child: SafeArea(
             child: CustomScrollView(slivers: [
       SliverAppBar(
+        backgroundColor: Colors.white,
     shape: const RoundedRectangleBorder(
             borderRadius:
                 BorderRadiusDirectional.vertical(bottom: Radius.circular(40))),
     pinned: false,
     floating: false,
     flexibleSpace: FlexibleSpaceBar(
-      centerTitle: true,
       background: ClipRRect(
             child: Hero(
               tag: 'mainScreen',

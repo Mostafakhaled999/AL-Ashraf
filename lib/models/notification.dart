@@ -16,7 +16,7 @@ class LocalNotification {
     var pref = await SharedPreferences.getInstance();
     if(!pref.containsKey('subscribedToHobAlNabi'))
     {
-      FirebaseMessaging.instance.subscribeToTopic('HobAlNabi').whenComplete((){
+      FirebaseMessaging.instance.subscribeToTopic('dev').whenComplete((){
         pref.setBool('subscribedToHobAlNabi', true);
       });
     }
@@ -91,14 +91,10 @@ class LocalNotification {
 
     await _initializeLocalNotification();
 
-    var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
-        'HobAlNabi', 'HOB AL NABI',
-        importance: Importance.max, priority: Priority.high);
-
-    var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
-
     var platformChannelSpecifics = new NotificationDetails(
-        android: androidPlatformChannelSpecifics, iOS: iOSPlatformChannelSpecifics);
+        android: AndroidNotificationDetails(
+            'HobAlNabi', 'HOB AL NABI',
+            importance: Importance.max, priority: Priority.high), iOS: IOSNotificationDetails());
 
     await _localNotificationsPlugin.show(
       0,
