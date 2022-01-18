@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "794383406784",
+    "project_id": "al-ashraf",
+    "storage_bucket": "al-ashraf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:794383406784:android:8bf0bc9faaa6fa3ea13f25",
+        "android_client_info": {
+          "package_name": "com.example.al_ashraf"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "794383406784-7ekne41cp3ac9ld0r1omkvll6n9lt5ni.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCo93x8soNn4nzvy9HYawMLSm9Hbkthd1s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "794383406784-7ekne41cp3ac9ld0r1omkvll6n9lt5ni.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
