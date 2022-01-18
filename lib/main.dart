@@ -1,4 +1,5 @@
 import 'package:al_ashraf/screens/home_screen.dart';
+import 'package:al_ashraf/screens/posts_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -21,13 +22,18 @@ class MyApp extends StatelessWidget {
       title: 'أحب محمدا',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        pageTransitionsTheme: PageTransitionsTheme(
+          builders: {
+            TargetPlatform.android: ZoomPageTransitionsBuilder(),
+          },
+        ),
         backgroundColor: Colors.white,
         //primarySwatch: Colors.white,
       ),
       home: HomeScreen(),
       routes: {
         'home': (context)=> HomeScreen(),
-
+        'posts': (context)=> PostsScreen(),
       },
 
     );

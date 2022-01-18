@@ -41,8 +41,12 @@ dependencies:
   lottie: ^1.1.0
   shared_preferences: ^2.0.6
   get: ^4.6.1
-
-
+  auto_size_text: ^3.0.0
+  webview_flutter: ^3.0.0
+  flutter_inappwebview: ^5.3.2
+  web_scraper: ^0.1.4
+  path: ^1.8.0
+  connectivity_plus: ^2.0.3
 
 
 dev_dependencies:
@@ -78,6 +82,16 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/main_screen_image/main_screen_image.jpg
+    - assets/lottie_gifs/home_screen/posts.json
+    - assets/lottie_gifs/home_screen/favourite_posts.json
+    - assets/lottie_gifs/home_screen/diwans.json
+    - assets/lottie_gifs/home_screen/nathr_books.json
+    - assets/lottie_gifs/home_screen/radio_station.json
+    - assets/lottie_gifs/home_screen/hadra_book.json
+    - assets/lottie_gifs/home_screen/ahadeth.json
+    - assets/lottie_gifs/home_screen/inshad.json
+    - assets/lottie_gifs/home_screen/who_are_we.json
+    - assets/lottie_gifs/home_screen/contact_us.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
