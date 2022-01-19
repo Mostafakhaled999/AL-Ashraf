@@ -1,4 +1,5 @@
 import 'package:al_ashraf/screens/home_screen.dart';
+import 'package:al_ashraf/screens/posts_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -12,35 +13,11 @@ class LocalNotification {
   static final FlutterLocalNotificationsPlugin _localNotificationsPlugin =
   FlutterLocalNotificationsPlugin();
 
-  static Future<void> _subscribeToTopic() async{
-    var pref = await SharedPreferences.getInstance();
-    if(!pref.containsKey('subscribedToHobAlNabi'))
-    {
-      FirebaseMessaging.instance.subscribeToTopic('dev').whenComplete((){
-        pref.setBool('subscribedToHobAlNabi', true);
-      });
-    }
-  }
-  static void _startNotificationListners() async{
-
-    FirebaseMessaging.instance.getInitialMessage().then((message) {
-      if(message != null)
-        Get.to(() => HomeScreen());
-    });
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      _displayNotification(title: message.notification!.title.toString(),
-          body: message.notification!.body.toString());
-    });
-    FirebaseMessaging.onMessageOpenedApp.listen((message) {
-      Get.to(() => HomeScreen());
-    });
-  }
-   static  void initialize()async{
-
+  static  void initialize()async{
     await Firebase.initializeApp();
     /// Update the iOS foreground notification presentation options to allow
     /// heads up notifications.
-    await FirebaseMessaging.instance
+    FirebaseMessaging.instance
         .setForegroundNotificationPresentationOptions(
       alert: true,
       badge: true,
@@ -50,13 +27,40 @@ class LocalNotification {
 
     _startNotificationListners();
   }
-  static void _selectNotification(String? payload) async {
+
+  static Future<void> _subscribeToTopic() async{
+    var pref = await SharedPreferences.getInstance();
+    if(!pref.containsKey('subscribedToHobAlNabi'))
+    {
+      FirebaseMessaging.instance.subscribeToTopic('dev').whenComplete((){
+        pref.setBool('subscribedToHobAlNabi', true);
+      });
+    }
+  }
+
+  static void _startNotificationListners() async{
+    //FirebaseMessaging.onBackgroundMessage(_messageHandler);
+    FirebaseMessaging.instance.getInitialMessage().then((message) {
+      if(message != null){
+        Get.to(PostsScreen());}
+    });
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      _displayLocalNotification(title: message.notification!.title.toString(),
+          body: message.notification!.body.toString());
+    });
+    FirebaseMessaging.onMessageOpenedApp.listen((message) {
+      print("Message recieved from background");
+      Get.to(PostsScreen());
+    });
+  }
+
+  static void _selectLocalNotification(String? payload) async {
     if (payload != null) {
       print('notification payload: $payload');
     } else {
       print("Notification Done");
     }
-    Get.to(() => HomeScreen());
+    Get.to(PostsScreen());
   }
   static Future<void> _initializeLocalNotification() async{
 
@@ -85,9 +89,9 @@ class LocalNotification {
       }
      await _localNotificationsPlugin.initialize(
          initializationSettings,
-         onSelectNotification: _selectNotification);
+         onSelectNotification: _selectLocalNotification);
    }
-  static void _displayNotification({required String title, required String body}) async {
+  static void _displayLocalNotification({required String title, required String body}) async {
 
     await _initializeLocalNotification();
 
@@ -103,5 +107,7 @@ class LocalNotification {
       platformChannelSpecifics,
     );
   }
+
+
 
 }
