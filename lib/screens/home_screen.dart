@@ -2,7 +2,7 @@ import 'package:al_ashraf/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:al_ashraf/widgets/grid_card.dart';
 import 'package:lottie/lottie.dart';
-import 'package:get/get.dart';
+
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class HomeScreen extends StatelessWidget {
                       child: GridCard(
                           cardName: kHomeScreenCardNames[index],
                           cardWidget: Lottie.asset(
-                              kAnimatedCardIconsPath[index].toString(),
+                              kAnimatedHomeIconsPath[index].toString(),
                               fit: BoxFit.cover)),
                       onTap: ()=> Navigator.pushNamed(context, kScreenRouteNames[index]),
                     ),

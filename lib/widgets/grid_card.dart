@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:al_ashraf/constants/constants.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
@@ -9,12 +8,14 @@ class GridCard extends StatelessWidget {
   double cardNameFont;
   FontWeight cardNameBold;
   TextDirection cardNameDirection;
+  int cardNameMaxLines;
   GridCard({
     required this.cardName,
     required this.cardWidget,
     this.cardNameFont = 30,
     this.cardNameBold = FontWeight.bold,
-    this.cardNameDirection = TextDirection.rtl
+    this.cardNameDirection = TextDirection.rtl,
+    this.cardNameMaxLines = 1
   }) ;
 
   @override
@@ -33,8 +34,10 @@ class GridCard extends StatelessWidget {
             padding: const EdgeInsets.all(5.0),
             child: AutoSizeText(
               cardName,
-              maxLines: 1,
+              maxLines: cardNameMaxLines,
+              textAlign: TextAlign.center,
               style: TextStyle(
+
                 fontSize: cardNameFont,
                 fontWeight: cardNameBold ,
               ),

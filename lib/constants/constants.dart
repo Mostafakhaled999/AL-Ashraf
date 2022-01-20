@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 const Color kGridTileColor = Color(0xFFF1F2F6);
 
 const String kHomeScreenImage = 'assets/images/main_screen_image/main_screen_image.jpg';
+const String kWhoAreWeScrenImgPath = 'assets/images/who_are_we_screen_image/who_are_we_screen_image.jpeg';
 
 const List<String> kHomeScreenCardNames = [
   "المقالات",
@@ -30,7 +31,7 @@ const List<String> kScreenRouteNames = [
   'contact_us'
 ];
 
-const List<String> kAnimatedCardIconsPath = [
+const List<String> kAnimatedHomeIconsPath = [
   "assets/lottie_gifs/home_screen/posts.json",
   "assets/lottie_gifs/home_screen/favourite_posts.json",
   "assets/lottie_gifs/home_screen/diwans.json",
@@ -41,4 +42,46 @@ const List<String> kAnimatedCardIconsPath = [
   "assets/lottie_gifs/home_screen/inshad.json",
   "assets/lottie_gifs/home_screen/who_are_we.json",
   "assets/lottie_gifs/home_screen/contact_us.json"
+];
+List<String>kWebsitesURLs = [
+  'http://www.alabd.com/',
+  'http://alashraf-almahdia.com/',
+  'https://alashraf-almahdia.net/',
+  'https://attention.fm/',
+  'https://twitter.com/salah_alkousy',
+  'https://www.youtube.com/channel/UCBf9qI7gYSgWyWA39c_jRCg',
+];
+List<String>kWebsitesNames = [
+  'ALABD.COM',
+  'ALASHRAF-ALMAHDIA.COM',
+  'ALASHRAF-ALMAHDIA.NET',
+  'ATTENTION.FM',
+  'Twitter',
+  'YouTube',
+];
+List<String>kWebsitesIconsPath = [
+  'assets/images/who_are_we_screen_image/world-wide-web64.png',
+  'assets/images/who_are_we_screen_image/world-wide-web64.png',
+  'assets/images/who_are_we_screen_image/world-wide-web64.png',
+  'assets/images/who_are_we_screen_image/world-wide-web64.png',
+  'assets/images/who_are_we_screen_image/twitter64.png',
+  'assets/images/who_are_we_screen_image/youtube64.png',
+];
+List<String>kContactURLs = [
+  'whatsapp://send?phone=+201117841111',
+  'mailto:ALABD@HOTMAIL.COM',
+  'https://www.facebook.com/ALABD.I.LOVE.MOHAMMED/',
+  'https://www.facebook.com/ALASHRAF.ALMAHDIA/',
+];
+List<String>kContactNames = [
+  'Whatsapp',
+  'ALABD@HOTMAIL.COM',
+  'ALABD.I.LOVE.MOHAMMED',
+  'ALASHRAF.ALMAHDIA',
+];
+List<String>kContactIconsPath = [
+  'assets/images/contact_us_screen_image/whatsapp64.png',
+  'assets/images/contact_us_screen_image/outlook64.png',
+  'assets/images/contact_us_screen_image/facebook64.png',
+  'assets/images/contact_us_screen_image/facebook64.png',
 ];

@@ -3,14 +3,32 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+    <queries>
+        <!-- If your app opens https URLs -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
+        <!-- If your app makes calls -->
+        <intent>
+            <action android:name="android.intent.action.DIAL" />
+            <data android:scheme="tel" />
+        </intent>
+        <!-- If your sends SMS messages -->
+        <intent>
+            <action android:name="android.intent.action.SENDTO" />
+            <data android:scheme="smsto" />
+        </intent>
+        <!-- If your app sends emails -->
+        <intent>
+            <action android:name="android.intent.action.SEND" />
+            <data android:mimeType="*/*" />
+        </intent>
+    </queries>
    <application
         android:label="أحب محمدا"
         android:icon="@mipmap/ic_launcher">
-       <meta-data
-           android:name="com.google.firebase.messaging.default_notification_icon"
-           android:resource="@drawable/ic_action_name" />
-       <meta-data android:name="com.google.firebase.messaging.default_notification_color"
-           android:resource="@color/notificationColor" />
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
@@ -48,6 +66,11 @@
             </intent-filter>
         </activity>
 
+       <meta-data
+           android:name="com.google.firebase.messaging.default_notification_icon"
+           android:resource="@drawable/ic_action_name" />
+       <meta-data android:name="com.google.firebase.messaging.default_notification_color"
+           android:resource="@color/notificationColor" />
 
        <meta-data android:name="com.google.firebase.messaging.default_notification_channel_id"
            android:value="HobAlNabi"/>
