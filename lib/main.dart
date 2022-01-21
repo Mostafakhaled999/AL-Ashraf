@@ -1,3 +1,4 @@
+import 'package:al_ashraf/screens/ahadeth_screen.dart';
 import 'package:al_ashraf/screens/home_screen.dart';
 import 'package:al_ashraf/screens/posts_screen.dart';
 import 'package:al_ashraf/screens/who_are_we_screen.dart';
@@ -36,7 +37,8 @@ class MyApp extends StatelessWidget {
         'home': (context)=> HomeScreen(),
         'posts': (context)=> PostsScreen(),
         'who_are_we': (context)=> WhoAreWeScreen(),
-        'contact_us': (context)=> ContactUsScreen()
+        'contact_us': (context)=> ContactUsScreen(),
+        'ahadeth':(context)=> AhadethScreen()
       },
 
     );

@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   firebase_core: ^1.11.0
   firebase_messaging: ^11.2.5
+  firebase_auth: ^3.3.5
   flutter_local_notifications: ^9.2.0
   lottie: ^1.1.0
   shared_preferences: ^2.0.6
@@ -49,6 +50,10 @@ dependencies:
   connectivity_plus: ^2.0.3
   http: ^0.13.3
   url_launcher: ^6.0.17
+  google_sign_in: ^5.2.3
+  googleapis: ^7.0.0
+  just_audio: ^0.9.18
+  rxdart: ^0.27.3
 
 dev_dependencies:
   flutter_test:
@@ -83,13 +88,15 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/main_screen_image/main_screen_image.jpg
-    - assets/images/who_are_we_screen_image/who_are_we_screen_image.jpeg
+    - assets/images/who_are_we_screen_image/who_are_we_screen_image.JPG
+    - assets/images/contact_us_screen_image/contact_us_screen_image.JPG
     - assets/images/who_are_we_screen_image/twitter64.png
     - assets/images/who_are_we_screen_image/world-wide-web64.png
     - assets/images/who_are_we_screen_image/youtube64.png
     - assets/images/contact_us_screen_image/facebook64.png
     - assets/images/contact_us_screen_image/outlook64.png
     - assets/images/contact_us_screen_image/whatsapp64.png
+    - assets/images/back_ground_image/back_ground.jpg
     - assets/lottie_gifs/home_screen/posts.json
     - assets/lottie_gifs/home_screen/favourite_posts.json
     - assets/lottie_gifs/home_screen/diwans.json

@@ -3,8 +3,15 @@ import 'package:flutter/material.dart';
 
 const Color kGridTileColor = Color(0xFFF1F2F6);
 
-const String kHomeScreenImage = 'assets/images/main_screen_image/main_screen_image.jpg';
-const String kWhoAreWeScrenImgPath = 'assets/images/who_are_we_screen_image/who_are_we_screen_image.jpeg';
+const String kHomeScreenImgPaht = 'assets/images/main_screen_image/main_screen_image.jpg';
+const String kWhoAreWeScrenImgPath = 'assets/images/who_are_we_screen_image/who_are_we_screen_image.JPG';
+const String kBackGroundImgPath = 'assets/images/back_ground_image/back_ground.jpg';
+
+const kFolderDriveType = "application/vnd.google-apps.folder";
+const kAudioFileDriveType = 'audio';
+
+const kAhadethRootFolderId = '0B40BecadRW2eVkhncEpYeWtjeUk';
+const kInshadRootFolderId = '0B40BecadRW2eaVVzNUJCbnk1RDA';
 
 const List<String> kHomeScreenCardNames = [
   "المقالات",
@@ -31,7 +38,7 @@ const List<String> kScreenRouteNames = [
   'contact_us'
 ];
 
-const List<String> kAnimatedHomeIconsPath = [
+const List<String> kAnimatedHomeImgsPath = [
   "assets/lottie_gifs/home_screen/posts.json",
   "assets/lottie_gifs/home_screen/favourite_posts.json",
   "assets/lottie_gifs/home_screen/diwans.json",
@@ -59,7 +66,7 @@ List<String>kWebsitesNames = [
   'Twitter',
   'YouTube',
 ];
-List<String>kWebsitesIconsPath = [
+List<String>kWebsitesImgsPath = [
   'assets/images/who_are_we_screen_image/world-wide-web64.png',
   'assets/images/who_are_we_screen_image/world-wide-web64.png',
   'assets/images/who_are_we_screen_image/world-wide-web64.png',
@@ -79,7 +86,7 @@ List<String>kContactNames = [
   'ALABD.I.LOVE.MOHAMMED',
   'ALASHRAF.ALMAHDIA',
 ];
-List<String>kContactIconsPath = [
+List<String>kContactImgsPath = [
   'assets/images/contact_us_screen_image/whatsapp64.png',
   'assets/images/contact_us_screen_image/outlook64.png',
   'assets/images/contact_us_screen_image/facebook64.png',

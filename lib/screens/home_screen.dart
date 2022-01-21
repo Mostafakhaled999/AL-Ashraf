@@ -1,7 +1,7 @@
 import 'package:al_ashraf/constants/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:al_ashraf/widgets/grid_card.dart';
 import 'package:lottie/lottie.dart';
+import 'package:al_ashraf/widgets/card_grid_list.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -24,7 +24,7 @@ class HomeScreen extends StatelessWidget {
                     child: Hero(
                       tag: 'mainScreen',
                       child: Image.asset(
-                        kHomeScreenImage,
+                        kHomeScreenImgPaht,
                         fit: BoxFit.fitWidth,
                         alignment: AlignmentDirectional.centerStart,
                       ),
@@ -47,22 +47,14 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ])),
-              SliverGrid(
-                delegate: SliverChildBuilderDelegate(
-                    (context, index) => GestureDetector(
-                      child: GridCard(
-                          cardName: kHomeScreenCardNames[index],
-                          cardWidget: Lottie.asset(
-                              kAnimatedHomeIconsPath[index].toString(),
-                              fit: BoxFit.cover)),
-                      onTap: ()=> Navigator.pushNamed(context, kScreenRouteNames[index]),
-                    ),
-                    childCount: kHomeScreenCardNames.length),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                ),
+              CardGridList(
+                gridCardNames: kHomeScreenCardNames,
+
+                gridCardImages: (index) => Lottie.asset(
+                    kAnimatedHomeImgsPath[index],
+                    fit: BoxFit.cover),
+                onPress: (index) =>
+                    Navigator.pushNamed(context, kScreenRouteNames[index]),
               )
             ]),
           ),

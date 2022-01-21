@@ -3,16 +3,17 @@ import 'package:get/get.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
 class CustomWidgets {
-  static AppBar customAppBar(String titleText) {
+  static AppBar customAppBar(String titleText,{bool centerTitle = true,double fontSize = 30}) {
     return AppBar(
       elevation: 1,
       backgroundColor: Colors.transparent,
-      centerTitle: true,
+      centerTitle: centerTitle,
       title: Text(
         titleText,
+        textDirection: TextDirection.ltr,
       ),
       titleTextStyle: TextStyle(
-          color: Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
+          color: Colors.white, fontSize: fontSize, fontWeight: FontWeight.bold),
       leading: IconButton(
         icon: Icon(
           Icons.adaptive.arrow_back,
@@ -27,14 +28,20 @@ class CustomWidgets {
 
   static GetSnackBar customSnackBar(String textContent) {
     return GetSnackBar(
-        titleText: AutoSizeText(
-      textContent,
-      maxLines: 1,
-      textDirection: TextDirection.rtl,
-      style: TextStyle(
-        fontSize: 25,
-        fontWeight: FontWeight.bold,
-      ),
-    ));
+        isDismissible: true,
+        borderRadius: 15,
+        snackStyle: SnackStyle.FLOATING,
+        margin: EdgeInsets.all(5),
+        duration: Duration(seconds: 3),
+        messageText: AutoSizeText(
+          textContent,
+          maxLines: 1,
+          textDirection: TextDirection.rtl,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ));
   }
 }

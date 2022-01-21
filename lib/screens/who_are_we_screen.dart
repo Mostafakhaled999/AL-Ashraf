@@ -1,7 +1,8 @@
+import 'package:al_ashraf/models/url_launcher.dart';
 import 'package:al_ashraf/widgets/circular_image.dart';
 import 'package:flutter/material.dart';
 import 'package:al_ashraf/constants/constants.dart';
-import 'package:al_ashraf/widgets/grid_list.dart';
+import 'package:al_ashraf/widgets/card_grid_list.dart';
 import 'package:al_ashraf/widgets/custom_widgets.dart';
 
 class WhoAreWeScreen extends StatelessWidget {
@@ -34,11 +35,15 @@ class WhoAreWeScreen extends StatelessWidget {
               ),
               //SliverList(delegate: delegate)
             ])),
-            GridList(
-              numOfCards: kWebsitesNames.length,
-              gridCardIconsPath: kWebsitesIconsPath,
+            CardGridList(
               gridCardNames: kWebsitesNames,
-              gridCardUrl: kWebsitesURLs,
+              cardNameDirection: TextDirection.ltr,
+              cardNameMaxLines: 2,
+              cardNameFontSize: 20,
+              gridCardImages: (index)=>
+                  Image(
+                      image: AssetImage(kWebsitesImgsPath[index])),
+              onPress:(index)=> UrlLauncher(kWebsitesURLs[index]),
             )
           ],
         ),
