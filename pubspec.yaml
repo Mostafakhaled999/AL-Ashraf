@@ -54,6 +54,7 @@ dependencies:
   googleapis: ^7.0.0
   just_audio: ^0.9.18
   rxdart: ^0.27.3
+  syncfusion_flutter_pdfviewer: ^19.4.43-beta
 
 dev_dependencies:
   flutter_test:
@@ -96,17 +97,20 @@ flutter:
     - assets/images/contact_us_screen_image/facebook64.png
     - assets/images/contact_us_screen_image/outlook64.png
     - assets/images/contact_us_screen_image/whatsapp64.png
+    - assets/images/radio_screen_image/radio_screen_image.png
     - assets/images/back_ground_image/back_ground.jpg
     - assets/lottie_gifs/home_screen/posts.json
     - assets/lottie_gifs/home_screen/favourite_posts.json
     - assets/lottie_gifs/home_screen/diwans.json
     - assets/lottie_gifs/home_screen/nathr_books.json
-    - assets/lottie_gifs/home_screen/radio_station.json
+    - assets/lottie_gifs/home_screen/radio.json
     - assets/lottie_gifs/home_screen/hadra_book.json
     - assets/lottie_gifs/home_screen/ahadeth.json
     - assets/lottie_gifs/home_screen/inshad.json
     - assets/lottie_gifs/home_screen/who_are_we.json
     - assets/lottie_gifs/home_screen/contact_us.json
+    - assets/books/pdf/hadra/الحضرة كاملة الطبعة 29 بدون هوامش.pdf
+    - assets/books/pdf/hadra/hadra_book.pdf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

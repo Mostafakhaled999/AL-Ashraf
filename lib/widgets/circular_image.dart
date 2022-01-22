@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class CustomCircularImage extends StatelessWidget {
   String imagePath;
-  CustomCircularImage(this.imagePath);
+  double imageHeightRatio;
+  CustomCircularImage({required this.imagePath,this.imageHeightRatio = 0.43});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +12,7 @@ class CustomCircularImage extends StatelessWidget {
         imagePath,
         fit: BoxFit.fitWidth,
         alignment: AlignmentDirectional.topCenter,
-        height: MediaQuery.of(context).size.height * 0.47,
+        height: MediaQuery.of(context).size.height * imageHeightRatio,
         width: MediaQuery.of(context).size.width,
       ),
       borderRadius: BorderRadius.only(

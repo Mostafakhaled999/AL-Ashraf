@@ -1,7 +1,7 @@
 import 'package:al_ashraf/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:al_ashraf/widgets/card_grid_list.dart';
+import 'package:al_ashraf/widgets/cards.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -24,7 +24,7 @@ class HomeScreen extends StatelessWidget {
                     child: Hero(
                       tag: 'mainScreen',
                       child: Image.asset(
-                        kHomeScreenImgPaht,
+                        kHomeScreenImgPath,
                         fit: BoxFit.fitWidth,
                         alignment: AlignmentDirectional.centerStart,
                       ),
@@ -49,7 +49,6 @@ class HomeScreen extends StatelessWidget {
               ])),
               CardGridList(
                 gridCardNames: kHomeScreenCardNames,
-
                 gridCardImages: (index) => Lottie.asset(
                     kAnimatedHomeImgsPath[index],
                     fit: BoxFit.cover),

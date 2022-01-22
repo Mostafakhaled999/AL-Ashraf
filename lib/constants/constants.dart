@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 
-const Color kGridTileColor = Color(0xFFF1F2F6);
+const Color kCardColor = Color(0xFFF1F2F6);
 
-const String kHomeScreenImgPaht = 'assets/images/main_screen_image/main_screen_image.jpg';
+const String kHomeScreenImgPath = 'assets/images/main_screen_image/main_screen_image.jpg';
 const String kWhoAreWeScrenImgPath = 'assets/images/who_are_we_screen_image/who_are_we_screen_image.JPG';
+const String kContactUsScreenImgPath = 'assets/images/contact_us_screen_image/contact_us_screen_image.JPG';
 const String kBackGroundImgPath = 'assets/images/back_ground_image/back_ground.jpg';
+const String kRadioScreenImgPath = 'assets/images/radio_screen_image/radio_screen_image.png';
 
 const kFolderDriveType = "application/vnd.google-apps.folder";
 const kAudioFileDriveType = 'audio';
@@ -30,7 +32,7 @@ const List<String> kScreenRouteNames = [
   'favourite_post',
   'diwans',
   'nathr_books',
-  'radio_station',
+  'radio',
   'hadra_book',
   'ahadeth',
   'inshad',
@@ -43,7 +45,7 @@ const List<String> kAnimatedHomeImgsPath = [
   "assets/lottie_gifs/home_screen/favourite_posts.json",
   "assets/lottie_gifs/home_screen/diwans.json",
   "assets/lottie_gifs/home_screen/nathr_books.json",
-  "assets/lottie_gifs/home_screen/radio_station.json",
+  "assets/lottie_gifs/home_screen/radio.json",
   "assets/lottie_gifs/home_screen/hadra_book.json",
   "assets/lottie_gifs/home_screen/ahadeth.json",
   "assets/lottie_gifs/home_screen/inshad.json",
@@ -86,9 +88,16 @@ List<String>kContactNames = [
   'ALABD.I.LOVE.MOHAMMED',
   'ALASHRAF.ALMAHDIA',
 ];
-List<String>kContactImgsPath = [
+List<String>kContactsImgsPath = [
   'assets/images/contact_us_screen_image/whatsapp64.png',
   'assets/images/contact_us_screen_image/outlook64.png',
   'assets/images/contact_us_screen_image/facebook64.png',
   'assets/images/contact_us_screen_image/facebook64.png',
 ];
+List<String> kRadioChannelsName = ['القرآن', 'حب النبي'];
+List<String> kRadioChannelsFreq = [
+  'http://185.80.220.12:8048/stream',
+  'https://s1.reliastream.com/proxy/oelgendy?mp=/stream'
+];
+
+const String kHadraBookPath = 'assets/books/pdf/hadra/الحضرة كاملة الطبعة 29 بدون هوامش.pdf';

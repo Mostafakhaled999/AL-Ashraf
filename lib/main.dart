@@ -1,6 +1,9 @@
 import 'package:al_ashraf/screens/ahadeth_screen.dart';
+import 'package:al_ashraf/screens/hadra_book_screen.dart';
 import 'package:al_ashraf/screens/home_screen.dart';
+import 'package:al_ashraf/screens/inshad_screen.dart';
 import 'package:al_ashraf/screens/posts_screen.dart';
+import 'package:al_ashraf/screens/radio_screen.dart';
 import 'package:al_ashraf/screens/who_are_we_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:al_ashraf/models/notification.dart';
@@ -38,7 +41,10 @@ class MyApp extends StatelessWidget {
         'posts': (context)=> PostsScreen(),
         'who_are_we': (context)=> WhoAreWeScreen(),
         'contact_us': (context)=> ContactUsScreen(),
-        'ahadeth':(context)=> AhadethScreen()
+        'ahadeth':(context)=> AhadethScreen(),
+        'inshad':(context)=> InshadScreen(),
+        'radio':(context)=>RadioScreen(),
+        'hadra_book':(context)=> HadraBookScreen()
       },
 
     );
