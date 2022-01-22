@@ -10,7 +10,7 @@ class CustomWidgets {
       centerTitle: centerTitle,
       title: Text(
         titleText,
-        textDirection: TextDirection.ltr,
+        textDirection: TextDirection.rtl,
       ),
       titleTextStyle: TextStyle(
           color: Colors.white, fontSize: fontSize, fontWeight: FontWeight.bold),

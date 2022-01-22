@@ -31,7 +31,6 @@
         android:label="أحب محمدا"
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true"
-        tools:targetApi="m"
         android:supportsRtl="true">
         <activity
             android:name=".MainActivity"
