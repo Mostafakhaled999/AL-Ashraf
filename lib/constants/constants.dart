@@ -8,6 +8,8 @@ const String kWhoAreWeScrenImgPath = 'assets/images/who_are_we_screen_image/who_
 const String kContactUsScreenImgPath = 'assets/images/contact_us_screen_image/contact_us_screen_image.JPG';
 const String kBackGroundImgPath = 'assets/images/back_ground_image/back_ground.jpg';
 const String kRadioScreenImgPath = 'assets/images/radio_screen_image/radio_screen_image.png';
+const String kBackGroundSrchBarImgPath = 'assets/images/books_screen/background_search.png';
+const String kHadraBookCoverPath = 'assets/images/books_screen/book_covers/hadra_cover.jpg';
 
 const kFolderDriveType = "application/vnd.google-apps.folder";
 const kAudioFileDriveType = 'audio';
@@ -101,3 +103,94 @@ List<String> kRadioChannelsFreq = [
 ];
 
 const String kHadraBookPath = 'assets/books/pdf/hadra/الحضرة كاملة الطبعة 29 بدون هوامش.pdf';
+List<String> kDiwanBookTitles = [
+  "ديوان الأسير",
+  "ديوان العتيق",
+  "ديوان الطليق",
+  "ديوان الغريق",
+  "ديوان الرفيق",
+  "ديوان الحقيق",
+  "ديوان العقيق",
+  "ديوان الوثيق",
+  "ديوان الرحيق",
+  "ديوان البريق",
+  "ديوان الفية محمد",
+  "ديوان محمد الإمام المبين",
+  "ديوان العشيق",
+  "ديوان الرشيق",
+  "ديوان الرقيق",
+  "ديوان المفيق",
+  "ديوان العريق",
+  "ديوان الفريق",
+  "ديوان الشفيق",
+  "ديوان الوفيق"
+];
+
+List<String> kDiwanPartNames = [
+  "الجزء الأول",
+  "الجزء الثانى",
+  "الجزء الثالث",
+  "الجزء الرابع",
+  "الجزء الخامس",
+  "الجزء السادس",
+  "الجزء السابع",
+  "الجزء الثامن",
+  "الجزء التاسع",
+  "الجزء العاشر",
+  "الجزء الحادى عشر",
+  "الجزء الثانى عشر",
+  "الجزء الثالث عشر",
+  "الجزء الرابع عشر",
+  "الجزء الخامس عشر",
+  "الجزء السادس عشر",
+  "الجزء السابع عشر",
+  "الجزء الثامن عشر",
+  "الجزء التاسع عشر",
+  "الجزء العشرون",
+];
+//assets/books/pdf/nathr/ihsanAll.pdf
+List<String> kDiwanContentPath = [
+  'assets/books/pdf/diwan/ديوان الأسير1.pdf',
+  'assets/books/pdf/diwan/ديوان العتيق2.pdf',
+  'assets/books/pdf/diwan/ديوان الطليق3.pdf',
+  'assets/books/pdf/diwan/ديوان الغريق4.pdf',
+  'assets/books/pdf/diwan/ديوان الرفيق5.pdf',
+  'assets/books/pdf/diwan/ديوان الحقيق6.pdf',
+  'assets/books/pdf/diwan/ديوان العقيق7.pdf',
+  'assets/books/pdf/diwan/ديوان الوثيق8.pdf',
+  'assets/books/pdf/diwan/ديوان الرحيق9.pdf',
+  'assets/books/pdf/diwan/ديوان البريق10.pdf',
+  'assets/books/pdf/diwan/ديوان الفية محمد صلى الله عليه وسلم11.pdf',
+  'assets/books/pdf/diwan/ديوان محمد الإمام المبين12.pdf',
+  'assets/books/pdf/diwan/ديوان العشيق13.pdf',
+  'assets/books/pdf/diwan/ديوان الرشيق14.pdf',
+  'assets/books/pdf/diwan/ديوان الرقيق15.pdf',
+  'assets/books/pdf/diwan/ديوان المفيق16.pdf',
+  'assets/books/pdf/diwan/ديوان العريق17.pdf',
+  'assets/books/pdf/diwan/ديوان الفريق18.pdf',
+  'assets/books/pdf/diwan/ديوان الشفيق19.pdf',
+  'assets/books/pdf/diwan/ديوان الوفيق20.pdf',
+];
+//assets/images/books_screen/diwan_cover/alaareq.jpg
+List<String> kDiwanCoverPaths = [
+  "assets/images/books_screen/diwan_cover/alaseer.jpg",
+  "assets/images/books_screen/diwan_cover/alateek.jpg",
+  "assets/images/books_screen/diwan_cover/altaleek.jpg",
+  "assets/images/books_screen/diwan_cover/alghareek.jpg",
+  "assets/images/books_screen/diwan_cover/alrafeek.jpg",
+  "assets/images/books_screen/diwan_cover/alhakeek.jpg",
+  "assets/images/books_screen/diwan_cover/alakeek.jpg",
+  "assets/images/books_screen/diwan_cover/alwatheek.jpg",
+  "assets/images/books_screen/diwan_cover/alraheek.jpg",
+  "assets/images/books_screen/diwan_cover/albareek.jpg",
+  "assets/images/books_screen/diwan_cover/alfeyya.jpg",
+  "assets/images/books_screen/diwan_cover/alemam.jpg",
+  "assets/images/books_screen/diwan_cover/alasheek.jpg",
+  "assets/images/books_screen/diwan_cover/dewan-alrasheq.jpg",
+  "assets/images/books_screen/diwan_cover/alrarkek.jpg",
+  "assets/images/books_screen/diwan_cover/elmafeeq.jpg",
+  "assets/images/books_screen/diwan_cover/alaareq.jpg",
+  "assets/images/books_screen/diwan_cover/alfareek.jpg",
+  "assets/images/books_screen/diwan_cover/alshafeeq.jpg",
+  "assets/images/books_screen/diwan_cover/alwafeek.jpg"
+];

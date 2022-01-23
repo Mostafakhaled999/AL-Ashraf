@@ -73,7 +73,7 @@ class _RadioScreenState extends State<RadioScreen> {
                                 initializedAudioId: initializedChannelFreq,
                                 player: player,
                                 initializeAndPlay: (freq)=>initAndPlay(freq),
-                              iconSize: 70,),
+                              iconSize: 60,),
                             )
                           ],
                         ),

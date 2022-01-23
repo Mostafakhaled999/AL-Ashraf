@@ -110,7 +110,48 @@ flutter:
     - assets/lottie_gifs/home_screen/who_are_we.json
     - assets/lottie_gifs/home_screen/contact_us.json
     - assets/books/pdf/hadra/الحضرة كاملة الطبعة 29 بدون هوامش.pdf
-    - assets/books/pdf/hadra/hadra_book.pdf
+    - assets/images/books_screen/background_search.png
+    - assets/images/books_screen/hadra_cover.jpg
+    - assets/books/pdf/diwan/ديوان الأسير1.pdf
+    - assets/books/pdf/diwan/ديوان العتيق2.pdf
+    - assets/books/pdf/diwan/ديوان الطليق3.pdf
+    - assets/books/pdf/diwan/ديوان الغريق4.pdf
+    - assets/books/pdf/diwan/ديوان الرفيق5.pdf
+    - assets/books/pdf/diwan/ديوان الحقيق6.pdf
+    - assets/books/pdf/diwan/ديوان العقيق7.pdf
+    - assets/books/pdf/diwan/ديوان الوثيق8.pdf
+    - assets/books/pdf/diwan/ديوان الرحيق9.pdf
+    - assets/books/pdf/diwan/ديوان البريق10.pdf
+    - assets/books/pdf/diwan/ديوان الفية محمد صلى الله عليه وسلم11.pdf
+    - assets/books/pdf/diwan/ديوان محمد الإمام المبين12.pdf
+    - assets/books/pdf/diwan/ديوان العشيق13.pdf
+    - assets/books/pdf/diwan/ديوان الرشيق14.pdf
+    - assets/books/pdf/diwan/ديوان الرقيق15.pdf
+    - assets/books/pdf/diwan/ديوان المفيق16.pdf
+    - assets/books/pdf/diwan/ديوان العريق17.pdf
+    - assets/books/pdf/diwan/ديوان الفريق18.pdf
+    - assets/books/pdf/diwan/ديوان الشفيق19.pdf
+    - assets/books/pdf/diwan/ديوان الوفيق20.pdf
+    - assets/images/books_screen/diwan_cover/alaseer.jpg
+    - assets/images/books_screen/diwan_cover/alateek.jpg
+    - assets/images/books_screen/diwan_cover/altaleek.jpg
+    - assets/images/books_screen/diwan_cover/alghareek.jpg
+    - assets/images/books_screen/diwan_cover/alrafeek.jpg
+    - assets/images/books_screen/diwan_cover/alhakeek.jpg
+    - assets/images/books_screen/diwan_cover/alakeek.jpg
+    - assets/images/books_screen/diwan_cover/alwatheek.jpg
+    - assets/images/books_screen/diwan_cover/alraheek.jpg
+    - assets/images/books_screen/diwan_cover/albareek.jpg
+    - assets/images/books_screen/diwan_cover/alfeyya.jpg
+    - assets/images/books_screen/diwan_cover/alemam.jpg
+    - assets/images/books_screen/diwan_cover/alasheek.jpg
+    - assets/images/books_screen/diwan_cover/dewan-alrasheq.jpg
+    - assets/images/books_screen/diwan_cover/alrarkek.jpg
+    - assets/images/books_screen/diwan_cover/elmafeeq.jpg
+    - assets/images/books_screen/diwan_cover/alaareq.jpg
+    - assets/images/books_screen/diwan_cover/alfareek.jpg
+    - assets/images/books_screen/diwan_cover/alshafeeq.jpg
+    - assets/images/books_screen/diwan_cover/alwafeek.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
