@@ -17,6 +17,9 @@ const kAudioFileDriveType = 'audio';
 const kAhadethRootFolderId = '0B40BecadRW2eVkhncEpYeWtjeUk';
 const kInshadRootFolderId = '0B40BecadRW2eaVVzNUJCbnk1RDA';
 
+String kDiwanEpubWithTashkilPath = 'assets/books/epub/diwan_epub_with_tashkil.epub';
+String kDiwanEpubWithOutTashkilPath = 'assets/books/epub/diwan_epub_without_tashkil.epub';
+
 const List<String> kHomeScreenCardNames = [
   "المقالات",
   "المقالات المفضلة",
@@ -149,7 +152,7 @@ List<String> kDiwanPartNames = [
   "الجزء العشرون",
 ];
 //assets/books/pdf/nathr/ihsanAll.pdf
-List<String> kDiwanContentPath = [
+List<String> kDiwanPdfContentPaths = [
   'assets/books/pdf/diwan/ديوان الأسير1.pdf',
   'assets/books/pdf/diwan/ديوان العتيق2.pdf',
   'assets/books/pdf/diwan/ديوان الطليق3.pdf',
@@ -193,4 +196,38 @@ List<String> kDiwanCoverPaths = [
   "assets/images/books_screen/diwan_cover/alfareek.jpg",
   "assets/images/books_screen/diwan_cover/alshafeeq.jpg",
   "assets/images/books_screen/diwan_cover/alwafeek.jpg"
+];
+List<String> kNathrPdfContentPaths = [
+  'assets/books/pdf/nathr/islamAll.pdf',
+  'assets/books/pdf/nathr/imanAll.pdf',
+  'assets/books/pdf/nathr/osool.pdf',
+  'assets/books/pdf/nathr/ihsanAll.pdf',
+  'assets/books/pdf/nathr/nabiAll.pdf',
+  'assets/books/pdf/nathr/mishkaa.pdf',
+];
+
+List<String> kNathrBooksCoverPaths = [
+  'assets/images/books_screen/nathr_books_covers/islam.jpg',
+  'assets/images/books_screen/nathr_books_covers/iman.jpg',
+  'assets/images/books_screen/nathr_books_covers/osool.jpg',
+  'assets/images/books_screen/nathr_books_covers/ihsan.jpg',
+  'assets/images/books_screen/nathr_books_covers/nabeena.jpg',
+  'assets/images/books_screen/nathr_books_covers/mishkaa.jpg',
+
+];
+List<String> kNathrBookTitles = [
+  'أركان الإِسلام',
+  'قواعد الإيمان',
+  'مقدمة أصول الوصول',
+  'أنوار الإحسان',
+  'محمد نبى الرحمة',
+  'محمد مشكاة الأنوار',
+];
+List<String> kNathrBooksPartNames = [
+  "الجزء الأول",
+  "الجزء الثانى",
+  "الجزء الثالث",
+  "الجزء الرابع",
+  "الجزء الخامس",
+  "الجزء السادس",
 ];

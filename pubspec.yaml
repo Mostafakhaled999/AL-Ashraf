@@ -55,6 +55,8 @@ dependencies:
   just_audio: ^0.9.18
   rxdart: ^0.27.3
   syncfusion_flutter_pdfviewer: ^19.4.43-beta
+  epubx: ^3.0.0
+  just_waveform: ^0.0.2
 
 dev_dependencies:
   flutter_test:
@@ -152,6 +154,20 @@ flutter:
     - assets/images/books_screen/diwan_cover/alfareek.jpg
     - assets/images/books_screen/diwan_cover/alshafeeq.jpg
     - assets/images/books_screen/diwan_cover/alwafeek.jpg
+    - assets/books/epub/diwan_epub_with_tashkil.epub
+    - assets/books/epub/diwan_epub_without_tashkil.epub
+    - assets/books/pdf/nathr/ihsanAll.pdf
+    - assets/books/pdf/nathr/imanAll.pdf
+    - assets/books/pdf/nathr/islamAll.pdf
+    - assets/books/pdf/nathr/mishkaa.pdf
+    - assets/books/pdf/nathr/nabiAll.pdf
+    - assets/books/pdf/nathr/osool.pdf
+    - assets/images/books_screen/nathr_books_covers/islam.jpg
+    - assets/images/books_screen/nathr_books_covers/iman.jpg
+    - assets/images/books_screen/nathr_books_covers/osool.jpg
+    - assets/images/books_screen/nathr_books_covers/ihsan.jpg
+    - assets/images/books_screen/nathr_books_covers/mishkaa.jpg
+    - assets/images/books_screen/nathr_books_covers/nabeena.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

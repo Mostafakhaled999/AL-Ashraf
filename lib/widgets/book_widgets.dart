@@ -1,8 +1,11 @@
-import 'package:al_ashraf/widgets/pdf_view.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:al_ashraf/models/book.dart';
 import 'package:get/get.dart';
+import 'package:al_ashraf/widgets/custom_widgets.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:flutter/src/material/search.dart';
 
 class BookListScreen extends StatelessWidget {
   String screenTitle;
@@ -28,6 +31,7 @@ class BookListScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+
                   IconButton(
                     icon: Icon(Icons.adaptive.arrow_back),
                     iconSize: 40,
@@ -69,7 +73,9 @@ class BookCard extends StatelessWidget {
       padding: EdgeInsets.only(top: 10, right: 12, left: 12),
       child: GestureDetector(
         onTap: () {
-          Get.to(PdfViewerScreen(book: book,));
+          Get.to(PdfViewerScreen(
+            book: book,
+          ));
         },
         child: Container(
           margin: EdgeInsets.only(bottom: 10),
@@ -106,7 +112,7 @@ class BookCard extends StatelessWidget {
                         maxLines: 1,
                         textDirection: TextDirection.rtl,
                         style: TextStyle(
-                            fontSize: 30,
+                            fontSize: 27,
                             fontWeight: FontWeight.bold,
                             color: Color(0xFF121212)),
                       ),
@@ -143,5 +149,78 @@ class BookCard extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class PdfViewerScreen extends StatefulWidget {
+  Book book;
+
+  PdfViewerScreen({required this.book});
+
+  @override
+  _PdfViewerScreenState createState() => _PdfViewerScreenState();
+}
+
+class _PdfViewerScreenState extends State<PdfViewerScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+        child: Scaffold(
+            appBar: CustomWidgets.customAppBar(widget.book.title,
+                centerTitle: true, fontSize: 25),
+            extendBodyBehindAppBar: true,
+            body: SfPdfViewer.asset(
+              widget.book.pdfContentPath,
+              enableTextSelection: false,
+            )));
+  }
+}
+
+class WebViewViewerScreen extends StatefulWidget {
+  Book book;
+
+  WebViewViewerScreen({required this.book});
+
+  @override
+  _WebViewViewerScreenState createState() => _WebViewViewerScreenState();
+}
+
+class _WebViewViewerScreenState extends State<WebViewViewerScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    //widget.book.webViewContent.replaceFirst("<link href="stylesheet.css" rel="stylesheet" type="text/css"/>", '<style> css1 {display: block;margin-bottom: 10pt;margin-top: 10pt;text-align: right;text-indent: 2em}</style>');
+  }
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+        child: Scaffold(
+      appBar: CustomWidgets.customAppBar(widget.book.title,fontSize: 23),
+      extendBodyBehindAppBar: true,
+      extendBody: true,
+      body: GestureDetector(
+        onLongPress: (){},
+        child: InAppWebView(
+          initialData: InAppWebViewInitialData(data: widget.book.webViewContent),
+          initialOptions: InAppWebViewGroupOptions(
+              crossPlatform: InAppWebViewOptions(
+            supportZoom: true,
+            javaScriptEnabled: false,
+            horizontalScrollBarEnabled: true,
+          )),
+          onLoadStop: (controller, url) {
+            //controller.reload();
+            controller.findAllAsync(find: widget.book.searchText.toString());
+          },
+          onWebViewCreated: (InAppWebViewController controller) {
+            print(widget.book.webViewContent);
+          },
+          onProgressChanged: (controller, progress) {
+            print(progress.toString());
+          },
+        ),
+      ),
+    ));
   }
 }

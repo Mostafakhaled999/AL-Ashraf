@@ -3,6 +3,7 @@ import 'package:al_ashraf/screens/diwan_books_screen.dart';
 import 'package:al_ashraf/screens/hadra_book_screen.dart';
 import 'package:al_ashraf/screens/home_screen.dart';
 import 'package:al_ashraf/screens/inshad_screen.dart';
+import 'package:al_ashraf/screens/nathr_books_screen.dart';
 import 'package:al_ashraf/screens/posts_screen.dart';
 import 'package:al_ashraf/screens/radio_screen.dart';
 import 'package:al_ashraf/screens/who_are_we_screen.dart';
@@ -46,7 +47,8 @@ class MyApp extends StatelessWidget {
         'inshad':(context)=> InshadScreen(),
         'radio':(context)=>RadioScreen(),
         'hadra_book':(context)=> HadraBookScreen(),
-        'diwans':(context)=> DiwanBooksScreen()
+        'diwans':(context)=> DiwanBooksScreen(),
+        'nathr_books':(context)=> NathrBooksScreen()
 
 
       },

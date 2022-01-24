@@ -1,12 +1,15 @@
 import 'package:al_ashraf/constants/constants.dart';
+import 'package:al_ashraf/models/audio_components.dart';
 import 'package:al_ashraf/widgets/custom_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:rxdart/rxdart.dart' as rx;
 import 'package:just_audio/just_audio.dart';
 import 'package:al_ashraf/widgets/circular_image.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:al_ashraf/widgets/audio_widgets.dart';
+import 'package:just_waveform/just_waveform.dart';
 
 class RadioScreen extends StatefulWidget {
   const RadioScreen({Key? key}) : super(key: key);
@@ -16,6 +19,13 @@ class RadioScreen extends StatefulWidget {
 }
 
 class _RadioScreenState extends State<RadioScreen> {
+  Stream<PositionData> get _positionDataStream =>
+      rx.Rx.combineLatest3<Duration, Duration, Duration?, PositionData>(
+          player.positionStream,
+          player.bufferedPositionStream,
+          player.durationStream,
+              (position, bufferedPosition, duration) => PositionData(
+              position, bufferedPosition, duration ?? Duration.zero));
   final AudioPlayer player = AudioPlayer();
   String initializedChannelFreq = '';
   Future<void> initAndPlay(String freq) async {
@@ -30,6 +40,12 @@ class _RadioScreenState extends State<RadioScreen> {
     } catch (e) {
       CustomWidgets.customSnackBar('حدث خطأ الرجاء المحاولة لاحقا');
     }
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    player.dispose();
   }
   @override
   Widget build(BuildContext context) {
@@ -80,7 +96,31 @@ class _RadioScreenState extends State<RadioScreen> {
                       ),
                     ),childCount: kRadioChannelsName.length),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, crossAxisSpacing: 10))
+                    crossAxisCount: 2, crossAxisSpacing: 10)),
+
+            SliverList(delegate: SliverChildListDelegate([
+              SizedBox(height: 20,),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child:Row(
+                  children: [
+                    Icon(Icons.volume_down),
+                    Expanded(
+                      child: Slider(
+                          value: player.volume,
+                          onChanged: (newVolume) {
+                            setState(() {
+                              player.setVolume(newVolume);
+                            });
+                          }),
+                    ),
+                    Icon(
+                      Icons.volume_up,
+                    ),
+                  ],
+                ),
+              ),
+            ]))
           ],
         ),
       ),
