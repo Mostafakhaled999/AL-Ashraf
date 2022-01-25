@@ -1,3 +1,4 @@
+import 'package:al_ashraf/models/instruction.dart';
 import 'package:al_ashraf/models/post.dart';
 import 'package:al_ashraf/widgets/blurry_back_ground.dart';
 import 'package:al_ashraf/widgets/custom_widgets.dart';
@@ -8,12 +9,26 @@ import 'package:al_ashraf/constants/constants.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
 import 'package:marquee/marquee.dart';
-import 'package:provider/provider.dart';
 
-class FavouritePostsScreen extends StatelessWidget {
-  FavouritePostsScreen({Key? key}) : super(key: key);
+class FavouritePostsScreen extends StatefulWidget {
+  const FavouritePostsScreen({Key? key}) : super(key: key);
+
+  @override
+  _FavouritePostsScreenState createState() => _FavouritePostsScreenState();
+}
+
+class _FavouritePostsScreenState extends State<FavouritePostsScreen> {
   PostData _postData = PostData();
+  static const _favPostsInstructionKey = 'FavouritePostsInstructions';
+  static const _favPostsInstructionText = 'لمسح مقال من المفضلة اسحب المقال الذى تريده فى الاتجاه الايمن';
 
+  Instructions _favPostsInstructions = Instructions(instructionKey: _favPostsInstructionKey, instructionText: _favPostsInstructionText);
+
+  @override
+  void initState() {
+    _favPostsInstructions.checkForInstructions();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

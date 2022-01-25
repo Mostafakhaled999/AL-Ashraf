@@ -1,8 +1,10 @@
+import 'package:al_ashraf/models/instruction.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:al_ashraf/models/book.dart';
 import 'package:get/get.dart';
 import 'package:al_ashraf/widgets/custom_widgets.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter/src/material/search.dart';
@@ -162,6 +164,19 @@ class PdfViewerScreen extends StatefulWidget {
 }
 
 class _PdfViewerScreenState extends State<PdfViewerScreen> {
+  static const _pdfInstructionKey = 'PdfInstructions';
+  static const _pdfInstructionText = "للانتقال الى صفحة محددة"
+      " اضغط على رقم الصفحة فى الجانب الايمن"
+      " ثم اكتب رقم الصفحة";
+
+  Instructions _pdfInstructions = Instructions(instructionKey: _pdfInstructionKey, instructionText: _pdfInstructionText);
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _pdfInstructions.checkForInstructions();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return SafeArea(

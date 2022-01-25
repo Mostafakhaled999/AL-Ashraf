@@ -17,10 +17,11 @@ const kAudioFileDriveType = 'audio';
 const kAhadethRootFolderId = '0B40BecadRW2eVkhncEpYeWtjeUk';
 const kInshadRootFolderId = '0B40BecadRW2eaVVzNUJCbnk1RDA';
 
-var kMainPostUrl = 'https://alashraf-almahdia.net/';
+const kMainPostUrl = 'https://alashraf-almahdia.net/';
 
-String kDiwanEpubWithTashkilPath = 'assets/books/epub/diwan_epub_with_tashkil.epub';
-String kDiwanEpubWithOutTashkilPath = 'assets/books/epub/diwan_epub_without_tashkil.epub';
+const kDiwanEpubWithTashkilPath = 'assets/books/epub/diwan_epub_with_tashkil.epub';
+const kDiwanEpubWithOutTashkilPath = 'assets/books/epub/diwan_epub_without_tashkil.epub';
+
 
 const List<String> kHomeScreenCardNames = [
   "المقالات",

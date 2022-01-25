@@ -55,4 +55,33 @@ class CustomWidgets {
           ),
         ));
   }
+
+  static AlertDialog customAlertDialog(String textMessage,Function dontShowAgain) {
+    return AlertDialog(
+      title: Text(
+        textMessage,
+        textDirection: TextDirection.rtl,
+        style: TextStyle(fontSize: 25),
+      ),
+      actions: [TextButton(
+        onPressed: () {
+          Get.back();
+        },
+        child: Text(
+          "حسنا",
+          textDirection: TextDirection.rtl,
+        ),
+      ),
+        TextButton(
+          onPressed: () {
+            dontShowAgain();
+            Get.back();
+          },
+          child: Text(
+            "لا تظهر هذه الرسالة مجددا",
+            textDirection: TextDirection.rtl,
+          ),
+        )],
+    );
+  }
 }

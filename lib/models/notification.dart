@@ -30,7 +30,7 @@ class LocalNotification {
     var pref = await SharedPreferences.getInstance();
     if(!pref.containsKey('subscribedToHobAlNabi'))
     {
-      FirebaseMessaging.instance.subscribeToTopic('dev').whenComplete((){
+      await FirebaseMessaging.instance.subscribeToTopic('dev').whenComplete((){
         print('successfully subscribed');
         pref.setBool('subscribedToHobAlNabi', true);
       });
@@ -53,7 +53,7 @@ class LocalNotification {
     });
   }
 
-  static void _selectLocalNotification(String? payload) async {
+  static void _onSelectLocalNotification(String? payload) async {
     if (payload != null) {
       print('notification payload: $payload');
     } else {
@@ -88,7 +88,7 @@ class LocalNotification {
       }
      await _localNotificationsPlugin.initialize(
          initializationSettings,
-         onSelectNotification: _selectLocalNotification);
+         onSelectNotification: _onSelectLocalNotification);
    }
   static void _displayLocalNotification({required String title, required String body}) async {
 
