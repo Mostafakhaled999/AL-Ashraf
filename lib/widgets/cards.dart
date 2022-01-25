@@ -1,10 +1,11 @@
 import 'package:al_ashraf/models/url_launcher.dart';
 import 'package:al_ashraf/widgets/circular_image.dart';
 import 'package:al_ashraf/widgets/custom_widgets.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:al_ashraf/constants/constants.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-
+import 'package:marquee/marquee.dart';
 
 
 class CardListScreen extends StatelessWidget {
@@ -150,5 +151,7 @@ class ImageCard extends StatelessWidget {
     );
   }
 }
+
+
 
 

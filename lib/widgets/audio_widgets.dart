@@ -294,7 +294,7 @@ class _AudioListScreenState extends State<AudioListScreen> {
         fit: StackFit.expand,
         children: [
           BlurryBackGround(
-            backGroundImgPath: kBackGroundImgPath,
+            backGroundImgPath: kAlkobbaBGImgPath,
           ),
           Container(
             color: Colors.transparent,

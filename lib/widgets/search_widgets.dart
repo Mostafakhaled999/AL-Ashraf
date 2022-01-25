@@ -102,12 +102,11 @@ class SearchScreen extends SearchDelegate<String> {
 
   @override
   Widget buildResults(BuildContext context) {
-    if (query.isNotEmpty) {
-      return FutureBuilder(
-          future: bookData.loadDiwanEpub(),
-          builder: (context, snapshot) {
+    return FutureBuilder(
+          future: bookData.search(query),
+          builder: (context,AsyncSnapshot<List<Book>> snapshot) {
             if (snapshot.hasData) {
-              var booksResult = bookData.search(query);
+              var booksResult = snapshot.data!;
               if (booksResult.length != 0) {
                 return ListView.builder(
                   itemCount: booksResult.length,
@@ -123,13 +122,15 @@ class SearchScreen extends SearchDelegate<String> {
               } else {
                 return ResultsNotFound();
               }
-            } else
+            } else if(snapshot.hasError) {
+              Get.back();
+              return CustomWidgets.customSnackBar('حدث خطأ حاول لاحقا');
+            }
+            else
               return LoadingWidget();
           });
-    } else {
-      return ResultsNotFound();
+
     }
-  }
 
   @override
   Widget buildSuggestions(BuildContext context) {

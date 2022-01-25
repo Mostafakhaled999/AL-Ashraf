@@ -50,9 +50,7 @@ class HomeScreen extends StatelessWidget {
               CardGridList(
                 gridCardNames: kHomeScreenCardNames,
                 gridCardImages: (index) => Lottie.asset(
-
                     kAnimatedHomeImgsPath[index],
-
                     fit: BoxFit.cover),
                 onPress: (index) =>
                     Navigator.pushNamed(context, kScreenRouteNames[index]),

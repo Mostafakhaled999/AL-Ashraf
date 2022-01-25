@@ -6,7 +6,7 @@ const Color kCardColor = Color(0xFFF1F2F6);
 const String kHomeScreenImgPath = 'assets/images/main_screen_image/main_screen_image.jpg';
 const String kWhoAreWeScrenImgPath = 'assets/images/who_are_we_screen_image/who_are_we_screen_image.JPG';
 const String kContactUsScreenImgPath = 'assets/images/contact_us_screen_image/contact_us_screen_image.JPG';
-const String kBackGroundImgPath = 'assets/images/back_ground_image/back_ground.jpg';
+const String kAlkobbaBGImgPath = 'assets/images/back_ground_image/back_ground.jpg';
 const String kRadioScreenImgPath = 'assets/images/radio_screen_image/radio_screen_image.png';
 const String kBackGroundSrchBarImgPath = 'assets/images/books_screen/background_search.png';
 const String kHadraBookCoverPath = 'assets/images/books_screen/book_covers/hadra_cover.jpg';
@@ -16,6 +16,8 @@ const kAudioFileDriveType = 'audio';
 
 const kAhadethRootFolderId = '0B40BecadRW2eVkhncEpYeWtjeUk';
 const kInshadRootFolderId = '0B40BecadRW2eaVVzNUJCbnk1RDA';
+
+var kMainPostUrl = 'https://alashraf-almahdia.net/';
 
 String kDiwanEpubWithTashkilPath = 'assets/books/epub/diwan_epub_with_tashkil.epub';
 String kDiwanEpubWithOutTashkilPath = 'assets/books/epub/diwan_epub_without_tashkil.epub';
@@ -34,7 +36,7 @@ const List<String> kHomeScreenCardNames = [
 ];
 const List<String> kScreenRouteNames = [
   'posts',
-  'favourite_post',
+  'favourite_posts',
   'diwans',
   'nathr_books',
   'radio',

@@ -167,7 +167,7 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
     return SafeArea(
         child: Scaffold(
             appBar: CustomWidgets.customAppBar(widget.book.title,
-                centerTitle: true, fontSize: 25),
+                centerTitle: true, fontSize: 25,elevation: 0),
             extendBodyBehindAppBar: true,
             body: SfPdfViewer.asset(
               widget.book.pdfContentPath,
@@ -190,13 +190,12 @@ class _WebViewViewerScreenState extends State<WebViewViewerScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    //widget.book.webViewContent.replaceFirst("<link href="stylesheet.css" rel="stylesheet" type="text/css"/>", '<style> css1 {display: block;margin-bottom: 10pt;margin-top: 10pt;text-align: right;text-indent: 2em}</style>');
   }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: CustomWidgets.customAppBar(widget.book.title,fontSize: 23),
+      appBar: CustomWidgets.customAppBar(widget.book.title,fontSize: 23,elevation: 0),
       extendBodyBehindAppBar: true,
       extendBody: true,
       body: GestureDetector(
@@ -210,14 +209,7 @@ class _WebViewViewerScreenState extends State<WebViewViewerScreen> {
             horizontalScrollBarEnabled: true,
           )),
           onLoadStop: (controller, url) {
-            //controller.reload();
             controller.findAllAsync(find: widget.book.searchText.toString());
-          },
-          onWebViewCreated: (InAppWebViewController controller) {
-            print(widget.book.webViewContent);
-          },
-          onProgressChanged: (controller, progress) {
-            print(progress.toString());
           },
         ),
       ),

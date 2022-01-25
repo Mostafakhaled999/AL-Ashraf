@@ -9,7 +9,6 @@ import 'package:just_audio/just_audio.dart';
 import 'package:al_ashraf/widgets/circular_image.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:al_ashraf/widgets/audio_widgets.dart';
-import 'package:just_waveform/just_waveform.dart';
 
 class RadioScreen extends StatefulWidget {
   const RadioScreen({Key? key}) : super(key: key);
@@ -19,13 +18,6 @@ class RadioScreen extends StatefulWidget {
 }
 
 class _RadioScreenState extends State<RadioScreen> {
-  Stream<PositionData> get _positionDataStream =>
-      rx.Rx.combineLatest3<Duration, Duration, Duration?, PositionData>(
-          player.positionStream,
-          player.bufferedPositionStream,
-          player.durationStream,
-              (position, bufferedPosition, duration) => PositionData(
-              position, bufferedPosition, duration ?? Duration.zero));
   final AudioPlayer player = AudioPlayer();
   String initializedChannelFreq = '';
   Future<void> initAndPlay(String freq) async {

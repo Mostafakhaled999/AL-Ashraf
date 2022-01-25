@@ -43,50 +43,56 @@ class BookData {
     }
   }
 
-  Future<bool> loadDiwanEpub() async {
+  Future<void> _loadDiwanEpub() async {
     var data = await rootBundle.load(kDiwanEpubWithOutTashkilPath);
     epubBookWithOutTashkil =
     await EpubReader.readBook(data.buffer.asUint8List());
     data = await rootBundle.load(kDiwanEpubWithTashkilPath);
     epubBookWithTashkil = await EpubReader.readBook(data.buffer.asUint8List());
-    return true;
   }
 
-  List<Book> search(String searchText) {
-    int bookPartIndex;
-    List<Book> searchedBooks = [];
-    epubBookWithOutTashkil!.Chapters!.forEach((EpubChapter mainChapter) {
-      bookPartIndex = epubBookWithOutTashkil!.Chapters!.indexOf(mainChapter);
-      mainChapter.SubChapters!.forEach((EpubChapter firstSubChapter) {
-        if (firstSubChapter.SubChapters!.isNotEmpty)
-          firstSubChapter.SubChapters!.forEach((EpubChapter secondSubChapter) {
-            if (secondSubChapter.SubChapters!.isNotEmpty)
-              secondSubChapter.SubChapters!
-                  .forEach((EpubChapter thirdSubChapter) {
-                if (thirdSubChapter.SubChapters!.isNotEmpty)
-                  thirdSubChapter.SubChapters!
-                      .forEach((EpubChapter fourthSubChapter) {
-                    _extractText(mainChapter, fourthSubChapter, searchText,
+  Future<List<Book>> search(String searchText) async{
+    if(epubBookWithTashkil == null || epubBookWithOutTashkil == null)
+      await _loadDiwanEpub();
+    try{
+      int bookPartIndex;
+      List<Book> searchedBooks = [];
+      epubBookWithOutTashkil!.Chapters!.forEach((EpubChapter mainChapter) {
+        bookPartIndex = epubBookWithOutTashkil!.Chapters!.indexOf(mainChapter);
+        mainChapter.SubChapters!.forEach((EpubChapter firstSubChapter) {
+          if (firstSubChapter.SubChapters!.isNotEmpty)
+            firstSubChapter.SubChapters!.forEach((EpubChapter secondSubChapter) {
+              if (secondSubChapter.SubChapters!.isNotEmpty)
+                secondSubChapter.SubChapters!
+                    .forEach((EpubChapter thirdSubChapter) {
+                  if (thirdSubChapter.SubChapters!.isNotEmpty)
+                    thirdSubChapter.SubChapters!
+                        .forEach((EpubChapter fourthSubChapter) {
+                      _extractText(mainChapter, fourthSubChapter, searchText,
+                          bookPartIndex, searchedBooks);
+                    });
+                  else {
+                    _extractText(mainChapter, thirdSubChapter, searchText,
                         bookPartIndex, searchedBooks);
-                  });
-                else {
-                  _extractText(mainChapter, thirdSubChapter, searchText,
-                      bookPartIndex, searchedBooks);
-                }
-              });
-            else {
-              _extractText(mainChapter, secondSubChapter, searchText,
-                  bookPartIndex, searchedBooks);
-            }
-          });
-        else {
-          _extractText(mainChapter, firstSubChapter, searchText, bookPartIndex,
-              searchedBooks);
-        }
+                  }
+                });
+              else {
+                _extractText(mainChapter, secondSubChapter, searchText,
+                    bookPartIndex, searchedBooks);
+              }
+            });
+          else {
+            _extractText(mainChapter, firstSubChapter, searchText, bookPartIndex,
+                searchedBooks);
+          }
+        });
       });
-    });
-    //print('length: ' + searchedBooks.length.toString());
-    return searchedBooks;
+      //print('length: ' + searchedBooks.length.toString());
+      return searchedBooks;
+    }catch(e){
+      return Future.error(e);
+    }
+
   }
 
   void _extractText(EpubChapter mainChapter, EpubChapter subChapter,
