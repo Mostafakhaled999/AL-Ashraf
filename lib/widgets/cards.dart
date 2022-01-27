@@ -66,14 +66,17 @@ class CardGridList extends StatelessWidget {
   TextDirection cardNameDirection;
   int cardNameMaxLines;
 
+
   CardGridList(
       {required this.gridCardNames,
       required this.gridCardImages,
       required this.onPress,
+
       this.cardNameFontSize = 30,
       this.cardNameFontWeight = FontWeight.bold,
       this.cardNameDirection = TextDirection.rtl,
-      this.cardNameMaxLines = 1});
+      this.cardNameMaxLines = 1,
+     });
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +91,7 @@ class CardGridList extends StatelessWidget {
               cardNameDirection: cardNameDirection,
               onPress: ()=>onPress(index)),
           childCount: gridCardNames.length),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,

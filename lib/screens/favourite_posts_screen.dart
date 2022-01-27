@@ -20,7 +20,7 @@ class FavouritePostsScreen extends StatefulWidget {
 class _FavouritePostsScreenState extends State<FavouritePostsScreen> {
   PostData _postData = PostData();
   static const _favPostsInstructionKey = 'FavouritePostsInstructions';
-  static const _favPostsInstructionText = 'لمسح مقال من المفضلة اسحب المقال الذى تريده فى الاتجاه الايمن';
+  static const _favPostsInstructionText = 'لمسح مقال من المقالات المفضلة قم بسحب المقال الذى تريده فى الإتجاه الأيمن';
 
   Instructions _favPostsInstructions = Instructions(instructionKey: _favPostsInstructionKey, instructionText: _favPostsInstructionText);
 
@@ -64,6 +64,7 @@ class _FavouritePostsScreenState extends State<FavouritePostsScreen> {
                             onDismissed: (direction) {
                               _postData.removeFromFavourites(favPost);
                             },
+
                             child: FavouritePostCard(
                                 favPost: favPost,),
                           );

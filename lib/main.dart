@@ -16,7 +16,6 @@ import 'package:hive/hive.dart';
 import 'screens/who_are_we_screen.dart';
 import 'screens/contact_us_screen.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:provider/provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

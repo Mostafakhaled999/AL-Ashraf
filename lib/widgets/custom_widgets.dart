@@ -61,7 +61,7 @@ class CustomWidgets {
       title: Text(
         textMessage,
         textDirection: TextDirection.rtl,
-        style: TextStyle(fontSize: 25),
+        style: TextStyle(fontSize: 23),
       ),
       actions: [TextButton(
         onPressed: () {
@@ -70,6 +70,7 @@ class CustomWidgets {
         child: Text(
           "حسنا",
           textDirection: TextDirection.rtl,
+          style: TextStyle(fontSize: 20),
         ),
       ),
         TextButton(
@@ -80,6 +81,7 @@ class CustomWidgets {
           child: Text(
             "لا تظهر هذه الرسالة مجددا",
             textDirection: TextDirection.rtl,
+            style: TextStyle(fontSize: 20),
           ),
         )],
     );

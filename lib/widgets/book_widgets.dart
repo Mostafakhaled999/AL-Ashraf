@@ -75,7 +75,7 @@ class BookCard extends StatelessWidget {
       padding: EdgeInsets.only(top: 10, right: 12, left: 12),
       child: GestureDetector(
         onTap: () {
-          Get.to(PdfViewerScreen(
+          Get.to(()=>PdfViewerScreen(
             book: book,
           ));
         },
@@ -121,10 +121,11 @@ class BookCard extends StatelessWidget {
                       SizedBox(
                         height: 5,
                       ),
-                      Text(
+                      AutoSizeText(
                         book.partName,
+                        maxLines: 1,
+                        textDirection: TextDirection.rtl,
                         style: TextStyle(
-                            overflow: TextOverflow.ellipsis,
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
                             color: Color(0xFF121212)),
@@ -165,16 +166,16 @@ class PdfViewerScreen extends StatefulWidget {
 
 class _PdfViewerScreenState extends State<PdfViewerScreen> {
   static const _pdfInstructionKey = 'PdfInstructions';
-  static const _pdfInstructionText = "للانتقال الى صفحة محددة"
-      " اضغط على رقم الصفحة فى الجانب الايمن"
+  static const _pdfInstructionText = "للإنتقال إلى صفحة محددة"
+      " اضغط على رقم الصفحة فى الجانب الأيمن"
       " ثم اكتب رقم الصفحة";
 
-  Instructions _pdfInstructions = Instructions(instructionKey: _pdfInstructionKey, instructionText: _pdfInstructionText);
+  Instructions instructions = Instructions(instructionKey: _pdfInstructionKey, instructionText: _pdfInstructionText);
 
   @override
   void initState() {
     // TODO: implement initState
-    _pdfInstructions.checkForInstructions();
+    instructions.checkForInstructions();
     super.initState();
   }
   @override
@@ -182,7 +183,7 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
     return SafeArea(
         child: Scaffold(
             appBar: CustomWidgets.customAppBar(widget.book.title,
-                centerTitle: true, fontSize: 25,elevation: 0),
+                centerTitle: true, fontSize: 25,elevation: 1),
             extendBodyBehindAppBar: true,
             body: SfPdfViewer.asset(
               widget.book.pdfContentPath,
@@ -210,7 +211,7 @@ class _WebViewViewerScreenState extends State<WebViewViewerScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: CustomWidgets.customAppBar(widget.book.title,fontSize: 23,elevation: 0),
+      appBar: CustomWidgets.customAppBar(widget.book.title,fontSize: 23,elevation: 1),
       extendBodyBehindAppBar: true,
       extendBody: true,
       body: GestureDetector(

@@ -105,6 +105,7 @@ flutter:
     - assets/images/contact_us_screen_image/whatsapp64.png
     - assets/images/radio_screen_image/radio_screen_image.png
     - assets/images/back_ground_image/back_ground.jpg
+    - assets/images/contact_us_screen_image/gmail64.png
     - assets/lottie_gifs/home_screen/posts.json
     - assets/lottie_gifs/home_screen/favourite_posts.json
     - assets/lottie_gifs/home_screen/diwans.json
@@ -138,6 +139,7 @@ flutter:
     - assets/books/pdf/diwan/ديوان الفريق18.pdf
     - assets/books/pdf/diwan/ديوان الشفيق19.pdf
     - assets/books/pdf/diwan/ديوان الوفيق20.pdf
+    - assets/books/pdf/diwan/ديوان فى حب أشرف البرية.pdf
     - assets/images/books_screen/diwan_cover/alaseer.jpg
     - assets/images/books_screen/diwan_cover/alateek.jpg
     - assets/images/books_screen/diwan_cover/altaleek.jpg
@@ -158,6 +160,7 @@ flutter:
     - assets/images/books_screen/diwan_cover/alfareek.jpg
     - assets/images/books_screen/diwan_cover/alshafeeq.jpg
     - assets/images/books_screen/diwan_cover/alwafeek.jpg
+    - assets/images/books_screen/diwan_cover/ashrf-albarya.jpg
     - assets/books/epub/diwan_epub_with_tashkil.epub
     - assets/books/epub/diwan_epub_without_tashkil.epub
     - assets/books/pdf/nathr/ihsanAll.pdf

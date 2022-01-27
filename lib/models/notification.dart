@@ -30,7 +30,7 @@ class LocalNotification {
     var pref = await SharedPreferences.getInstance();
     if(!pref.containsKey('subscribedToHobAlNabi'))
     {
-      await FirebaseMessaging.instance.subscribeToTopic('dev').whenComplete((){
+      await FirebaseMessaging.instance.subscribeToTopic('HobAlNabi').whenComplete((){
         print('successfully subscribed');
         pref.setBool('subscribedToHobAlNabi', true);
       });

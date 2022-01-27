@@ -86,21 +86,15 @@ List<String>kWebsitesImgsPath = [
 ];
 List<String>kContactURLs = [
   'whatsapp://send?phone=+201117841111',
-  'mailto:ALABD@HOTMAIL.COM',
-  'https://www.facebook.com/ALABD.I.LOVE.MOHAMMED/',
-  'https://www.facebook.com/ALASHRAF.ALMAHDIA/',
+  'mailto:alashrafapp@gmail.com',
 ];
 List<String>kContactNames = [
   'Whatsapp',
-  'ALABD@HOTMAIL.COM',
-  'ALABD.I.LOVE.MOHAMMED',
-  'ALASHRAF.ALMAHDIA',
+  'Gmail'
 ];
 List<String>kContactsImgsPath = [
   'assets/images/contact_us_screen_image/whatsapp64.png',
-  'assets/images/contact_us_screen_image/outlook64.png',
-  'assets/images/contact_us_screen_image/facebook64.png',
-  'assets/images/contact_us_screen_image/facebook64.png',
+  'assets/images/contact_us_screen_image/gmail64.png'
 ];
 List<String> kRadioChannelsName = ['القرآن', 'حب النبي'];
 List<String> kRadioChannelsFreq = [
@@ -129,7 +123,8 @@ List<String> kDiwanBookTitles = [
   "ديوان العريق",
   "ديوان الفريق",
   "ديوان الشفيق",
-  "ديوان الوفيق"
+  "ديوان الوفيق",
+  "ديوان فى حب أشرف البرية"
 ];
 
 List<String> kDiwanPartNames = [
@@ -153,6 +148,7 @@ List<String> kDiwanPartNames = [
   "الجزء الثامن عشر",
   "الجزء التاسع عشر",
   "الجزء العشرون",
+  "الجزء الواحد والعشرون"
 ];
 //assets/books/pdf/nathr/ihsanAll.pdf
 List<String> kDiwanPdfContentPaths = [
@@ -176,6 +172,7 @@ List<String> kDiwanPdfContentPaths = [
   'assets/books/pdf/diwan/ديوان الفريق18.pdf',
   'assets/books/pdf/diwan/ديوان الشفيق19.pdf',
   'assets/books/pdf/diwan/ديوان الوفيق20.pdf',
+  'assets/books/pdf/diwan/ديوان فى حب أشرف البرية.pdf'
 ];
 //assets/images/books_screen/diwan_cover/alaareq.jpg
 List<String> kDiwanCoverPaths = [
@@ -198,7 +195,8 @@ List<String> kDiwanCoverPaths = [
   "assets/images/books_screen/diwan_cover/alaareq.jpg",
   "assets/images/books_screen/diwan_cover/alfareek.jpg",
   "assets/images/books_screen/diwan_cover/alshafeeq.jpg",
-  "assets/images/books_screen/diwan_cover/alwafeek.jpg"
+  "assets/images/books_screen/diwan_cover/alwafeek.jpg",
+  'assets/images/books_screen/diwan_cover/ashrf-albarya.jpg'
 ];
 List<String> kNathrPdfContentPaths = [
   'assets/books/pdf/nathr/islamAll.pdf',

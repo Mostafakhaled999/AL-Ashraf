@@ -1,15 +1,8 @@
-import 'dart:io';
-
 import 'package:al_ashraf/constants/constants.dart';
 import 'package:al_ashraf/widgets/custom_widgets.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:web_scraper/web_scraper.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:provider/provider.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:hive/hive.dart';
-
 part 'post.g.dart';
 
 @HiveType(typeId: 0)
@@ -59,42 +52,38 @@ class PostData {
     return posts;
   }
 
-  Future<bool> updatePostFavouriteStatus(String postUrl) async {
+  Future<void> updatePostFavouriteStatus(String postUrl) async {
     var post = getPostByUrl(postUrl);
     post.toggleFavourite();
     if (post.isFavourite) {
-      return addtoFavourites(post);
+      await addtoFavourites(post);
     } else {
-      return removeFromFavourites(post);
+      await removeFromFavourites(post);
     }
   }
 
-  Future<bool> removeFromFavourites(Post post) async {
+  Future<void> removeFromFavourites(Post post) async {
     _box = await Hive.openBox<Post>('FavouritePosts');
     var postIndex = posts.indexOf(post);
     try {
       await _box!.deleteAt(postIndex);
     } catch (e) {
       Get.showSnackbar(CustomWidgets.customSnackBar('تعذر حذف المقال من المقالات المفضلة'));
-      return false;
     }
     posts.removeAt(postIndex);
     Get.showSnackbar(CustomWidgets.customSnackBar('تم حذف المقال من المقالات المفضلة'));
-    return true;
   }
 
-  Future<bool> addtoFavourites(Post post) async {
+  Future<void> addtoFavourites(Post post) async {
     _box = await Hive.openBox<Post>('FavouritePosts');
     try {
       await scrapContent(post);
       await _box!.add(post);
     } catch (e) {
       Get.showSnackbar(CustomWidgets.customSnackBar('تعذر اضافة المقال الى المقالات المفضلة')) ;
-      return false;
     }
     posts.add(post);
     Get.showSnackbar(CustomWidgets.customSnackBar('تمت اضافة المقال الى المقالات المفضلة')) ;
-    return true;
   }
 
   Future<void> scrapContent(Post post) async {

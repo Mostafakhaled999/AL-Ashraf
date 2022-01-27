@@ -22,17 +22,19 @@ class PostsScreen extends StatefulWidget {
 
 class _PostsScreenState extends State<PostsScreen> {
   static const _postsInstructionKey = 'PostsInstructions';
-  static const _postsInstructionText = 'لاضافة مقال الى المفضلة اختر المقال الذى تريده اولا ثم اضغط على الدائرة اسفل يمين الشاشة';
+  static const _postsInstructionText = 'لإضافة مقال إلى المقالات المفضلة'
+      ' اضغط على عنوان المقال الذى تريده أولا'
+      ' ثم اضغط على الدائرة أسفل يمين الشاشة';
 
   Instructions _postsInstructions = Instructions(instructionKey: _postsInstructionKey, instructionText: _postsInstructionText);
 
   PostData _postData = PostData();
-  Post currentPost = Post(url: kMainPostUrl);
+  Post _currentPost = Post(url: kMainPostUrl);
   final Completer<WebViewController> _completeController =
       Completer<WebViewController>();
   WebViewController? _webViewController;
 
-  bool connectionState = false;
+  bool _connectionState = false;
 
   Future<bool> _goBack() async {
     var status = await _webViewController!.canGoBack();
@@ -57,7 +59,7 @@ class _PostsScreenState extends State<PostsScreen> {
     _checkConnectivity().then((value) {
       if (value)
         setState(() {
-          connectionState = true;
+          _connectionState = true;
         });
     });
   }
@@ -73,23 +75,22 @@ class _PostsScreenState extends State<PostsScreen> {
     return SafeArea(
       child: Scaffold(
           appBar: CustomWidgets.customAppBar('المقالات',
-              elevation: 0,
-              appBarColor: Colors.black12,
-              titleTextColor: Colors.green,
-              iconColor: Colors.green),
+              elevation: 1,
+              ),
           extendBodyBehindAppBar: true,
           floatingActionButton: FloatingActionButton(
             child: Icon(
               CupertinoIcons.heart_fill,
-              color: _postData.getPostByUrl(currentPost.url).isFavourite
+              color: _currentPost.isFavourite
                   ? Colors.green
                   : Colors.grey,
               size: 30,
             ),
             backgroundColor: Colors.white,
-            onPressed: () {
+            onPressed: () async{
+              await _postData.updatePostFavouriteStatus(_currentPost.url);
               setState(() {
-                _postData.updatePostFavouriteStatus(currentPost.url);
+                _currentPost = _postData.getPostByUrl(_currentPost.url);
               });
             },
           ),
@@ -97,7 +98,7 @@ class _PostsScreenState extends State<PostsScreen> {
             future: _checkConnectivity(),
             builder: (context, AsyncSnapshot<bool> snapshot) {
               if (snapshot.hasData) {
-                connectionState = snapshot.data!;
+                _connectionState = snapshot.data!;
                 if (snapshot.data!) {
                   return WillPopScope(
                       onWillPop: () => _goBack(),
@@ -126,7 +127,7 @@ class _PostsScreenState extends State<PostsScreen> {
                         },
                         onPageStarted: (url) {
                           setState(() {
-                            currentPost.url = url;
+                            _currentPost = _postData.getPostByUrl(url);
                           });
                         },
                         onWebResourceError: (error) {
