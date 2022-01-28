@@ -9,12 +9,12 @@ import 'package:al_ashraf/widgets/loading_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
 class PostsScreen extends StatefulWidget {
   String url;
+
   PostsScreen({this.url = kMainPostUrl});
 
   @override
@@ -27,18 +27,25 @@ class _PostsScreenState extends State<PostsScreen> {
       ' اضغط على عنوان المقال الذى تريده أولا'
       ' ثم اضغط على الدائرة أسفل يمين الشاشة';
 
-  Instructions _postsInstructions = Instructions(instructionKey: _postsInstructionKey, instructionText: _postsInstructionText);
+  Instructions _postsInstructions = Instructions(
+      instructionKey: _postsInstructionKey,
+      instructionText: _postsInstructionText);
 
   PostData _postData = PostData();
-  late Post _currentPost = Post(url: widget.url);
+  late Post _currentPost =
+      Post(url: widget.url == '' ? kMainPostUrl : widget.url);
   final Completer<WebViewController> _completeController =
       Completer<WebViewController>();
   WebViewController? _webViewController;
 
-  bool _connectionState = false;
+  late bool _connectionState;
+
+  bool wantToGoBack = false;
 
   Future<bool> _goBack() async {
+    wantToGoBack = true;
     var status = await _webViewController!.canGoBack();
+    print('status' + status.toString());
     if (status) {
       _webViewController!.goBack();
       return Future.value(false);
@@ -56,12 +63,30 @@ class _PostsScreenState extends State<PostsScreen> {
       return false;
     }
   }
-  Future _restartConnection()async{
+
+  Future<NavigationDecision> _checkConnectionForNavigation(
+      NavigationRequest navigation) async {
+    _connectionState = await _checkConnectivity();
+    print('navigation');
+    if (_connectionState) {
+      if (navigation.url.contains(kMainPostUrl)) {
+        return NavigationDecision.navigate;
+      } else {
+        UrlLauncher(navigation.url);
+        return NavigationDecision.prevent;
+      }
+    } else {
+      Get.showSnackbar(
+          CustomWidgets.customSnackBar('تأكد من اتصالك بالأنترنت'));
+      return NavigationDecision.prevent;
+    }
+  }
+
+  Future _restartConnection() async {
     _checkConnectivity().then((value) {
-      if (value)
-        setState(() {
-          _connectionState = true;
-        });
+      setState(() {
+        _connectionState = true;
+      });
     });
   }
 
@@ -75,24 +100,26 @@ class _PostsScreenState extends State<PostsScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          appBar: CustomWidgets.customAppBar('المقالات',
-              elevation: 1,
-              ),
+          appBar: CustomWidgets.customAppBar(
+            'المقالات',
+            elevation: 1,
+          ),
           extendBodyBehindAppBar: true,
           floatingActionButton: FloatingActionButton(
             child: Icon(
               CupertinoIcons.heart_fill,
-              color: _currentPost.isFavourite
-                  ? Colors.green
-                  : Colors.grey,
+              color: _currentPost.isFavourite ? Colors.green : Colors.grey,
               size: 30,
             ),
             backgroundColor: Colors.white,
-            onPressed: () async{
+            onPressed: () async {
+              _connectionState = await _checkConnectivity();
               await _postData.updatePostFavouriteStatus(_currentPost.url);
-              setState(() {
-                _currentPost = _postData.getPostByUrl(_currentPost.url);
-              });
+              if (_connectionState) {
+                setState(() {
+                  _currentPost = _postData.getPostByUrl(_currentPost.url);
+                });
+              }
             },
           ),
           body: FutureBuilder(
@@ -100,45 +127,34 @@ class _PostsScreenState extends State<PostsScreen> {
             builder: (context, AsyncSnapshot<bool> snapshot) {
               if (snapshot.hasData) {
                 _connectionState = snapshot.data!;
-                if (snapshot.data!) {
+                if (_connectionState) {
                   return WillPopScope(
                       onWillPop: () => _goBack(),
                       child: WebView(
-                        initialUrl: widget.url,
+                        initialUrl: _currentPost.url,
                         gestureNavigationEnabled: true,
                         onWebViewCreated: (controller) {
                           _completeController.complete(controller);
                           _webViewController = controller;
                         },
                         navigationDelegate: (navigation) async {
-                          var connectionState = await _checkConnectivity();
-                          if (connectionState) {
-                            //print('value'+value.toString());
-                            if (navigation.url.contains(kMainPostUrl)) {
-                              return NavigationDecision.navigate;
-                            } else {
-                              UrlLauncher(navigation.url);
-                              return NavigationDecision.prevent;
-                            }
-                          } else {
-                            Get.showSnackbar(CustomWidgets.customSnackBar(
-                                'تأكد من اتصالك بالأنترنت'));
-                            return NavigationDecision.prevent;
+                          return _checkConnectionForNavigation(navigation);
+                        },
+                        onPageStarted: (url) async {
+                          _connectionState = await _checkConnectivity();
+                          if (_connectionState) {
+                            setState(() {
+                              _currentPost = _postData.getPostByUrl(url);
+                            });
                           }
                         },
-                        onPageStarted: (url) {
-                          setState(() {
-                            _currentPost = _postData.getPostByUrl(url);
-                          });
-                        },
                         onWebResourceError: (error) {
-                          Get.to(NoConnectionWidget(restartConnection: ()=>_restartConnection()));
+                          //Get.to(NoConnectionWidget(restartConnection: ()=>_restartConnection()));
                         },
                       ));
                 } else {
-                  return NoConnectionWidget(restartConnection: () {
-
-                  });
+                  return NoConnectionWidget(
+                      restartConnection: () => _restartConnection());
                 }
               } else {
                 return LoadingWidget();

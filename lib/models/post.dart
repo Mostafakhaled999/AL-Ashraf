@@ -69,6 +69,7 @@ class PostData {
       await _box!.deleteAt(postIndex);
     } catch (e) {
       Get.showSnackbar(CustomWidgets.customSnackBar('تعذر حذف المقال من المقالات المفضلة'));
+      return;
     }
     posts.removeAt(postIndex);
     Get.showSnackbar(CustomWidgets.customSnackBar('تم حذف المقال من المقالات المفضلة'));
@@ -81,6 +82,7 @@ class PostData {
       await _box!.add(post);
     } catch (e) {
       Get.showSnackbar(CustomWidgets.customSnackBar('تعذر اضافة المقال الى المقالات المفضلة')) ;
+      return;
     }
     posts.add(post);
     Get.showSnackbar(CustomWidgets.customSnackBar('تمت اضافة المقال الى المقالات المفضلة')) ;
