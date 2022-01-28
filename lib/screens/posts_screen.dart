@@ -14,7 +14,8 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
 class PostsScreen extends StatefulWidget {
-  const PostsScreen({Key? key}) : super(key: key);
+  String url;
+  PostsScreen({this.url = kMainPostUrl});
 
   @override
   _PostsScreenState createState() => _PostsScreenState();
@@ -29,7 +30,7 @@ class _PostsScreenState extends State<PostsScreen> {
   Instructions _postsInstructions = Instructions(instructionKey: _postsInstructionKey, instructionText: _postsInstructionText);
 
   PostData _postData = PostData();
-  Post _currentPost = Post(url: kMainPostUrl);
+  late Post _currentPost = Post(url: widget.url);
   final Completer<WebViewController> _completeController =
       Completer<WebViewController>();
   WebViewController? _webViewController;
@@ -103,7 +104,7 @@ class _PostsScreenState extends State<PostsScreen> {
                   return WillPopScope(
                       onWillPop: () => _goBack(),
                       child: WebView(
-                        initialUrl: kMainPostUrl,
+                        initialUrl: widget.url,
                         gestureNavigationEnabled: true,
                         onWebViewCreated: (controller) {
                           _completeController.complete(controller);

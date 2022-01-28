@@ -1,10 +1,8 @@
 import 'package:al_ashraf/constants/constants.dart';
-import 'package:al_ashraf/models/audio_components.dart';
 import 'package:al_ashraf/widgets/custom_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:rxdart/rxdart.dart' as rx;
 import 'package:just_audio/just_audio.dart';
 import 'package:al_ashraf/widgets/circular_image.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -44,7 +42,7 @@ class _RadioScreenState extends State<RadioScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: CustomWidgets.customAppBar('الإذاعة'),
-        extendBodyBehindAppBar: true,
+        extendBodyBehindAppBar: false,
         body: CustomScrollView(
           physics: BouncingScrollPhysics(),
           slivers: [

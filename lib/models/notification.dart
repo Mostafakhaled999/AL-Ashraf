@@ -30,7 +30,7 @@ class LocalNotification {
     var pref = await SharedPreferences.getInstance();
     if(!pref.containsKey('subscribedToHobAlNabi'))
     {
-      await FirebaseMessaging.instance.subscribeToTopic('HobAlNabi').whenComplete((){
+      await FirebaseMessaging.instance.subscribeToTopic('dev').whenComplete((){
         print('successfully subscribed');
         pref.setBool('subscribedToHobAlNabi', true);
       });
@@ -41,7 +41,8 @@ class LocalNotification {
     //FirebaseMessaging.onBackgroundMessage(_messageHandler);
     FirebaseMessaging.instance.getInitialMessage().then((message) {
       if(message != null){
-        Get.to(PostsScreen());}
+        Get.to(()=>PostsScreen(url: message.data['url'],));
+      }
     });
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       _displayLocalNotification(title: message.notification!.title.toString(),
@@ -49,7 +50,12 @@ class LocalNotification {
     });
     FirebaseMessaging.onMessageOpenedApp.listen((message) {
       print("Message recieved from background");
-      Get.to(PostsScreen());
+      //print('first key'+message.data.keys);
+      print('url' + message.data['url']);
+      print('post_id' + message.data['post_id']);
+      message.data.keys.forEach((element) {print('key1'+element);});
+      print('from'+message.from.toString());
+      Get.to(()=>PostsScreen(url: message.data['url'],));
     });
   }
 
@@ -57,7 +63,7 @@ class LocalNotification {
     if (payload != null) {
       print('notification payload: $payload');
     } else {
-      print("Notification Done");
+      print(payload);
     }
     Get.to(PostsScreen());
   }

@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:al_ashraf/constants/constants.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:marquee/marquee.dart';
+
 
 
 class CardListScreen extends StatelessWidget {
@@ -29,7 +29,7 @@ class CardListScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        extendBodyBehindAppBar: true,
+        extendBodyBehindAppBar: false,
         appBar: CustomWidgets.customAppBar(title),
         body: CustomScrollView(
           slivers: [

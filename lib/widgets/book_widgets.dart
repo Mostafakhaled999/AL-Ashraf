@@ -1,13 +1,12 @@
 import 'package:al_ashraf/models/instruction.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:al_ashraf/models/book.dart';
 import 'package:get/get.dart';
 import 'package:al_ashraf/widgets/custom_widgets.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:flutter/src/material/search.dart';
 
 class BookListScreen extends StatelessWidget {
   String screenTitle;
@@ -33,7 +32,6 @@ class BookListScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-
                   IconButton(
                     icon: Icon(Icons.adaptive.arrow_back),
                     iconSize: 40,
@@ -75,9 +73,9 @@ class BookCard extends StatelessWidget {
       padding: EdgeInsets.only(top: 10, right: 12, left: 12),
       child: GestureDetector(
         onTap: () {
-          Get.to(()=>PdfViewerScreen(
-            book: book,
-          ));
+          Get.to(() => PdfViewerScreen(
+                book: book,
+              ));
         },
         child: Container(
           margin: EdgeInsets.only(bottom: 10),
@@ -170,7 +168,8 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
       " اضغط على رقم الصفحة فى الجانب الأيمن"
       " ثم اكتب رقم الصفحة";
 
-  Instructions instructions = Instructions(instructionKey: _pdfInstructionKey, instructionText: _pdfInstructionText);
+  Instructions instructions = Instructions(
+      instructionKey: _pdfInstructionKey, instructionText: _pdfInstructionText);
 
   @override
   void initState() {
@@ -178,17 +177,45 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
     instructions.checkForInstructions();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-            appBar: CustomWidgets.customAppBar(widget.book.title,
-                centerTitle: true, fontSize: 25,elevation: 1),
-            extendBodyBehindAppBar: true,
-            body: SfPdfViewer.asset(
+            //appBar: CustomWidgets.customAppBar(widget.book.title,
+            //     centerTitle: true, fontSize: 25,elevation: 1),
+            // extendBodyBehindAppBar: true,
+            body:Stack(children: [
+
+              SfPdfViewer.asset(
               widget.book.pdfContentPath,
               enableTextSelection: false,
-            )));
+            ), Positioned(
+                height: 50,
+                width: 50,
+                top: 10,
+                left: 10,
+                child: Card(
+                    elevation: 5,
+                    color: Colors.lightGreen,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.adaptive.arrow_back,
+                        size: 25,
+                        color: Colors.white,
+                      ),
+                      //color: Colors.green,
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    )),
+              ),],
+
+            )
+
+        ));
   }
 }
 
@@ -207,17 +234,20 @@ class _WebViewViewerScreenState extends State<WebViewViewerScreen> {
     // TODO: implement initState
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: CustomWidgets.customAppBar(widget.book.title,fontSize: 23,elevation: 1),
+      appBar: CustomWidgets.customAppBar(widget.book.title,
+          fontSize: 23, elevation: 1),
       extendBodyBehindAppBar: true,
       extendBody: true,
       body: GestureDetector(
-        onLongPress: (){},
+        onLongPress: () {},
         child: InAppWebView(
-          initialData: InAppWebViewInitialData(data: widget.book.webViewContent),
+          initialData:
+              InAppWebViewInitialData(data: widget.book.webViewContent),
           initialOptions: InAppWebViewGroupOptions(
               crossPlatform: InAppWebViewOptions(
             supportZoom: true,
