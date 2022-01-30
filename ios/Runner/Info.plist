@@ -44,22 +44,22 @@
 		<key>UIStatusBarHidden</key>
 		<false/>
 		<key>LSApplicationQueriesSchemes</key>
-		<array>
-			<string>https</string>
-			<string>http</string>
-			<string>youtube</string>
-			<string>whatsapp</string>
-			<string>instagram</string>
-			<string>fb</string>
-			<string>tel</string>
-			<string>mailto</string>
-		</array>
-		<key>NSAppTransportSecurity</key>
-		<dict>
-			<key>NSAllowsArbitraryLoads</key>
-			<true/>
-			<key>NSAllowsArbitraryLoadsForMedia</key>
-			<true/>
-		</dict>
+        <array>
+            <string>https</string>
+            <string>http</string>
+            <string>youtube</string>
+            <string>whatsapp</string>
+            <string>instagram</string>
+            <string>fb</string>
+            <string>tel</string>
+            <string>mailto</string>
+        </array>
+        <key>NSAppTransportSecurity</key>
+        <dict>
+            <key>NSAllowsArbitraryLoads</key>
+            <true/>
+            <key>NSAllowsArbitraryLoadsForMedia</key>
+            <true/>
+        </dict>
 	</dict>
 </plist>
