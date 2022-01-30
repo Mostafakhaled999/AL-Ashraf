@@ -49,22 +49,11 @@ class LocalNotification {
           body: message.notification!.body.toString());
     });
     FirebaseMessaging.onMessageOpenedApp.listen((message) {
-      print("Message recieved from background");
-      //print('first key'+message.data.keys);
-      print('url' + message.data['url']);
-      print('post_id' + message.data['post_id']);
-      message.data.keys.forEach((element) {print('key1'+element);});
-      print('from'+message.from.toString());
       Get.to(()=>PostsScreen(url: message.data['url'],));
     });
   }
 
   static void _onSelectLocalNotification(String? payload) async {
-    if (payload != null) {
-      print('notification payload: $payload');
-    } else {
-      print(payload);
-    }
     Get.to(PostsScreen());
   }
   static Future<void> _initializeLocalNotification() async{

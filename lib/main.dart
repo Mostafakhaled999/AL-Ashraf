@@ -15,12 +15,14 @@ import 'package:get/get.dart';
 import 'screens/who_are_we_screen.dart';
 import 'screens/contact_us_screen.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'models/app_rating.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   LocalNotification.initialize();
   Hive.initFlutter();
   Hive.registerAdapter(PostAdapter());
+  AppRating().rate();
   runApp(const MyApp());
 }
 
