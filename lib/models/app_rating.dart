@@ -7,7 +7,6 @@ class AppRating{
 
    Future _getLaunchTimes()async{
     var pref = await SharedPreferences.getInstance();
-    _launchTimes = 1;
     if(pref.containsKey('launchTimes')){
       await pref.setInt('launchTimes', 1);
     }else{
