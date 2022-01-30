@@ -8,13 +8,14 @@ class AppRating{
    Future _getLaunchTimes()async{
     var pref = await SharedPreferences.getInstance();
     if(pref.containsKey('launchTimes')){
-      await pref.setInt('launchTimes', 1);
-    }else{
       _launchTimes =  pref.getInt('launchTimes')!;
+    }else{
+      await pref.setInt('launchTimes', 1);
     }
   }
   Future rate()async{
     await _getLaunchTimes();
+    print(_launchTimes.toString());
     if(_launchTimes % 7 == 0){
       final InAppReview inAppReview = InAppReview.instance;
       if (await inAppReview.isAvailable()) {
