@@ -30,6 +30,7 @@
 .pub-cache/
 .pub/
 /build/
+/lib/models/google_drive.dart
 
 # Web related
 lib/generated_plugin_registrant.dart

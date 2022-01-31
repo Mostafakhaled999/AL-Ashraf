@@ -1,0 +1,96 @@
+{
+  "project_info": {
+    "project_number": "527154167423",
+    "project_id": "alashraf",
+    "storage_bucket": "alashraf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:527154167423:android:9409248c35124aff24c94a",
+        "android_client_info": {
+          "package_name": "com.alabd.alashraf"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "527154167423-59d6cimnl4lcg5qpdd9pvcj9q0m65ask.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuOlyfug5ZRBtbniAUPiDzPRakoA2l_fs"
+        },
+        {
+          "current_key": "AIzaSyAeY-DbnUnHHKIApKT5DFZ7vKVfjOmMn14"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "527154167423-59d6cimnl4lcg5qpdd9pvcj9q0m65ask.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "527154167423-npp8qld8o2r8vh6ee1t2n17gufe2msjj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.alAshraf"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:527154167423:android:0cb2ce515623cc0524c94a",
+        "android_client_info": {
+          "package_name": "com.example.al_ashraf"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "527154167423-579arrlgkabrj3u1from9u9ag2cfd1em.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.al_ashraf",
+            "certificate_hash": "9bc428b4c79d3d3564073f8d46b32f5476dfc567"
+          }
+        },
+        {
+          "client_id": "527154167423-59d6cimnl4lcg5qpdd9pvcj9q0m65ask.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuOlyfug5ZRBtbniAUPiDzPRakoA2l_fs"
+        },
+        {
+          "current_key": "AIzaSyAeY-DbnUnHHKIApKT5DFZ7vKVfjOmMn14"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "527154167423-59d6cimnl4lcg5qpdd9pvcj9q0m65ask.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "527154167423-npp8qld8o2r8vh6ee1t2n17gufe2msjj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.alAshraf"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

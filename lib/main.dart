@@ -1,24 +1,28 @@
+import 'package:al_ashraf/models/post.dart';
+import 'package:al_ashraf/screens/ahadeth_screen.dart';
+import 'package:al_ashraf/screens/diwan_books_screen.dart';
+import 'package:al_ashraf/screens/favourite_posts_screen.dart';
+import 'package:al_ashraf/screens/hadra_book_screen.dart';
 import 'package:al_ashraf/screens/home_screen.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:al_ashraf/screens/inshad_screen.dart';
+import 'package:al_ashraf/screens/nathr_books_screen.dart';
+import 'package:al_ashraf/screens/posts_screen.dart';
+import 'package:al_ashraf/screens/radio_screen.dart';
+import 'package:al_ashraf/screens/who_are_we_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-void initializeFireBase() async{
-  await Firebase.initializeApp();
-  var pref = await SharedPreferences.getInstance();
-  if(!pref.containsKey('subscribedToHobAlNabi'))
-    {
-      FirebaseMessaging.instance.subscribeToTopic('HobAlNabi').whenComplete((){
-        pref.setBool('subscribedToHobAlNabi', true);
-      });
-    }
-
-}
+import 'package:al_ashraf/models/notification.dart';
+import 'package:get/get.dart';
+import 'screens/who_are_we_screen.dart';
+import 'screens/contact_us_screen.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'models/app_rating.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  initializeFireBase();
+  LocalNotification.initialize();
+  Hive.initFlutter();
+  Hive.registerAdapter(PostAdapter());
+  AppRating().rate();
   runApp(const MyApp());
 }
 
@@ -28,19 +32,33 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'أحب محمدا',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        pageTransitionsTheme: const PageTransitionsTheme(
+          builders: {
+            TargetPlatform.android: ZoomPageTransitionsBuilder(),
+          },
+        ),
         backgroundColor: Colors.white,
-        primarySwatch: Colors.green,
+        //primarySwatch: Colors.white,
       ),
       home: HomeScreen(),
       routes: {
-        'home': (context)=> HomeScreen(),
-
+        'home': (context) => HomeScreen(),
+        'posts': (context) => PostsScreen(),
+        'who_are_we': (context) => WhoAreWeScreen(),
+        'contact_us': (context) => ContactUsScreen(),
+        'ahadeth': (context) => AhadethScreen(),
+        'inshad': (context) => InshadScreen(),
+        'radio': (context) => RadioScreen(),
+        'hadra_book': (context) => HadraBookScreen(),
+        'diwans': (context) => DiwanBooksScreen(),
+        'nathr_books': (context) => NathrBooksScreen(),
+        'posts': (context) => PostsScreen(),
+        'favourite_posts': (context) => FavouritePostsScreen()
       },
     );
   }
 }
-
