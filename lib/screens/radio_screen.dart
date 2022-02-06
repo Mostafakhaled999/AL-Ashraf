@@ -41,7 +41,7 @@ class _RadioScreenState extends State<RadioScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: CustomWidgets.customAppBar('الإذاعة'),
+        appBar: CustomWidgets.customAppBar('الإذاعة',appBarColor: Colors.green),
         extendBodyBehindAppBar: false,
         body: CustomScrollView(
           physics: BouncingScrollPhysics(),
@@ -98,6 +98,7 @@ class _RadioScreenState extends State<RadioScreen> {
                     Expanded(
                       child: Slider(
                           value: player.volume,
+                          activeColor: Colors.green,
                           onChanged: (newVolume) {
                             setState(() {
                               player.setVolume(newVolume);

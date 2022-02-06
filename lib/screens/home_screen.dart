@@ -54,7 +54,31 @@ class HomeScreen extends StatelessWidget {
                     fit: BoxFit.cover),
                 onPress: (index) =>
                     Navigator.pushNamed(context, kScreenRouteNames[index]),
+              ),
+              // CardGridList(
+              //   gridCardNames: kMoreScreenCardNames,
+              //   gridCardImages: (index) => Lottie.asset(
+              //       kMoreScreenCardImgs[index],
+              //       fit: BoxFit.cover),
+              //   onPress: (index) =>
+              //       kMoreScreenFuncitons[index].call(),
+              // ),
+              SliverList(
+                  delegate: SliverChildListDelegate([
+                    SizedBox(height: 10,)
+                  ])),
+              SliverGrid(
+                delegate: SliverChildListDelegate([
+                  ExtraHomeScreenCards.shareAppCard(),
+                  ExtraHomeScreenCards.rateAppCard(),
+                ]),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                ),
               )
+
             ]),
           ),
         ));

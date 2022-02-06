@@ -1,28 +1,32 @@
-import 'package:al_ashraf/models/post.dart';
-import 'package:al_ashraf/screens/ahadeth_screen.dart';
-import 'package:al_ashraf/screens/diwan_books_screen.dart';
-import 'package:al_ashraf/screens/favourite_posts_screen.dart';
-import 'package:al_ashraf/screens/hadra_book_screen.dart';
-import 'package:al_ashraf/screens/home_screen.dart';
-import 'package:al_ashraf/screens/inshad_screen.dart';
-import 'package:al_ashraf/screens/nathr_books_screen.dart';
-import 'package:al_ashraf/screens/posts_screen.dart';
-import 'package:al_ashraf/screens/radio_screen.dart';
-import 'package:al_ashraf/screens/who_are_we_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:al_ashraf/models/notification.dart';
-import 'package:get/get.dart';
+
+import 'screens/ahadeth_screen.dart';
+import 'screens/diwan_books_screen.dart';
+import 'screens/favourite_posts_screen.dart';
+import 'screens/hadra_book_screen.dart';
+import 'screens/home_screen.dart';
+import 'screens/inshad_screen.dart';
+import 'screens/nathr_books_screen.dart';
+import 'screens/posts_screen.dart';
+import 'screens/radio_screen.dart';
 import 'screens/who_are_we_screen.dart';
 import 'screens/contact_us_screen.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+
+import 'models/post.dart';
+import 'models/notification.dart';
 import 'models/app_rating.dart';
+
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
+
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   LocalNotification.initialize();
   Hive.initFlutter();
   Hive.registerAdapter(PostAdapter());
-  AppRating().rate();
+  AppRating().checkRating();
   runApp(const MyApp());
 }
 
@@ -57,7 +61,7 @@ class MyApp extends StatelessWidget {
         'diwans': (context) => DiwanBooksScreen(),
         'nathr_books': (context) => NathrBooksScreen(),
         'posts': (context) => PostsScreen(),
-        'favourite_posts': (context) => FavouritePostsScreen()
+        'favourite_posts': (context) => FavouritePostsScreen(),
       },
     );
   }

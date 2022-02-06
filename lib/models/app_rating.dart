@@ -15,7 +15,7 @@ class AppRating{
       await pref.setInt('launchTimes', 1);
     }
   }
-  Future rate()async{
+  Future checkRating()async{
     await _getLaunchTimes();
     if(_launchTimes % 7 == 0){
       final InAppReview inAppReview = InAppReview.instance;
@@ -23,5 +23,9 @@ class AppRating{
         inAppReview.requestReview();
       }
     }
+  }
+  static Future rate()async{
+    final InAppReview inAppReview = InAppReview.instance;
+    inAppReview.openStoreListing(appStoreId: '',);
   }
 }

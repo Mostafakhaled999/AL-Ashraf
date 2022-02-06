@@ -60,6 +60,7 @@ dependencies:
   build_runner: ^2.1.7
   marquee: ^2.2.0
   in_app_review: ^2.0.4
+  share_plus: ^3.0.4
 
 
 dev_dependencies:
@@ -116,6 +117,8 @@ flutter:
     - assets/lottie_gifs/home_screen/inshad.json
     - assets/lottie_gifs/home_screen/who_are_we.json
     - assets/lottie_gifs/home_screen/contact_us.json
+    - assets/lottie_gifs/home_screen/rate_app.json
+    - assets/lottie_gifs/home_screen/share.json
     - assets/books/pdf/hadra/الحضرة كاملة الطبعة 29 بدون هوامش.pdf
     - assets/images/books_screen/background_search.png
     - assets/images/books_screen/hadra_cover.jpg

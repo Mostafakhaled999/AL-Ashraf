@@ -1,15 +1,24 @@
+import 'package:al_ashraf/models/app_rating.dart';
 import 'package:flutter/material.dart';
-
+import 'dart:io' show Platform;
+import 'package:share_plus/share_plus.dart';
 
 const Color kCardColor = Color(0xFFF1F2F6);
 
-const String kHomeScreenImgPath = 'assets/images/main_screen_image/main_screen_image.jpg';
-const String kWhoAreWeScrenImgPath = 'assets/images/who_are_we_screen_image/who_are_we_screen_image.JPG';
-const String kContactUsScreenImgPath = 'assets/images/contact_us_screen_image/contact_us_screen_image.JPG';
-const String kAlkobbaBGImgPath = 'assets/images/back_ground_image/back_ground.jpg';
-const String kRadioScreenImgPath = 'assets/images/radio_screen_image/radio_screen_image.png';
-const String kBackGroundSrchBarImgPath = 'assets/images/books_screen/background_search.png';
-const String kHadraBookCoverPath = 'assets/images/books_screen/book_covers/hadra_cover.jpg';
+const String kHomeScreenImgPath =
+    'assets/images/main_screen_image/main_screen_image.jpg';
+const String kWhoAreWeScrenImgPath =
+    'assets/images/who_are_we_screen_image/who_are_we_screen_image.JPG';
+const String kContactUsScreenImgPath =
+    'assets/images/contact_us_screen_image/contact_us_screen_image.JPG';
+const String kAlkobbaBGImgPath =
+    'assets/images/back_ground_image/back_ground.jpg';
+const String kRadioScreenImgPath =
+    'assets/images/radio_screen_image/radio_screen_image.png';
+const String kBackGroundSrchBarImgPath =
+    'assets/images/books_screen/background_search.png';
+const String kHadraBookCoverPath =
+    'assets/images/books_screen/book_covers/hadra_cover.jpg';
 
 const kFolderDriveType = "application/vnd.google-apps.folder";
 const kAudioFileDriveType = 'audio';
@@ -19,9 +28,10 @@ const kInshadRootFolderId = '0B40BecadRW2eaVVzNUJCbnk1RDA';
 
 const kMainPostUrl = 'https://alashraf-almahdia.net/';
 
-const kDiwanEpubWithTashkilPath = 'assets/books/epub/diwan_epub_with_tashkil.epub';
-const kDiwanEpubWithOutTashkilPath = 'assets/books/epub/diwan_epub_without_tashkil.epub';
-
+const kDiwanEpubWithTashkilPath =
+    'assets/books/epub/diwan_epub_with_tashkil.epub';
+const kDiwanEpubWithOutTashkilPath =
+    'assets/books/epub/diwan_epub_without_tashkil.epub';
 
 const List<String> kHomeScreenCardNames = [
   "المقالات",
@@ -33,7 +43,7 @@ const List<String> kHomeScreenCardNames = [
   "الأحاديث",
   "الإنشاد",
   "من نحن",
-  "اتصل بنا"
+  "اتصل بنا",
 ];
 const List<String> kScreenRouteNames = [
   'posts',
@@ -45,7 +55,7 @@ const List<String> kScreenRouteNames = [
   'ahadeth',
   'inshad',
   'who_are_we',
-  'contact_us'
+  'contact_us',
 ];
 
 const List<String> kAnimatedHomeImgsPath = [
@@ -58,9 +68,9 @@ const List<String> kAnimatedHomeImgsPath = [
   "assets/lottie_gifs/home_screen/ahadeth.json",
   "assets/lottie_gifs/home_screen/inshad.json",
   "assets/lottie_gifs/home_screen/who_are_we.json",
-  "assets/lottie_gifs/home_screen/contact_us.json"
+  "assets/lottie_gifs/home_screen/contact_us.json",
 ];
-List<String>kWebsitesURLs = [
+List<String> kWebsitesURLs = [
   'http://www.alabd.com/',
   'http://alashraf-almahdia.com/',
   'https://alashraf-almahdia.net/',
@@ -68,7 +78,7 @@ List<String>kWebsitesURLs = [
   'https://twitter.com/salah_alkousy',
   'https://www.youtube.com/channel/UCBf9qI7gYSgWyWA39c_jRCg',
 ];
-List<String>kWebsitesNames = [
+List<String> kWebsitesNames = [
   'ALABD.COM',
   'ALASHRAF-ALMAHDIA.COM',
   'ALASHRAF-ALMAHDIA.NET',
@@ -76,7 +86,7 @@ List<String>kWebsitesNames = [
   'Twitter',
   'YouTube',
 ];
-List<String>kWebsitesImgsPath = [
+List<String> kWebsitesImgsPath = [
   'assets/images/who_are_we_screen_image/world-wide-web64.png',
   'assets/images/who_are_we_screen_image/world-wide-web64.png',
   'assets/images/who_are_we_screen_image/world-wide-web64.png',
@@ -84,15 +94,12 @@ List<String>kWebsitesImgsPath = [
   'assets/images/who_are_we_screen_image/twitter64.png',
   'assets/images/who_are_we_screen_image/youtube64.png',
 ];
-List<String>kContactURLs = [
+List<String> kContactURLs = [
   'whatsapp://send?phone=+201117841111',
   'mailto:alashrafapp@gmail.com',
 ];
-List<String>kContactNames = [
-  'Whatsapp',
-  'Gmail'
-];
-List<String>kContactsImgsPath = [
+List<String> kContactNames = ['Whatsapp', 'Gmail'];
+List<String> kContactsImgsPath = [
   'assets/images/contact_us_screen_image/whatsapp64.png',
   'assets/images/contact_us_screen_image/gmail64.png'
 ];
@@ -102,7 +109,8 @@ List<String> kRadioChannelsFreq = [
   'https://s1.reliastream.com/proxy/oelgendy?mp=/stream'
 ];
 
-const String kHadraBookPath = 'assets/books/pdf/hadra/الحضرة كاملة الطبعة 29 بدون هوامش.pdf';
+const String kHadraBookPath =
+    'assets/books/pdf/hadra/الحضرة كاملة الطبعة 29 بدون هوامش.pdf';
 List<String> kDiwanBookTitles = [
   "ديوان الأسير",
   "ديوان العتيق",
@@ -214,7 +222,6 @@ List<String> kNathrBooksCoverPaths = [
   'assets/images/books_screen/nathr_books_covers/ihsan.jpg',
   'assets/images/books_screen/nathr_books_covers/nabeena.jpg',
   'assets/images/books_screen/nathr_books_covers/mishkaa.jpg',
-
 ];
 List<String> kNathrBookTitles = [
   'أركان الإِسلام',

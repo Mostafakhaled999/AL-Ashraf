@@ -5,8 +5,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:al_ashraf/constants/constants.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-
-
+import 'package:lottie/lottie.dart';
+import 'package:al_ashraf/models/app_rating.dart';
+import 'dart:io' show Platform;
+import 'package:share_plus/share_plus.dart';
 
 class CardListScreen extends StatelessWidget {
   String title;
@@ -18,11 +20,11 @@ class CardListScreen extends StatelessWidget {
 
   CardListScreen(
       {required this.title,
-        required this.cardImagesPath,
-        required this.cardNames,
-        required this.widget,
-        required this.cardUrls,
-        required this.screenImagePath});
+      required this.cardImagesPath,
+      required this.cardNames,
+      required this.widget,
+      required this.cardUrls,
+      required this.screenImagePath});
 
   @override
   Widget build(BuildContext context) {
@@ -30,17 +32,17 @@ class CardListScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.white,
         extendBodyBehindAppBar: false,
-        appBar: CustomWidgets.customAppBar(title),
+        appBar: CustomWidgets.customAppBar(title, appBarColor: Colors.green),
         body: CustomScrollView(
           slivers: [
             SliverList(
                 delegate: SliverChildListDelegate([
-                  CustomCircularImage(imagePath: screenImagePath),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  widget
-                ])),
+              CustomCircularImage(imagePath: screenImagePath),
+              SizedBox(
+                height: 10,
+              ),
+              widget
+            ])),
             CardGridList(
               gridCardNames: cardNames,
               cardNameDirection: TextDirection.ltr,
@@ -66,17 +68,15 @@ class CardGridList extends StatelessWidget {
   TextDirection cardNameDirection;
   int cardNameMaxLines;
 
-
-  CardGridList(
-      {required this.gridCardNames,
-      required this.gridCardImages,
-      required this.onPress,
-
-      this.cardNameFontSize = 30,
-      this.cardNameFontWeight = FontWeight.bold,
-      this.cardNameDirection = TextDirection.rtl,
-      this.cardNameMaxLines = 1,
-     });
+  CardGridList({
+    required this.gridCardNames,
+    required this.gridCardImages,
+    required this.onPress,
+    this.cardNameFontSize = 30,
+    this.cardNameFontWeight = FontWeight.bold,
+    this.cardNameDirection = TextDirection.rtl,
+    this.cardNameMaxLines = 1,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +89,7 @@ class CardGridList extends StatelessWidget {
               cardNameFontSize: cardNameFontSize,
               cardNameFontWeight: cardNameFontWeight,
               cardNameDirection: cardNameDirection,
-              onPress: ()=>onPress(index)),
+              onPress: () => onPress(index)),
           childCount: gridCardNames.length),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
@@ -105,10 +105,10 @@ class ImageCard extends StatelessWidget {
     Key? key,
     required this.gridCardImage,
     required this.gridCardName,
-    required this.cardNameMaxLines,
-    required this.cardNameFontSize,
-    required this.cardNameFontWeight,
-    required this.cardNameDirection,
+    this.cardNameFontSize = 30,
+    this.cardNameFontWeight = FontWeight.bold,
+    this.cardNameDirection = TextDirection.rtl,
+    this.cardNameMaxLines = 1,
     required this.onPress,
   }) : super(key: key);
 
@@ -150,11 +150,31 @@ class ImageCard extends StatelessWidget {
           ],
         ),
       ),
-      onTap: ()=>onPress(),
+      onTap: () => onPress(),
     );
   }
 }
 
-
-
-
+class ExtraHomeScreenCards {
+  static ImageCard shareAppCard() {
+    return ImageCard(
+        gridCardImage:
+            Lottie.asset('assets/lottie_gifs/more_screen/share.json'),
+        gridCardName: 'شارك التطبيق',
+        onPress: () {
+          if (Platform.isAndroid) {
+            Share.share(
+                'https://play.google.com/store/apps/details?id=com.alabd.alashraf');
+          }
+        });
+  }
+  static ImageCard rateAppCard() {
+    return ImageCard(
+        gridCardImage:
+        Lottie.asset('assets/lottie_gifs/more_screen/rate_app.json'),
+        gridCardName: 'قيم التطبيق',
+        onPress: () {
+          AppRating.rate();
+        });
+  }
+}
