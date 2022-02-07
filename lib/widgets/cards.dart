@@ -159,7 +159,7 @@ class ExtraHomeScreenCards {
   static ImageCard shareAppCard() {
     return ImageCard(
         gridCardImage:
-            Lottie.asset('assets/lottie_gifs/more_screen/share.json'),
+            Lottie.asset('assets/lottie_gifs/home_screen/share.json'),
         gridCardName: 'شارك التطبيق',
         onPress: () {
           if (Platform.isAndroid) {
@@ -171,7 +171,7 @@ class ExtraHomeScreenCards {
   static ImageCard rateAppCard() {
     return ImageCard(
         gridCardImage:
-        Lottie.asset('assets/lottie_gifs/more_screen/rate_app.json'),
+        Lottie.asset('assets/lottie_gifs/home_screen/rate_app.json'),
         gridCardName: 'قيم التطبيق',
         onPress: () {
           AppRating.rate();

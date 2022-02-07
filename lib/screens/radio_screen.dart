@@ -3,10 +3,10 @@ import 'package:al_ashraf/widgets/custom_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:al_ashraf/widgets/circular_image.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:al_ashraf/widgets/audio_widgets.dart';
+import 'package:al_ashraf/models/audio_components.dart';
 
 class RadioScreen extends StatefulWidget {
   const RadioScreen({Key? key}) : super(key: key);
@@ -16,92 +16,99 @@ class RadioScreen extends StatefulWidget {
 }
 
 class _RadioScreenState extends State<RadioScreen> {
-  final AudioPlayer player = AudioPlayer();
-  String initializedChannelFreq = '';
-  Future<void> initAndPlay(String freq) async {
+  Future<void> playRadio(String id) async {
     setState(() {
-      initializedChannelFreq = freq;
+      globalAudioPlayer.intializedAudioId = id;
+      globalAudioPlayer.audioUrl = id;
     });
-    try {
-      await player.setAudioSource(AudioSource.uri(
-          Uri.parse(freq)));
-
-      player.play();
-    } catch (e) {
-      CustomWidgets.customSnackBar('حدث خطأ الرجاء المحاولة لاحقا');
-    }
+    globalAudioPlayer.initAndPlay();
   }
+
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    player.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: CustomWidgets.customAppBar('الإذاعة',appBarColor: Colors.green),
+        appBar:
+            CustomWidgets.customAppBar('الإذاعة', appBarColor: Colors.green),
         extendBodyBehindAppBar: false,
         body: CustomScrollView(
           physics: BouncingScrollPhysics(),
           slivers: [
             SliverList(
               delegate: SliverChildListDelegate([
-                CustomCircularImage(imagePath: kRadioScreenImgPath,imageHeightRatio: 0.47,),
-                SizedBox(height: 20,)
+                CustomCircularImage(
+                  imagePath: kRadioScreenImgPath,
+                  imageHeightRatio: 0.47,
+                ),
+                SizedBox(
+                  height: 20,
+                )
               ]),
             ),
             SliverGrid(
                 delegate: SliverChildBuilderDelegate(
-                        (context, index) =>
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Card(
-                        elevation: 5,
-                        color: kCardColor,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15)),
-                        child: Column(
-                          children: [
-                            Expanded(
-                              flex: 2,
-                              child: Center(
-                                child: AutoSizeText(kRadioChannelsName[index],
-                                    textDirection: TextDirection.rtl,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(fontSize: 40)),
-                              ),
+                    (context, index) => Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Card(
+                            elevation: 5,
+                            color: kCardColor,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15)),
+                            child: Column(
+                              children: [
+                                Expanded(
+                                  flex: 2,
+                                  child: Center(
+                                    child: AutoSizeText(
+                                        kRadioChannelsName[index],
+                                        textDirection: TextDirection.rtl,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(fontSize: 40)),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 3,
+                                  child: ControlButton(
+                                    audioId: kRadioChannelsFreq[index],
+                                    initializedAudioId:
+                                        globalAudioPlayer.intializedAudioId,
+                                    player: globalAudioPlayer.audioPlayer,
+                                    initializeAndPlay: (freq) =>
+                                        playRadio(freq),
+                                    iconSize: 60,
+                                  ),
+                                )
+                              ],
                             ),
-                            Expanded(
-                              flex: 3,
-                              child: ControlButton(audioId: kRadioChannelsFreq[index],
-                                initializedAudioId: initializedChannelFreq,
-                                player: player,
-                                initializeAndPlay: (freq)=>initAndPlay(freq),
-                              iconSize: 60,),
-                            )
-                          ],
+                          ),
                         ),
-                      ),
-                    ),childCount: kRadioChannelsName.length),
+                    childCount: kRadioChannelsName.length),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2, crossAxisSpacing: 10)),
-
-            SliverList(delegate: SliverChildListDelegate([
-              SizedBox(height: 20,),
+            SliverList(
+                delegate: SliverChildListDelegate([
+              SizedBox(
+                height: 20,
+              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child:Row(
+                child: Row(
                   children: [
                     Icon(Icons.volume_down),
                     Expanded(
                       child: Slider(
-                          value: player.volume,
+                          value: globalAudioPlayer.audioPlayer.volume,
                           activeColor: Colors.green,
                           onChanged: (newVolume) {
                             setState(() {
-                              player.setVolume(newVolume);
+                              globalAudioPlayer.audioPlayer
+                                  .setVolume(newVolume);
                             });
                           }),
                     ),

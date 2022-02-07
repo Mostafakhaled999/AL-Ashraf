@@ -210,8 +210,8 @@ class ControlButton extends StatelessWidget {
                   processingState == ProcessingState.buffering) {
                 return Container(
                   margin: EdgeInsets.all(8.0),
-                  width: iconSize,
-                  height:iconSize,
+                   width: iconSize,
+                   height:iconSize,
                   child: CircularProgressIndicator(
                     color: Colors.white,
                   ),
@@ -259,28 +259,18 @@ class AudioListScreen extends StatefulWidget {
   _AudioListScreenState createState() => _AudioListScreenState();
 }
 class _AudioListScreenState extends State<AudioListScreen> {
-  final player = AudioPlayer();
-  String initializedAudioId = '';
-
-  Future<void> _initAndPlay(String id) async {
+  Future<void> _playAudio(String id)async{
     setState(() {
-      initializedAudioId = id;
+      globalAudioPlayer.intializedAudioId = id;
+      globalAudioPlayer.audioUrl = 'https://drive.google.com/uc?export=view&id=$id';
     });
-    try {
-      await player.setAudioSource(AudioSource.uri(
-          Uri.parse('https://drive.google.com/uc?export=view&id=$id')));
-
-      player.play();
-    } catch (e) {
-      CustomWidgets.customSnackBar('حدث خطأ الرجاء المحاولة لاحقا');
-    }
+    globalAudioPlayer.initAndPlay();
   }
 
   @override
   void dispose() {
     // Release decoders and buffers back to the operating system making them
     // available for other apps to use.
-    player.dispose();
     super.dispose();
   }
 
@@ -308,11 +298,11 @@ class _AudioListScreenState extends State<AudioListScreen> {
                     physics: BouncingScrollPhysics(),
                     itemCount: audioData.contentNames.length,
                     itemBuilder: (context, index) => AudioCard(
-                      player: player,
-                      initializeAndPlay: (id)=>_initAndPlay(id),
+                      player: globalAudioPlayer.audioPlayer,
+                      initializeAndPlay: (id)=>_playAudio(id),
                       audioId: audioData.contentIds[index],
                       audioName: audioData.contentNames[index],
-                      initializedAudioId: initializedAudioId,
+                      initializedAudioId: globalAudioPlayer.intializedAudioId,
                     ),
                   );
                 } else
