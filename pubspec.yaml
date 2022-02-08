@@ -61,6 +61,9 @@ dependencies:
   marquee: ^2.2.0
   in_app_review: ^2.0.4
   share_plus: ^3.0.4
+  just_audio_background: ^0.0.1-beta.4
+  in_app_update: ^2.0.0
+  new_version: ^0.3.0
 
 
 dev_dependencies:

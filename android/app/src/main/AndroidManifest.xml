@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <queries>
         <!-- If your app opens https URLs -->
         <intent>
@@ -33,7 +35,7 @@
         android:usesCleartextTraffic="true"
         android:supportsRtl="true">
         <activity
-            android:name=".MainActivity"
+            android:name="com.ryanheise.audioservice.AudioServiceActivity"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
@@ -70,7 +72,18 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+       <service android:name="com.ryanheise.audioservice.AudioService">
+           <intent-filter>
+               <action android:name="android.media.browse.MediaBrowserService" />
+           </intent-filter>
+       </service>
 
+       <!-- ADD THIS "RECEIVER" element -->
+       <receiver android:name="com.ryanheise.audioservice.MediaButtonReceiver" >
+           <intent-filter>
+               <action android:name="android.intent.action.MEDIA_BUTTON" />
+           </intent-filter>
+       </receiver>
        <meta-data
            android:name="com.google.firebase.messaging.default_notification_icon"
            android:resource="@drawable/ic_action_name" />

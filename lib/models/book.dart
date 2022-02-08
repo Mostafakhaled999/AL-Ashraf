@@ -5,7 +5,8 @@ import 'package:epubx/epubx.dart';
 class Book {
   String title;
   String partName;
-  String? searchText;
+  String? completeSearchText;
+  String? searchQuery;
   String coverPath;
   String authorName = 'صلاح الدين القوصى';
   String pdfContentPath;
@@ -123,7 +124,8 @@ class BookData {
             partName: books[bookPartIndex].partName,
             coverPath: books[bookPartIndex].coverPath,
             pdfContentPath: books[bookPartIndex].pdfContentPath);
-        bookResult.searchText = completeSearchText;
+        bookResult.completeSearchText = completeSearchText;
+        bookResult.searchQuery = searchText;
         bookResult.webViewContent =
             epubBookWithTashkil!.Content!.Html![subChapter.ContentFileName]!
                 .Content.toString();

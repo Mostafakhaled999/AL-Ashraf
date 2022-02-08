@@ -12,7 +12,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:al_ashraf/models/audio_components.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:rxdart/rxdart.dart' as rx;
-
+import 'package:share_plus/share_plus.dart';
 
 class AudioFoldersScreen extends StatelessWidget {
   String folderRootId;
@@ -66,6 +66,7 @@ class AudioFoldersScreen extends StatelessWidget {
                     onPress: (index) => Get.to(() => AudioListScreen(
                       folderId: folderData.contentIds[index],
                       folderName: folderData.contentNames[index],
+                      screenTitle: screenTitle
                     )),
                   )
                 ],
@@ -131,6 +132,13 @@ class AudioCard extends StatelessWidget {
                               fontSize: 22, overflow: TextOverflow.ellipsis),
                         ),
                       ),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        Share.share('https://drive.google.com/file/d/${audioId}/view');
+                      },
+                      icon: Icon(Icons.adaptive.share),
+                      iconSize: 25,
                     ),
                     IconButton(
                       onPressed: () {
@@ -252,8 +260,9 @@ class ControlButton extends StatelessWidget {
 class AudioListScreen extends StatefulWidget {
   String folderId;
   String folderName;
+  String screenTitle;
 
-  AudioListScreen({required this.folderId, required this.folderName});
+  AudioListScreen({required this.folderId, required this.folderName, required  this.screenTitle});
 
   @override
   _AudioListScreenState createState() => _AudioListScreenState();
@@ -263,6 +272,8 @@ class _AudioListScreenState extends State<AudioListScreen> {
     setState(() {
       globalAudioPlayer.intializedAudioId = id;
       globalAudioPlayer.audioUrl = 'https://drive.google.com/uc?export=view&id=$id';
+      globalAudioPlayer.audioName = widget.folderName;
+      globalAudioPlayer.audioAlbumName = widget.screenTitle;
     });
     globalAudioPlayer.initAndPlay();
   }

@@ -1,4 +1,3 @@
-
 import 'screens/ahadeth_screen.dart';
 import 'screens/diwan_books_screen.dart';
 import 'screens/favourite_posts_screen.dart';
@@ -11,9 +10,11 @@ import 'screens/radio_screen.dart';
 import 'screens/who_are_we_screen.dart';
 import 'screens/contact_us_screen.dart';
 
+import 'models/audio_components.dart';
 import 'models/post.dart';
 import 'models/notification.dart';
 import 'models/app_rating.dart';
+import 'models/auto_update.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,12 +22,14 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 
 
-void main() {
+void main(){
   WidgetsFlutterBinding.ensureInitialized();
   LocalNotification.initialize();
   Hive.initFlutter();
   Hive.registerAdapter(PostAdapter());
   AppRating().checkRating();
+  AutoUpdate.checkForNewUpdate();
+  GlobalAudioPlayer.initializeBackGroundAudio();
   runApp(const MyApp());
 }
 
