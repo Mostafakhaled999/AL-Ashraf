@@ -1,3 +1,6 @@
+import 'package:al_ashraf/screens/hadra_audio.dart';
+import 'package:al_ashraf/screens/images_screen.dart';
+
 import 'screens/ahadeth_screen.dart';
 import 'screens/diwan_books_screen.dart';
 import 'screens/favourite_posts_screen.dart';
@@ -65,6 +68,8 @@ class MyApp extends StatelessWidget {
         'nathr_books': (context) => NathrBooksScreen(),
         'posts': (context) => PostsScreen(),
         'favourite_posts': (context) => FavouritePostsScreen(),
+        'images': (context)=>ImagesScreen(),
+        'hadra_audio':(context)=>HadraAudioScreen(),
       },
     );
   }

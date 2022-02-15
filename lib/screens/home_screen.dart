@@ -56,14 +56,6 @@ class HomeScreen extends StatelessWidget {
                 onPress: (index) =>
                     Navigator.pushNamed(context, kScreenRouteNames[index]),
               ),
-              // CardGridList(
-              //   gridCardNames: kMoreScreenCardNames,
-              //   gridCardImages: (index) => Lottie.asset(
-              //       kMoreScreenCardImgs[index],
-              //       fit: BoxFit.cover),
-              //   onPress: (index) =>
-              //       kMoreScreenFuncitons[index].call(),
-              // ),
               SliverList(
                   delegate: SliverChildListDelegate([
                     SizedBox(height: 10,)
@@ -78,7 +70,7 @@ class HomeScreen extends StatelessWidget {
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
                 ),
-              )
+              ),
 
             ]),
           ),

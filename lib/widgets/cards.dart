@@ -82,13 +82,14 @@ class CardGridList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverGrid(
       delegate: SliverChildBuilderDelegate(
-          (context, index) => ImageCard(
+          (context, index) => GridCard(
               gridCardImage: gridCardImages(index),
-              gridCardName: gridCardNames[index],
-              cardNameMaxLines: cardNameMaxLines,
-              cardNameFontSize: cardNameFontSize,
-              cardNameFontWeight: cardNameFontWeight,
-              cardNameDirection: cardNameDirection,
+              gridCardWidget: ImageCardText(
+                  gridCardName: gridCardNames[index],
+                  cardNameMaxLines: cardNameMaxLines,
+                  cardNameFontSize: cardNameFontSize,
+                  cardNameFontWeight: cardNameFontWeight,
+                  cardNameDirection: cardNameDirection),
               onPress: () => onPress(index)),
           childCount: gridCardNames.length),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -100,25 +101,54 @@ class CardGridList extends StatelessWidget {
   }
 }
 
-class ImageCard extends StatelessWidget {
-  const ImageCard({
+class ImageCardText extends StatelessWidget {
+  const ImageCardText({
     Key? key,
-    required this.gridCardImage,
     required this.gridCardName,
     this.cardNameFontSize = 30,
     this.cardNameFontWeight = FontWeight.bold,
     this.cardNameDirection = TextDirection.rtl,
     this.cardNameMaxLines = 1,
-    required this.onPress,
   }) : super(key: key);
 
-  final Widget gridCardImage;
   final String gridCardName;
   final int cardNameMaxLines;
   final double cardNameFontSize;
   final FontWeight cardNameFontWeight;
   final TextDirection cardNameDirection;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+        padding: const EdgeInsets.all(5.0),
+        child: AutoSizeText(
+          gridCardName,
+          maxLines: cardNameMaxLines,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: cardNameFontSize,
+            fontWeight: cardNameFontWeight,
+          ),
+          textDirection: cardNameDirection,
+          softWrap: true,
+          overflow: TextOverflow.clip,
+        ));
+  }
+}
+
+class GridCard extends StatelessWidget {
+  const GridCard({
+    Key? key,
+    required this.gridCardImage,
+    required this.gridCardWidget,
+    required this.onPress,
+    this.crossAxisAlignment = CrossAxisAlignment.center
+  }) : super(key: key);
+
+  final Widget gridCardImage;
+  final Widget gridCardWidget;
   final Function onPress;
+  final CrossAxisAlignment crossAxisAlignment;
 
   @override
   Widget build(BuildContext context) {
@@ -128,25 +158,14 @@ class ImageCard extends StatelessWidget {
         color: kCardColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: crossAxisAlignment,
           mainAxisSize: MainAxisSize.max,
           children: [
-            Expanded(child: gridCardImage),
-            Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: AutoSizeText(
-                gridCardName,
-                maxLines: cardNameMaxLines,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: cardNameFontSize,
-                  fontWeight: cardNameFontWeight,
-                ),
-                textDirection: cardNameDirection,
-                softWrap: true,
-                overflow: TextOverflow.clip,
-              ),
-            )
+            Expanded(
+              child: gridCardImage,
+            ),
+           gridCardWidget
           ],
         ),
       ),
@@ -156,11 +175,11 @@ class ImageCard extends StatelessWidget {
 }
 
 class ExtraHomeScreenCards {
-  static ImageCard shareAppCard() {
-    return ImageCard(
+  static GridCard shareAppCard() {
+    return GridCard(
         gridCardImage:
             Lottie.asset('assets/lottie_gifs/home_screen/share.json'),
-        gridCardName: 'شارك التطبيق',
+        gridCardWidget: ImageCardText(gridCardName: 'شارك التطبيق'),
         onPress: () {
           if (Platform.isAndroid) {
             Share.share(
@@ -168,11 +187,12 @@ class ExtraHomeScreenCards {
           }
         });
   }
-  static ImageCard rateAppCard() {
-    return ImageCard(
+
+  static GridCard rateAppCard() {
+    return GridCard(
         gridCardImage:
-        Lottie.asset('assets/lottie_gifs/home_screen/rate_app.json'),
-        gridCardName: 'قيم التطبيق',
+            Lottie.asset('assets/lottie_gifs/home_screen/rate_app.json'),
+        gridCardWidget: ImageCardText(gridCardName: 'قيم التطبيق'),
         onPress: () {
           AppRating.rate();
         });

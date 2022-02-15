@@ -1,7 +1,5 @@
-import 'package:al_ashraf/models/app_rating.dart';
 import 'package:flutter/material.dart';
 import 'dart:io' show Platform;
-import 'package:share_plus/share_plus.dart';
 
 const Color kCardColor = Color(0xFFF1F2F6);
 
@@ -23,8 +21,12 @@ const String kHadraBookCoverPath =
 const kFolderDriveType = "application/vnd.google-apps.folder";
 const kAudioFileDriveType = 'audio';
 
-const kAhadethRootFolderId = '0B40BecadRW2eVkhncEpYeWtjeUk';
-const kInshadRootFolderId = '0B40BecadRW2eaVVzNUJCbnk1RDA';
+const kAhadethDriveFolderId = '0B40BecadRW2eVkhncEpYeWtjeUk';
+const kInshadDriveFolderId = '0B40BecadRW2eaVVzNUJCbnk1RDA';
+const kImagesDriveFolderId = '16AZNt-viGdSNoCxkSLma3OgU6wwXhJK7';
+const kHadraAudioDriveFolderId = '0B40BecadRW2edERFbTFBcnZJR2c';
+
+const kViewDriveContentUrl = 'https://drive.google.com/uc?export=view&id=';
 
 const kMainPostUrl = 'https://alashraf-almahdia.net/';
 
@@ -40,8 +42,10 @@ const List<String> kHomeScreenCardNames = [
   "كتب النثر",
   "الإذاعة",
   "كتاب الحضرة",
+  "صوت الحضرة",
   "الأحاديث",
   "الإنشاد",
+  "الصور",
   "من نحن",
   "اتصل بنا",
 ];
@@ -52,8 +56,10 @@ const List<String> kScreenRouteNames = [
   'nathr_books',
   'radio',
   'hadra_book',
+  'hadra_audio',
   'ahadeth',
   'inshad',
+  'images',
   'who_are_we',
   'contact_us',
 ];
@@ -65,8 +71,10 @@ const List<String> kAnimatedHomeImgsPath = [
   "assets/lottie_gifs/home_screen/nathr_books.json",
   "assets/lottie_gifs/home_screen/radio.json",
   "assets/lottie_gifs/home_screen/hadra_book.json",
+  "assets/lottie_gifs/home_screen/hadra_audio.json",
   "assets/lottie_gifs/home_screen/ahadeth.json",
   "assets/lottie_gifs/home_screen/inshad.json",
+  "assets/lottie_gifs/home_screen/images.json",
   "assets/lottie_gifs/home_screen/who_are_we.json",
   "assets/lottie_gifs/home_screen/contact_us.json",
 ];

@@ -18,7 +18,7 @@ class AutoUpdate{
         final newVersion = NewVersion(
           iOSId: 'com.alabd.alashraf'
         );
-        newVersion.showAlertIfNecessary(context: Get.context!);
+        await newVersion.showAlertIfNecessary(context: Get.context!);
     }
   }
 }

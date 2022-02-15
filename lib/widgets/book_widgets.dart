@@ -295,7 +295,6 @@ class _WebViewViewerScreenState extends State<WebViewViewerScreen> {
             horizontalScrollBarEnabled: true,
           )),
           onLoadStop: (controller, url) {
-            print('asdasd');
             _webViewController = controller;
              controller.findAllAsync(
                 find: widget.book.completeSearchText.toString());

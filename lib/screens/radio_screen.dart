@@ -17,11 +17,11 @@ class RadioScreen extends StatefulWidget {
 }
 
 class _RadioScreenState extends State<RadioScreen> {
-  Future<void> playRadio(String id,int index) async {
+  Future<void> _playRadio(String audioId,String audioName) async {
     setState(() {
-      globalAudioPlayer.intializedAudioId = id;
-      globalAudioPlayer.audioUrl = id;
-      globalAudioPlayer.audioName = kRadioChannelsName[index];
+      globalAudioPlayer.intializedAudioId = audioId;
+      globalAudioPlayer.audioUrl = audioId;
+      globalAudioPlayer.audioName = audioName;
       globalAudioPlayer.audioAlbumName = 'الإذاعة';
     });
     globalAudioPlayer.initAndPlay();
@@ -70,10 +70,11 @@ class _RadioScreenState extends State<RadioScreen> {
                           ),
                           ControlButton(
                             audioId: kRadioChannelsFreq[index],
+                            audioName:kRadioChannelsName[index] ,
                             initializedAudioId:
                                 globalAudioPlayer.intializedAudioId,
                             player: globalAudioPlayer.audioPlayer,
-                            initializeAndPlay: (freq) => playRadio(freq,index),
+                            initializeAndPlay: (audioId,audioName) => _playRadio(audioId,audioName),
                             iconSize: 60,
                           )
                         ])))),

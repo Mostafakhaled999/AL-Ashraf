@@ -149,6 +149,7 @@ class _PostsScreenState extends State<PostsScreen> {
                           }
                         },
                         onWebResourceError: (error) {
+
                           //Get.to(NoConnectionWidget(restartConnection: ()=>_restartConnection()));
                         },
                       ));
