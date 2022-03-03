@@ -45,11 +45,12 @@ const List<String> kHomeScreenCardNames = [
   "صوت الحضرة",
   "الأحاديث",
   "الإنشاد",
-  "الصور",
+  "المزيد",
   "من نحن",
   "اتصل بنا",
+
 ];
-const List<String> kScreenRouteNames = [
+const List<String> kHomeScreenRouteNames = [
   'posts',
   'favourite_posts',
   'diwans',
@@ -59,9 +60,10 @@ const List<String> kScreenRouteNames = [
   'hadra_audio',
   'ahadeth',
   'inshad',
-  'images',
+  'more',
   'who_are_we',
   'contact_us',
+
 ];
 
 const List<String> kAnimatedHomeImgsPath = [
@@ -74,10 +76,33 @@ const List<String> kAnimatedHomeImgsPath = [
   "assets/lottie_gifs/home_screen/hadra_audio.json",
   "assets/lottie_gifs/home_screen/ahadeth.json",
   "assets/lottie_gifs/home_screen/inshad.json",
-  "assets/lottie_gifs/home_screen/images.json",
+  "assets/lottie_gifs/home_screen/more.json",
   "assets/lottie_gifs/home_screen/who_are_we.json",
   "assets/lottie_gifs/home_screen/contact_us.json",
+
 ];
+const List<String> kExtraHomeScreenCardNames = [
+  "التحميلات",
+  "الأوراد والأذكار",
+  "الصور",
+  "نغمات الجوال"
+];
+const List<String> kExtraHomeScreenRouteNames = [
+  'downloads',
+  'azkar&slwat',
+  'images',
+  'mobile_ringtones'
+
+];
+
+const List<String> kExtraAnimatedHomeImgsPath = [
+  "assets/lottie_gifs/home_screen/downloads.json",
+  "assets/lottie_gifs/home_screen/azkar&slawat.json",
+  "assets/lottie_gifs/home_screen/images.json",
+  "assets/lottie_gifs/home_screen/mobile_ringtones.json"
+
+];
+
 List<String> kWebsitesURLs = [
   'http://www.alabd.com/',
   'http://alashraf-almahdia.com/',

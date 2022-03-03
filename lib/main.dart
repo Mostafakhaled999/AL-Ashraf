@@ -1,5 +1,7 @@
 import 'package:al_ashraf/screens/hadra_audio.dart';
 import 'package:al_ashraf/screens/images_screen.dart';
+import 'package:al_ashraf/screens/more_screen.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 
 import 'screens/ahadeth_screen.dart';
 import 'screens/diwan_books_screen.dart';
@@ -28,10 +30,11 @@ import 'package:hive_flutter/hive_flutter.dart';
 void main(){
   WidgetsFlutterBinding.ensureInitialized();
   LocalNotification.initialize();
+  FlutterDownloader.initialize();
   Hive.initFlutter();
   Hive.registerAdapter(PostAdapter());
   AppRating().checkRating();
-  AutoUpdate.checkForNewUpdate();
+  AutoUpdate().checkForNewUpdate();
   GlobalAudioPlayer.initializeBackGroundAudio();
   runApp(const MyApp());
 }
@@ -70,6 +73,9 @@ class MyApp extends StatelessWidget {
         'favourite_posts': (context) => FavouritePostsScreen(),
         'images': (context)=>ImagesScreen(),
         'hadra_audio':(context)=>HadraAudioScreen(),
+        'downloads': (context) => FavouritePostsScreen(),
+        'azkar&slwat': (context)=>ImagesScreen(),
+        'more':(context)=>MoreScreen(),
       },
     );
   }

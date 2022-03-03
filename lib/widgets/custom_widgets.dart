@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
 class CustomWidgets {
+
   static AppBar customAppBar(
     String titleText, {
     bool centerTitle = true,
@@ -64,26 +65,27 @@ class CustomWidgets {
         style: TextStyle(fontSize: 23),
       ),
       actions: [TextButton(
+      onPressed: () {
+        Get.back();
+      },
+      child: Text(
+        "حسنا",
+        textDirection: TextDirection.rtl,
+        style: TextStyle(fontSize: 20),
+      ),
+      ),
+      TextButton(
         onPressed: () {
+          dontShowAgain();
           Get.back();
         },
         child: Text(
-          "حسنا",
+          "لا تظهر هذه الرسالة مجددا",
           textDirection: TextDirection.rtl,
           style: TextStyle(fontSize: 20),
         ),
-      ),
-        TextButton(
-          onPressed: () {
-            dontShowAgain();
-            Get.back();
-          },
-          child: Text(
-            "لا تظهر هذه الرسالة مجددا",
-            textDirection: TextDirection.rtl,
-            style: TextStyle(fontSize: 20),
-          ),
-        )],
+      )
+        ],
     );
   }
 }

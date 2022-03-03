@@ -6,23 +6,18 @@ import 'package:al_ashraf/models/google_drive.dart';
 import 'package:al_ashraf/constants/constants.dart';
 
 import 'dart:math';
-import 'package:al_ashraf/models/url_launcher.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:al_ashraf/models/audio_components.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:rxdart/rxdart.dart' as rx;
-import 'package:share_plus/share_plus.dart';
-
-
 
 class AudioCardsScreen extends StatefulWidget {
-  String folderId;
-  String folderName;
+
+  GoogleDrive driveFolder;
   DriveContent audioData;
 
   AudioCardsScreen(
-      {required this.folderId,
-      required this.folderName,
+      {required this.driveFolder,
       required this.audioData});
 
   @override
@@ -36,7 +31,7 @@ class _AudioCardsScreenState extends State<AudioCardsScreen> {
       globalAudioPlayer.audioUrl =
           'https://drive.google.com/uc?export=view&id=$audioId';
       globalAudioPlayer.audioName = audioName;
-      globalAudioPlayer.audioAlbumName = widget.folderName;
+      globalAudioPlayer.audioAlbumName = widget.driveFolder.name;
     });
     globalAudioPlayer.initAndPlay();
   }
@@ -44,7 +39,7 @@ class _AudioCardsScreenState extends State<AudioCardsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomWidgets.customAppBar(widget.folderName,
+      appBar: CustomWidgets.customAppBar(widget.driveFolder.name,
           fontSize: 22, centerTitle: true),
       extendBodyBehindAppBar: true,
       body: Stack(
@@ -57,13 +52,12 @@ class _AudioCardsScreenState extends State<AudioCardsScreen> {
               color: Colors.transparent,
               child: ListView.builder(
                 physics: BouncingScrollPhysics(),
-                itemCount: widget.audioData.contentNames.length,
+                itemCount: widget.audioData.contentLength,
                 itemBuilder: (context, index) => AudioCard(
                   player: globalAudioPlayer.audioPlayer,
                   initializeAndPlay: (audioId, audioName) =>
                       _playAudio(audioId, audioName),
-                  audioId: widget.audioData.contentIds[index],
-                  audioName: widget.audioData.contentNames[index],
+                  driveAudio: widget.audioData.content[index],
                   initializedAudioId: globalAudioPlayer.intializedAudioId,
                 ),
               ))
@@ -74,18 +68,17 @@ class _AudioCardsScreenState extends State<AudioCardsScreen> {
 }
 
 class AudioCard extends StatelessWidget {
-  String audioName;
-  String audioId;
+  GoogleDrive driveAudio;
   String initializedAudioId;
   Function initializeAndPlay;
   AudioPlayer player;
 
-  AudioCard(
-      {required this.player,
-      required this.audioName,
-      required this.initializedAudioId,
-      required this.initializeAndPlay,
-      required this.audioId});
+  AudioCard({
+    required this.player,
+    required this.driveAudio,
+    required this.initializedAudioId,
+    required this.initializeAndPlay,
+  });
 
   Stream<PositionData> get _positionDataStream =>
       rx.Rx.combineLatest3<Duration, Duration, Duration?, PositionData>(
@@ -117,7 +110,7 @@ class AudioCard extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: AutoSizeText(
-                          audioName.replaceAll('.mp3', ''),
+                          driveAudio.name.replaceAll('.mp3', ''),
                           maxLines: 3,
                           textDirection: TextDirection.rtl,
                           style: TextStyle(
@@ -127,16 +120,14 @@ class AudioCard extends StatelessWidget {
                     ),
                     IconButton(
                       onPressed: () {
-                        Share.share(
-                            'https://drive.google.com/file/d/${audioId}/view');
+                        driveAudio.share();
                       },
                       icon: Icon(Icons.adaptive.share),
                       iconSize: 25,
                     ),
                     IconButton(
                       onPressed: () {
-                        UrlLauncher(
-                            'https://drive.google.com/file/d/${audioId}/view');
+                        driveAudio.download();
                       },
                       icon: Icon(Icons.download),
                       iconSize: 25,
@@ -144,8 +135,8 @@ class AudioCard extends StatelessWidget {
                     ControlButton(
                       player: player,
                       initializedAudioId: initializedAudioId,
-                      audioId: audioId,
-                      audioName: audioName,
+                      audioName: driveAudio.name,
+                      audioId: driveAudio.id,
                       initializeAndPlay: initializeAndPlay,
                     )
                   ],
@@ -153,7 +144,7 @@ class AudioCard extends StatelessWidget {
               ),
               Visibility(
                 maintainSize: false,
-                visible: (initializedAudioId == audioId),
+                visible: (initializedAudioId == driveAudio.id),
                 child: Expanded(
                   flex: 1,
                   child: StreamBuilder<PositionData>(

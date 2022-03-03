@@ -1,56 +1,54 @@
 import 'package:al_ashraf/constants/constants.dart';
 import 'package:al_ashraf/models/google_drive.dart';
-import 'package:al_ashraf/widgets/audio_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
 import 'loading_widget.dart';
 
-
 class DriveContentWidget extends StatelessWidget {
   DriveContentWidget(
-      {required this.rootFolderId, required this.screenTitle, required this.contentViewWidget});
+      {required this.driveFolder,
+      required this.contentViewWidget});
 
-  String screenTitle;
-  String rootFolderId;
+  GoogleDrive driveFolder;
   Function contentViewWidget;
+  DriveContent driveContent = DriveContent();
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-          body: FutureBuilder(
-            future: GoogleDrive().getDriveContent(rootFolderId, true),
-            builder: (context, AsyncSnapshot<DriveContent?>snapshot) {
-              if (snapshot.hasData) {
-                if (snapshot.data!.contentType == kFolderDriveType) {
-                  return DriveFoldersScreen(folderRootId: rootFolderId,
-                    screenTitle: screenTitle,
-                    driveContent: snapshot.data!,
-                    contentViewWidget: contentViewWidget,);
-                } else {
-                  return contentViewWidget(
-                      rootFolderId, screenTitle, snapshot.data!);
-                }
-              } else {
-                return LoadingWidget();
-              }
-            },
-          ),
-        ));
+      body: FutureBuilder(
+        future: driveContent.getDriveContent(driveFolder),
+        builder: (context, AsyncSnapshot<bool?> snapshot) {
+          if (snapshot.hasData) {
+            if (driveContent.contentType == kFolderDriveType) {
+              return DriveFoldersScreen(
+                driveFolder: driveFolder,
+                driveContent: driveContent,
+                contentViewWidget: contentViewWidget,
+              );
+            } else {
+              return contentViewWidget(driveFolder, driveContent);
+            }
+          } else {
+            return LoadingWidget();
+          }
+        },
+      ),
+    ));
   }
 }
 
 class DriveFoldersScreen extends StatelessWidget {
-  String folderRootId;
-  String screenTitle;
+  GoogleDrive driveFolder;
   DriveContent driveContent;
   Function contentViewWidget;
 
-  DriveFoldersScreen({required this.folderRootId,
-    required this.screenTitle,
-    required this.driveContent,
-    required this.contentViewWidget});
+  DriveFoldersScreen(
+      {required this.driveFolder,
+      required this.driveContent,
+      required this.contentViewWidget});
 
   @override
   Widget build(BuildContext context) {
@@ -59,23 +57,21 @@ class DriveFoldersScreen extends StatelessWidget {
       slivers: [
         SliverList(
             delegate: SliverChildListDelegate([
-              Padding(
-                padding: EdgeInsets.all(12),
-                child: NewAppBar(screenTitle: screenTitle),
-              ),
-            ])),
+          Padding(
+            padding: EdgeInsets.all(12),
+            child: NewAppBar(screenTitle: driveFolder.name),
+          ),
+        ])),
         FolderGridList(
-          folderNames: driveContent.contentNames,
-          folderIds: driveContent.contentIds,
+          driveContent: driveContent,
           onPress: (index) {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>
-                      DriveContentWidget(
-                        rootFolderId: driveContent.contentIds[index],
-                        screenTitle: driveContent.contentNames[index],
-                        contentViewWidget: contentViewWidget,),
+                  builder: (context) => DriveContentWidget(
+                    driveFolder: driveContent.content[index],
+                    contentViewWidget: contentViewWidget,
+                  ),
                 ));
           },
         )
@@ -124,36 +120,28 @@ class NewAppBar extends StatelessWidget {
 }
 
 class FolderGridList extends StatelessWidget {
-
-  List<String> folderNames;
-  List<String> folderIds;
+  DriveContent driveContent;
   Function onPress;
 
-  FolderGridList(
-      {required this.folderNames, required this.folderIds, required this.onPress});
+  FolderGridList({required this.driveContent, required this.onPress});
 
   @override
   Widget build(BuildContext context) {
     return SliverGrid(
       delegate: SliverChildBuilderDelegate(
-              (context, index) =>
-              GestureDetector(
+          (context, index) => GestureDetector(
                 child: Column(
                   children: [
                     Icon(
                       Icons.folder,
-                      size: MediaQuery
-                          .of(context)
-                          .size
-                          .width *
-                          0.28,
+                      size: MediaQuery.of(context).size.width * 0.28,
                       color: Color(0xFFFFCF66),
                     ),
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.only(right: 8.0, left: 8),
                         child: AutoSizeText(
-                          folderNames[index],
+                          driveContent.content[index].name,
                           softWrap: true,
                           textDirection: TextDirection.rtl,
                           maxLines: 3,
@@ -167,9 +155,8 @@ class FolderGridList extends StatelessWidget {
                 ),
                 onTap: () => onPress(index),
               ),
-          childCount: folderNames.length),
-      gridDelegate:
-      const SliverGridDelegateWithFixedCrossAxisCount(
+          childCount: driveContent.contentLength),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,

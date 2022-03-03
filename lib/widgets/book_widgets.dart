@@ -173,7 +173,6 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     instructions.checkForInstructions();
     super.initState();
   }
@@ -227,11 +226,6 @@ class WebViewViewerScreen extends StatefulWidget {
 class _WebViewViewerScreenState extends State<WebViewViewerScreen> {
   late InAppWebViewController _webViewController;
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

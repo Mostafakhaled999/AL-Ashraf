@@ -48,6 +48,7 @@ class LocalNotification {
           body: message.notification!.body.toString());
     });
     FirebaseMessaging.onMessageOpenedApp.listen((message) {
+      print('notification URL: '+message.data['url']);
       Get.to(()=>PostsScreen(url: message.data['url'],));
     });
   }

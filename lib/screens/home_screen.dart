@@ -54,7 +54,7 @@ class HomeScreen extends StatelessWidget {
                     kAnimatedHomeImgsPath[index],
                     fit: BoxFit.cover),
                 onPress: (index) =>
-                    Navigator.pushNamed(context, kScreenRouteNames[index]),
+                    Navigator.pushNamed(context, kHomeScreenRouteNames[index]),
               ),
               SliverList(
                   delegate: SliverChildListDelegate([

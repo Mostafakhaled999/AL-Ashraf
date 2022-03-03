@@ -66,6 +66,13 @@ dependencies:
   new_version: ^0.3.0
   photo_view: ^0.13.0
   cached_network_image: ^3.2.0
+  path_provider: ^2.0.9
+  dio: ^4.0.4
+  permission_handler: ^9.1.0
+  flutter_downloader: ^1.7.2
+  open_file: ^3.2.1
+  shared_storage: ^0.2.0
+  path: ^1.8.0
 
 
 dev_dependencies:
@@ -126,6 +133,10 @@ flutter:
     - assets/lottie_gifs/home_screen/share.json
     - assets/lottie_gifs/home_screen/images.json
     - assets/lottie_gifs/home_screen/hadra_audio.json
+    - assets/lottie_gifs/home_screen/more.json
+    - assets/lottie_gifs/home_screen/downloads.json
+    - assets/lottie_gifs/home_screen/azkar&slawat.json
+    - assets/lottie_gifs/home_screen/mobile_ringtones.json
     - assets/books/pdf/hadra/الحضرة كاملة الطبعة 29 بدون هوامش.pdf
     - assets/images/books_screen/background_search.png
     - assets/images/books_screen/hadra_cover.jpg
