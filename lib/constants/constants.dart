@@ -25,6 +25,8 @@ const kAhadethDriveFolderId = '0B40BecadRW2eVkhncEpYeWtjeUk';
 const kInshadDriveFolderId = '0B40BecadRW2eaVVzNUJCbnk1RDA';
 const kImagesDriveFolderId = '16AZNt-viGdSNoCxkSLma3OgU6wwXhJK7';
 const kHadraAudioDriveFolderId = '0B40BecadRW2edERFbTFBcnZJR2c';
+const kAzkarAndSlawatDriveFolderId = '0B40BecadRW2eZ2xwM1Vpc2pKcW8';
+const kMobileRingtonesDriveFolderId = '0B40BecadRW2eWWIxT2dhQWVZSEU';
 
 const kViewDriveContentUrl = 'https://drive.google.com/uc?export=view&id=';
 
@@ -81,13 +83,13 @@ const List<String> kAnimatedHomeImgsPath = [
   "assets/lottie_gifs/home_screen/contact_us.json",
 
 ];
-const List<String> kExtraHomeScreenCardNames = [
+const List<String> kMoreHomeScreenCardNames = [
   "التحميلات",
   "الأوراد والأذكار",
   "الصور",
   "نغمات الجوال"
 ];
-const List<String> kExtraHomeScreenRouteNames = [
+const List<String> kMoreHomeScreenRouteNames = [
   'downloads',
   'azkar&slwat',
   'images',
@@ -95,7 +97,7 @@ const List<String> kExtraHomeScreenRouteNames = [
 
 ];
 
-const List<String> kExtraAnimatedHomeImgsPath = [
+const List<String> kMoreAnimatedHomeImgsPath = [
   "assets/lottie_gifs/home_screen/downloads.json",
   "assets/lottie_gifs/home_screen/azkar&slawat.json",
   "assets/lottie_gifs/home_screen/images.json",

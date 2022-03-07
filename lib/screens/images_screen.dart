@@ -22,11 +22,8 @@ class ImagesScreen extends StatelessWidget {
 }
 
 class FullSizeScreenImage extends StatelessWidget {
-
-  String imageId;
-
-  FullSizeScreenImage(this.imageId);
-
+  String imageViewLink;
+  FullSizeScreenImage({required this.imageViewLink});
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -35,7 +32,10 @@ class FullSizeScreenImage extends StatelessWidget {
         appBar: CustomWidgets.customAppBar(''),
         body: Container(
             child: PhotoView(
-          imageProvider: NetworkImage(kViewDriveContentUrl + imageId),
+              loadingBuilder: (context, event) {
+                return LoadingWidget();
+              },
+          imageProvider: NetworkImage(imageViewLink),
         )),
       ),
     );
@@ -62,11 +62,11 @@ class ImageCardsScreen extends StatelessWidget {
             delegate: SliverChildBuilderDelegate((context, index) {
               return GridCard(
                 gridCardImage: _cardImage(index),
-                gridCardWidget: _cardWidget(index),
+                gridCardWidget: DownloadShareButtons(driveFile: imageData.content[index],rowMainAligment: MainAxisAlignment.center,),
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 onPress: () {
                   Get.to(
-                      () => FullSizeScreenImage(imageData.content[index].id));
+                      () => FullSizeScreenImage(imageViewLink: imageData.content[index].mainLink!));
                 },
               );
             }, childCount: imageData.contentLength),
@@ -80,44 +80,29 @@ class ImageCardsScreen extends StatelessWidget {
       ),
     );
   }
-
-  Row _cardWidget(int index) {
-    return Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      imageData.content[index].download();
-                    },
-                    icon: Icon(Icons.download),
-                  ),
-                  IconButton(
-                      onPressed: () {
-                        imageData.content[index].share();
-                      },
-                      icon: Icon(Icons.adaptive.share)),
-                ],
-              );
-  }
-
   ClipRRect _cardImage(int index) {
     return ClipRRect(
-                child: Image(
-                  fit: BoxFit.fitWidth,
-                  alignment: AlignmentDirectional.topStart,
-                  loadingBuilder: (context, child, loadingProgress) {
-                    if (loadingProgress == null) return child;
-                    return LoadingWidget();
-                  },
-                  errorBuilder: (context, error, stackTrace) {
-                    return Icon(Icons.error);
-                  },
-                  image: NetworkImage(
-                      kViewDriveContentUrl + imageData.content[index].id),
-                ),
+                child:
+                   Image(
+                    fit: BoxFit.cover,
+                    alignment: AlignmentDirectional.center,
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return LoadingWidget();
+                    },
+                    errorBuilder: (context, error, stackTrace) {
+                      return Icon(Icons.error);
+                    },
+                    image: NetworkImage(
+                       imageData.content[index].thumbnail!
+                    ),
+                  ),
                 borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(15),
-                    topRight: Radius.circular(15)),
+                  topLeft:
+                     Radius.circular(15),
+                  topRight:
+                  Radius.circular(15),
+                    ),
               );
   }
 }

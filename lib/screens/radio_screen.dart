@@ -68,7 +68,8 @@ class _RadioScreenState extends State<RadioScreen> {
                             initializedAudioId:
                                 globalAudioPlayer.intializedAudioId,
                             player: globalAudioPlayer.audioPlayer,
-                            initializeAndPlay: (audioId,audioName) => _playRadio(audioId,audioName),
+                            playLink: kRadioChannelsFreq[index],
+                            initializeAndPlay: (audioId,audioName,playLink) => _playRadio(audioId,audioName),
                             iconSize: 60,
                           )
                         ])))),

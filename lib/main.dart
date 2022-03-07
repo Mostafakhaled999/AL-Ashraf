@@ -1,5 +1,8 @@
+import 'package:al_ashraf/screens/azkar_slawat.dart';
+import 'package:al_ashraf/screens/downloads.dart';
 import 'package:al_ashraf/screens/hadra_audio.dart';
 import 'package:al_ashraf/screens/images_screen.dart';
+import 'package:al_ashraf/screens/mobile_ringtones_screen.dart';
 import 'package:al_ashraf/screens/more_screen.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 
@@ -73,8 +76,9 @@ class MyApp extends StatelessWidget {
         'favourite_posts': (context) => FavouritePostsScreen(),
         'images': (context)=>ImagesScreen(),
         'hadra_audio':(context)=>HadraAudioScreen(),
-        'downloads': (context) => FavouritePostsScreen(),
-        'azkar&slwat': (context)=>ImagesScreen(),
+        'downloads': (context) => DownloadsScreen(),
+        'azkar&slwat': (context)=>AzkarAndSalwat(),
+        'mobile_ringtones':(context)=>MobileRingtonesScreen(),
         'more':(context)=>MoreScreen(),
       },
     );

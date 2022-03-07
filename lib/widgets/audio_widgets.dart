@@ -1,5 +1,6 @@
 import 'package:al_ashraf/widgets/blurry_back_ground.dart';
 import 'package:al_ashraf/widgets/custom_widgets.dart';
+import 'package:al_ashraf/widgets/drive_widgets.dart';
 
 import 'package:flutter/material.dart';
 import 'package:al_ashraf/models/google_drive.dart';
@@ -12,24 +13,22 @@ import 'package:just_audio/just_audio.dart';
 import 'package:rxdart/rxdart.dart' as rx;
 
 class AudioCardsScreen extends StatefulWidget {
-
   GoogleDrive driveFolder;
   DriveContent audioData;
 
-  AudioCardsScreen(
-      {required this.driveFolder,
-      required this.audioData});
+  AudioCardsScreen({required this.driveFolder, required this.audioData});
 
   @override
   _AudioCardsScreenState createState() => _AudioCardsScreenState();
 }
 
 class _AudioCardsScreenState extends State<AudioCardsScreen> {
-  Future<void> _playAudio(String audioId, String audioName) async {
+  Future<void> _playAudio(
+      String audioId, String audioName, String playLink) async {
     setState(() {
       globalAudioPlayer.intializedAudioId = audioId;
-      globalAudioPlayer.audioUrl =
-          'https://drive.google.com/uc?export=view&id=$audioId';
+      globalAudioPlayer.audioUrl = playLink;
+      //'https://drive.google.com/uc?export=view&id=$audioId';
       globalAudioPlayer.audioName = audioName;
       globalAudioPlayer.audioAlbumName = widget.driveFolder.name;
     });
@@ -55,8 +54,8 @@ class _AudioCardsScreenState extends State<AudioCardsScreen> {
                 itemCount: widget.audioData.contentLength,
                 itemBuilder: (context, index) => AudioCard(
                   player: globalAudioPlayer.audioPlayer,
-                  initializeAndPlay: (audioId, audioName) =>
-                      _playAudio(audioId, audioName),
+                  initializeAndPlay: (audioId, audioName, playLink) =>
+                      _playAudio(audioId, audioName, playLink),
                   driveAudio: widget.audioData.content[index],
                   initializedAudioId: globalAudioPlayer.intializedAudioId,
                 ),
@@ -118,25 +117,18 @@ class AudioCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                    IconButton(
-                      onPressed: () {
-                        driveAudio.share();
-                      },
-                      icon: Icon(Icons.adaptive.share),
-                      iconSize: 25,
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        driveAudio.download();
-                      },
-                      icon: Icon(Icons.download),
-                      iconSize: 25,
+                    DownloadShareButtons(
+                      driveFile: driveAudio,
+                      colMainAligment: MainAxisAlignment.center,
+                      rowCrossAligment: CrossAxisAlignment.center,
+                      rowMainAligment: MainAxisAlignment.center,
                     ),
                     ControlButton(
                       player: player,
                       initializedAudioId: initializedAudioId,
                       audioName: driveAudio.name,
                       audioId: driveAudio.id,
+                      playLink: driveAudio.mainLink??'',
                       initializeAndPlay: initializeAndPlay,
                     )
                   ],
@@ -173,6 +165,7 @@ class AudioCard extends StatelessWidget {
 class ControlButton extends StatelessWidget {
   AudioPlayer player;
   String audioId;
+  String playLink;
   String audioName;
   String initializedAudioId;
   Function initializeAndPlay;
@@ -184,6 +177,7 @@ class ControlButton extends StatelessWidget {
       required this.audioName,
       required this.initializedAudioId,
       required this.initializeAndPlay,
+      required this.playLink,
       this.iconSize = 35});
 
   @override
@@ -233,7 +227,8 @@ class ControlButton extends StatelessWidget {
               return IconButton(
                 icon: Icon(Icons.play_arrow, color: Colors.white),
                 iconSize: iconSize,
-                onPressed: () => initializeAndPlay(audioId, audioName),
+                onPressed: () =>
+                    initializeAndPlay(audioId, audioName, playLink),
               );
             }
           },

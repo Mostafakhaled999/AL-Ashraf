@@ -12,12 +12,12 @@ class MoreScreen extends StatelessWidget {
         body: CustomScrollView(
           slivers: [
             CardGridList(
-              gridCardNames: kExtraHomeScreenCardNames,
+              gridCardNames: kMoreHomeScreenCardNames,
               gridCardImages: (index) => Lottie.asset(
-                  kExtraAnimatedHomeImgsPath[index],
+                  kMoreAnimatedHomeImgsPath[index],
                   fit: BoxFit.cover),
               onPress: (index) => Navigator.pushNamed(
-                  context, kExtraHomeScreenRouteNames[index]),
+                  context, kMoreHomeScreenRouteNames[index]),
             ),
           ],
         ));

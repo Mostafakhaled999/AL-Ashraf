@@ -1,5 +1,6 @@
 import 'package:al_ashraf/constants/constants.dart';
 import 'package:al_ashraf/models/google_drive.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
@@ -7,8 +8,7 @@ import 'loading_widget.dart';
 
 class DriveContentWidget extends StatelessWidget {
   DriveContentWidget(
-      {required this.driveFolder,
-      required this.contentViewWidget});
+      {required this.driveFolder, required this.contentViewWidget});
 
   GoogleDrive driveFolder;
   Function contentViewWidget;
@@ -130,29 +130,7 @@ class FolderGridList extends StatelessWidget {
     return SliverGrid(
       delegate: SliverChildBuilderDelegate(
           (context, index) => GestureDetector(
-                child: Column(
-                  children: [
-                    Icon(
-                      Icons.folder,
-                      size: MediaQuery.of(context).size.width * 0.28,
-                      color: Color(0xFFFFCF66),
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 8.0, left: 8),
-                        child: AutoSizeText(
-                          driveContent.content[index].name,
-                          softWrap: true,
-                          textDirection: TextDirection.rtl,
-                          maxLines: 3,
-                          textAlign: TextAlign.center,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(fontSize: 20),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
+                child: FolderGridCard(folderName:driveContent.content[index].name),
                 onTap: () => onPress(index),
               ),
           childCount: driveContent.contentLength),
@@ -161,6 +139,84 @@ class FolderGridList extends StatelessWidget {
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
       ),
+    );
+  }
+}
+
+class FolderGridCard extends StatelessWidget {
+  const FolderGridCard({
+    Key? key,
+    required this.folderName,
+  }) : super(key: key);
+
+  final String folderName;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Icon(
+          Icons.folder,
+          size: MediaQuery.of(context).size.width * 0.28,
+          color: Color(0xFFFFCF66),
+        ),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.only(right: 8.0, left: 8),
+            child: AutoSizeText(
+              folderName,
+              softWrap: true,
+              textDirection: TextDirection.rtl,
+              maxLines: 3,
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(fontSize: 20),
+            ),
+          ),
+        )
+      ],
+    );
+  }
+}
+
+class DownloadShareButtons extends StatelessWidget {
+  DownloadShareButtons({
+    required this.driveFile,
+    this.rowMainAligment = MainAxisAlignment.spaceBetween,
+    this.rowCrossAligment = CrossAxisAlignment.start,
+    this.colMainAligment = MainAxisAlignment.start,
+  });
+
+  GoogleDrive driveFile;
+  MainAxisAlignment rowMainAligment;
+  CrossAxisAlignment rowCrossAligment;
+  MainAxisAlignment colMainAligment;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: rowMainAligment,
+      crossAxisAlignment: rowCrossAligment,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              GestureDetector(child: Icon(Icons.download,size: 25,),onTap:() {
+                  driveFile.download();
+                },),
+
+              Text(driveFile.size.toString() + ' mb',)
+            ],
+          ),
+        ),
+        IconButton(
+            onPressed: () {
+              driveFile.share();
+            },
+            icon: Icon(Icons.adaptive.share,)),
+      ],
     );
   }
 }
