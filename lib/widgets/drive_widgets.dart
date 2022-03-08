@@ -106,7 +106,7 @@ class NewAppBar extends StatelessWidget {
             screenTitle,
             textDirection: TextDirection.rtl,
             maxLines: 1,
-            minFontSize: 25,
+            minFontSize: 20,
             style: TextStyle(
               overflow: TextOverflow.ellipsis,
               fontSize: 40,

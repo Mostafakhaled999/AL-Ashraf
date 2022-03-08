@@ -16,8 +16,12 @@ class DownloadsScreen extends StatelessWidget {
       this.folderPath = '/storage/emulated/0/Download/أحب محمدا'});
 
   List<FileSystemEntity> _getFiles(String folderPath) {
-    List<FileSystemEntity> files = Directory(folderPath).listSync();
-    return files;
+    try {
+      List<FileSystemEntity> files = Directory(folderPath).listSync();
+      return files;
+    } catch (e) {
+      return [];
+    }
   }
 
   @override
@@ -32,7 +36,8 @@ class DownloadsScreen extends StatelessWidget {
               return DownloadFoldersScreen(
                   folders: downloadFiles, folderName: folderName);
             } else {
-              return DownloadsContentView(files: downloadFiles, folderName: folderName);
+              return DownloadsContentView(
+                  files: downloadFiles, folderName: folderName);
             }
           } else {
             return Center(
@@ -121,8 +126,15 @@ class DownloadsContentView extends StatelessWidget {
           delegate: SliverChildBuilderDelegate(
               (context, index) => GestureDetector(
                     child: ListTile(
-                      leading: Icon(Icons.file_present,size: 45,),
-                      subtitle: Text((files[index].statSync().size/(1024*1024)).ceil().toString()+'mb'),
+                      leading: Icon(
+                        Icons.file_present,
+                        size: 45,
+                      ),
+                      subtitle: Text(
+                          (files[index].statSync().size / (1024 * 1024))
+                                  .ceil()
+                                  .toString() +
+                              'mb'),
                       title: Text(files[index]
                           .path
                           .replaceAll(files[index].parent.path + '/', '')),

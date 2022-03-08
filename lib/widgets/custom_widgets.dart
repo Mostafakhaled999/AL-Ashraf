@@ -40,7 +40,7 @@ class CustomWidgets {
 
   static GetSnackBar customSnackBar(String textContent) {
     return GetSnackBar(
-        isDismissible: true,
+        isDismissible: false,
         borderRadius: 15,
         snackStyle: SnackStyle.FLOATING,
         margin: EdgeInsets.all(5),
