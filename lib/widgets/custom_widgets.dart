@@ -32,15 +32,16 @@ class CustomWidgets {
           color: iconColor,
         ),
         onPressed: () {
-          Get.back();
+          //Get.back(closeOverlays: false ,result: );
+          Navigator.pop(Get.context!);
         },
       ),
     );
   }
 
-  static GetSnackBar customSnackBar(String textContent) {
+  static GetSnackBar customSnackBar(String textContent,) {
     return GetSnackBar(
-        isDismissible: false,
+        isDismissible: true,
         borderRadius: 15,
         snackStyle: SnackStyle.FLOATING,
         margin: EdgeInsets.all(5),

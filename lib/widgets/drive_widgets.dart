@@ -130,7 +130,8 @@ class FolderGridList extends StatelessWidget {
     return SliverGrid(
       delegate: SliverChildBuilderDelegate(
           (context, index) => GestureDetector(
-                child: FolderGridCard(folderName:driveContent.content[index].name),
+                child: FolderGridCard(
+                    folderName: driveContent.content[index].name),
                 onTap: () => onPress(index),
               ),
           childCount: driveContent.contentLength),
@@ -179,6 +180,8 @@ class FolderGridCard extends StatelessWidget {
   }
 }
 
+
+
 class DownloadShareButtons extends StatelessWidget {
   DownloadShareButtons({
     required this.driveFile,
@@ -203,11 +206,21 @@ class DownloadShareButtons extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              GestureDetector(child: Icon(Icons.download,size: 25,),onTap:() {
+              GestureDetector(
+                child: Icon(
+                  Icons.download,
+                  size: 25,
+                ),
+                onTap: () {
                   driveFile.download();
-                },),
-
-              Text(driveFile.size.toString() + ' mb',)
+                },
+              ),
+              Text(
+                (int.parse(driveFile.size.toString()) / (1024 * 1024))
+                        .ceil()
+                        .toString() +
+                    ' mb',
+              )
             ],
           ),
         ),
@@ -215,7 +228,9 @@ class DownloadShareButtons extends StatelessWidget {
             onPressed: () {
               driveFile.share();
             },
-            icon: Icon(Icons.adaptive.share,)),
+            icon: Icon(
+              Icons.adaptive.share,
+            )),
       ],
     );
   }

@@ -28,6 +28,8 @@ const kHadraAudioDriveFolderId = '0B40BecadRW2edERFbTFBcnZJR2c';
 const kAzkarAndSlawatDriveFolderId = '0B40BecadRW2eZ2xwM1Vpc2pKcW8';
 const kMobileRingtonesDriveFolderId = '0B40BecadRW2eWWIxT2dhQWVZSEU';
 
+const kAndroidDownloadFolderPath = '/storage/emulated/0/Download/';
+
 const kViewDriveContentUrl = 'https://drive.google.com/uc?export=view&id=';
 
 const kMainPostUrl = 'https://alashraf-almahdia.net/';

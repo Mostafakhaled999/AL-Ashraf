@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:al_ashraf/widgets/drive_widgets.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:open_file/open_file.dart';
@@ -125,19 +126,21 @@ class DownloadsContentView extends StatelessWidget {
         SliverList(
           delegate: SliverChildBuilderDelegate(
               (context, index) => GestureDetector(
-                    child: ListTile(
-                      leading: Icon(
-                        Icons.file_present,
-                        size: 45,
+                    child: Directionality(
+                      textDirection: TextDirection.rtl,
+                      child: ListTile(
+                        leading: Icon(
+                          Icons.file_present,
+                          size: 45,
+                        ),
+                        subtitle: Text(
+                          '${(files[index].statSync().size / (1024 * 1024)).ceil()}'
+                              'mb',
+                        ),
+                        title: Text(files[index]
+                            .path
+                            .replaceAll(files[index].parent.path + '/', '')),
                       ),
-                      subtitle: Text(
-                          (files[index].statSync().size / (1024 * 1024))
-                                  .ceil()
-                                  .toString() +
-                              'mb'),
-                      title: Text(files[index]
-                          .path
-                          .replaceAll(files[index].parent.path + '/', '')),
                     ),
                     onTap: () {
                       OpenFile.open(files[index].path);

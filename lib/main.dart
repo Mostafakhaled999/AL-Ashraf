@@ -1,5 +1,5 @@
 import 'package:al_ashraf/screens/azkar_slawat.dart';
-import 'package:al_ashraf/screens/downloads.dart';
+import 'package:al_ashraf/screens/downloads_screen.dart';
 import 'package:al_ashraf/screens/hadra_audio.dart';
 import 'package:al_ashraf/screens/images_screen.dart';
 import 'package:al_ashraf/screens/mobile_ringtones_screen.dart';
@@ -30,10 +30,9 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 
 
-void main(){
+void main()async{
   WidgetsFlutterBinding.ensureInitialized();
   LocalNotification.initialize();
-  FlutterDownloader.initialize();
   Hive.initFlutter();
   Hive.registerAdapter(PostAdapter());
   AppRating().checkRating();
