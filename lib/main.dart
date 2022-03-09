@@ -4,7 +4,6 @@ import 'package:al_ashraf/screens/hadra_audio.dart';
 import 'package:al_ashraf/screens/images_screen.dart';
 import 'package:al_ashraf/screens/mobile_ringtones_screen.dart';
 import 'package:al_ashraf/screens/more_screen.dart';
-import 'package:flutter_downloader/flutter_downloader.dart';
 
 import 'screens/ahadeth_screen.dart';
 import 'screens/diwan_books_screen.dart';

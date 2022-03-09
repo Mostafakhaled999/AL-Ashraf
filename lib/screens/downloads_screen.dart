@@ -3,10 +3,8 @@ import 'dart:io';
 import 'package:al_ashraf/widgets/drive_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:open_file/open_file.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:filesystem_picker/filesystem_picker.dart';
+
 
 class DownloadsScreen extends StatelessWidget {
   String folderName;
