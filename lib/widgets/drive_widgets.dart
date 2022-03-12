@@ -1,8 +1,11 @@
 import 'package:al_ashraf/constants/constants.dart';
 import 'package:al_ashraf/models/google_drive.dart';
+import 'package:al_ashraf/models/instruction.dart';
+import 'package:al_ashraf/widgets/custom_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:get/get.dart';
 
 import 'loading_widget.dart';
 
@@ -203,6 +206,12 @@ class DownloadShareButtons extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: GestureDetector(
             onTap: () {
+              Instructions(
+                      instructionKey: 'Downloads',
+                      instructionText: 'سيتم إِنشاء مجلد بإِسم أحب محمدا'
+                          ' داخل مجلد التحميلات الخاص بالجهاز بك'
+                          ' و سوف يحتوى على جميع الملفات المحملة من التطبيق')
+                  .checkForInstructions();
               driveFile.download();
             },
             child: Column(

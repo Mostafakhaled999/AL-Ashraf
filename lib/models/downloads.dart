@@ -42,10 +42,10 @@ class DownloadModel {
             textDirection: TextDirection.rtl,
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
-          borderRadius: 20,
+          borderRadius: 15,
           snackStyle: SnackStyle.FLOATING,
-          margin: EdgeInsets.all(10),
-          snackPosition: SnackPosition.BOTTOM,
+          margin: EdgeInsets.all(5),
+          //snackPosition: SnackPosition.BOTTOM,
           mainButton: Obx(() => bytes.length != driveFile.size!
               ? CircularProgressIndicator(
                   color: Colors.green,
@@ -128,16 +128,12 @@ class DownloadModel {
 
   Future<String> _saveDownloadedFile(List<int> downloadedData) async {
     final fullDownloadedFilePath = await _getFullDownloadedFilePath();
-    //Directory('/storage/emulated/0/Download/أحب محمدا').createSync( recursive: true);
-     //File('/storage/emulated/0/Download/أحب محمدا/test1.txt').createSync(recursive: true);
-    // File(fullDownloadedFilePath + '/' + driveFile.name)
-    //         .createSync(recursive: true);
-    // final savedFile = File(fullDownloadedFilePath + '/' + driveFile.name).openSync(mode: FileMode.write);
-    // savedFile.writeFromSync(downloadedData);
-    // await savedFile.close();
-    // print( ' saveFilePath: '+ savedFile.path);
-    // print('downloadedFilePath: '+downloadedFile.path);
-    return fullDownloadedFilePath + '/' + driveFile.name;
+    final downloadedFile = await File(fullDownloadedFilePath + '/' + driveFile.name)
+            .create(recursive: true);
+    final savedFile = downloadedFile.openSync(mode: FileMode.write);
+    savedFile.writeFromSync(downloadedData);
+    await savedFile.close();
+    return downloadedFile.path;
     //await OpenFile.open(downloadedFile.path);
   }
 }

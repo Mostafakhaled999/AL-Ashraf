@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:al_ashraf/models/google_drive.dart';
 import 'package:al_ashraf/constants/constants.dart';
 
+
+
 import 'dart:math';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:al_ashraf/models/audio_components.dart';
@@ -36,10 +38,10 @@ class _AudioCardsScreenState extends State<AudioCardsScreen> {
     });
     globalAudioPlayer.initAndPlay();
   }
+
   @override
   void initState() {
     // TODO: implement initState
-    Directory('/storage/emulated/0/Download/أحب محمدا').createSync(recursive: true);
     super.initState();
   }
 

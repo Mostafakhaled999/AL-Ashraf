@@ -31,11 +31,12 @@
         </intent>
     </queries>
    <application
-        android:label="أحب محمدا"
-        android:requestLegacyExternalStorage="true"
-        android:usesCleartextTraffic="true"
-        android:supportsRtl="true"
-        android:icon="@mipmap/ic_launcher">
+       android:label="أحب محمدا"
+       android:requestLegacyExternalStorage="true"
+       android:preserveLegacyExternalStorage="true"
+       android:usesCleartextTraffic="true"
+       android:supportsRtl="true"
+       android:icon="@mipmap/ic_launcher">
         <activity
             android:name="com.ryanheise.audioservice.AudioServiceActivity"
             android:launchMode="singleTop"
