@@ -180,8 +180,6 @@ class FolderGridCard extends StatelessWidget {
   }
 }
 
-
-
 class DownloadShareButtons extends StatelessWidget {
   DownloadShareButtons({
     required this.driveFile,
@@ -203,25 +201,25 @@ class DownloadShareButtons extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              GestureDetector(
-                child: Icon(
+          child: GestureDetector(
+            onTap: () {
+              driveFile.download();
+            },
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
                   Icons.download,
                   size: 25,
                 ),
-                onTap: () {
-                  driveFile.download();
-                },
-              ),
-              Text(
-                (int.parse(driveFile.size.toString()) / (1024 * 1024))
-                        .ceil()
-                        .toString() +
-                    ' mb',
-              )
-            ],
+                Text(
+                  (int.parse(driveFile.size.toString()) / (1024 * 1024))
+                          .ceil()
+                          .toString() +
+                      ' mb',
+                )
+              ],
+            ),
           ),
         ),
         IconButton(

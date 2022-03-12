@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:al_ashraf/widgets/blurry_back_ground.dart';
 import 'package:al_ashraf/widgets/custom_widgets.dart';
 import 'package:al_ashraf/widgets/drive_widgets.dart';
@@ -33,6 +35,12 @@ class _AudioCardsScreenState extends State<AudioCardsScreen> {
       globalAudioPlayer.audioAlbumName = widget.driveFolder.name;
     });
     globalAudioPlayer.initAndPlay();
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    Directory('/storage/emulated/0/Download/أحب محمدا').createSync(recursive: true);
+    super.initState();
   }
 
   @override

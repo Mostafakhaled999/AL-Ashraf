@@ -3,8 +3,6 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-<!--    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />-->
-<!--    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />-->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
@@ -34,9 +32,9 @@
     </queries>
    <application
         android:label="أحب محمدا"
+        android:requestLegacyExternalStorage="true"
         android:usesCleartextTraffic="true"
         android:supportsRtl="true"
-        android:requestLegacyExternalStorage="true"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name="com.ryanheise.audioservice.AudioServiceActivity"
@@ -101,14 +99,5 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
-       <provider
-           android:name="vn.hunghd.flutterdownloader.DownloadedFileProvider"
-           android:authorities="${applicationId}.flutter_downloader.provider"
-           android:exported="false"
-           android:grantUriPermissions="true">
-           <meta-data
-               android:name="android.support.FILE_PROVIDER_PATHS"
-               android:resource="@xml/provider_paths"/>
-       </provider>
     </application>
 </manifest>

@@ -63,6 +63,8 @@ class DownloadModel {
 
         response.stream.listen(
           (List<int> newBytes) async {
+            // print(bytes.length);
+            // print(driveFile.size);
             bytes.addAll(newBytes);
             bytes2.addAll(newBytes);
           },
@@ -126,13 +128,16 @@ class DownloadModel {
 
   Future<String> _saveDownloadedFile(List<int> downloadedData) async {
     final fullDownloadedFilePath = await _getFullDownloadedFilePath();
-    File downloadedFile =
-        await File(fullDownloadedFilePath + '/' + driveFile.name)
-            .create(recursive: true);
-    final savedFile = downloadedFile.openSync(mode: FileMode.write);
-    savedFile.writeFromSync(downloadedData);
-    await savedFile.close();
-    return savedFile.path;
+    //Directory('/storage/emulated/0/Download/أحب محمدا').createSync( recursive: true);
+     //File('/storage/emulated/0/Download/أحب محمدا/test1.txt').createSync(recursive: true);
+    // File(fullDownloadedFilePath + '/' + driveFile.name)
+    //         .createSync(recursive: true);
+    // final savedFile = File(fullDownloadedFilePath + '/' + driveFile.name).openSync(mode: FileMode.write);
+    // savedFile.writeFromSync(downloadedData);
+    // await savedFile.close();
+    // print( ' saveFilePath: '+ savedFile.path);
+    // print('downloadedFilePath: '+downloadedFile.path);
+    return fullDownloadedFilePath + '/' + driveFile.name;
     //await OpenFile.open(downloadedFile.path);
   }
 }
