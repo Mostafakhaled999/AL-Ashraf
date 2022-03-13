@@ -67,7 +67,7 @@ class CustomWidgets {
       ),
       actions: [TextButton(
       onPressed: () {
-        Get.back();
+        Navigator.pop(Get.context!);
       },
       child: Text(
         "حسنا",
@@ -78,7 +78,7 @@ class CustomWidgets {
       TextButton(
         onPressed: () {
           dontShowAgain();
-          Get.back();
+          Navigator.pop(Get.context!);
         },
         child: Text(
           "لا تظهر هذه الرسالة مجددا",

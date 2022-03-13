@@ -1,10 +1,26 @@
 import 'package:al_ashraf/constants/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:al_ashraf/widgets/cards.dart';
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
 
-class HomeScreen extends StatelessWidget {
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    if(mounted)
+      {
+        //showDialog(context: Get.context!, builder: (context)=>AlertDialog(title: Text('asdsadasd'),));
+      }
+
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

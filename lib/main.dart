@@ -1,14 +1,16 @@
+import 'dart:io';
+
 import 'package:al_ashraf/screens/azkar_slawat.dart';
 import 'package:al_ashraf/screens/downloads_screen.dart';
-import 'package:al_ashraf/screens/hadra_audio.dart';
+import 'package:al_ashraf/screens/hadra_screen.dart';
 import 'package:al_ashraf/screens/images_screen.dart';
 import 'package:al_ashraf/screens/mobile_ringtones_screen.dart';
 import 'package:al_ashraf/screens/more_screen.dart';
+import 'package:upgrader/upgrader.dart';
 
 import 'screens/ahadeth_screen.dart';
 import 'screens/diwan_books_screen.dart';
 import 'screens/favourite_posts_screen.dart';
-import 'screens/hadra_book_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/inshad_screen.dart';
 import 'screens/nathr_books_screen.dart';
@@ -21,21 +23,18 @@ import 'models/audio_components.dart';
 import 'models/post.dart';
 import 'models/notification.dart';
 import 'models/app_rating.dart';
-import 'models/auto_update.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 
-
-void main()async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   LocalNotification.initialize();
   Hive.initFlutter();
   Hive.registerAdapter(PostAdapter());
   AppRating().checkRating();
-  AutoUpdate().checkForNewUpdate();
   GlobalAudioPlayer.initializeBackGroundAudio();
   runApp(const MyApp());
 }
@@ -58,7 +57,9 @@ class MyApp extends StatelessWidget {
         backgroundColor: Colors.white,
         //primarySwatch: Colors.white,
       ),
-      home: HomeScreen(),
+      home: UpgradeAlert(child: HomeScreen(),
+        messages: UpgraderMessages(code: 'ar'),
+        dialogStyle: Platform.isIOS ? UpgradeDialogStyle.cupertino:UpgradeDialogStyle.material,),
       routes: {
         'home': (context) => HomeScreen(),
         'posts': (context) => PostsScreen(),
@@ -72,12 +73,13 @@ class MyApp extends StatelessWidget {
         'nathr_books': (context) => NathrBooksScreen(),
         'posts': (context) => PostsScreen(),
         'favourite_posts': (context) => FavouritePostsScreen(),
-        'images': (context)=>ImagesScreen(),
-        'hadra_audio':(context)=>HadraAudioScreen(),
+        'images': (context) => ImagesScreen(),
+        'hadra_audio': (context) => HadraAudioScreen(),
         'downloads': (context) => DownloadsScreen(),
-        'azkar&slwat': (context)=>AzkarAndSalwat(),
-        'mobile_ringtones':(context)=>MobileRingtonesScreen(),
-        'more':(context)=>MoreScreen(),
+        'azkar&slwat': (context) => AzkarAndSalwat(),
+        'mobile_ringtones': (context) => MobileRingtonesScreen(),
+        'more': (context) => MoreScreen(),
+        'hadra': (context) => HadraScreen(),
       },
     );
   }

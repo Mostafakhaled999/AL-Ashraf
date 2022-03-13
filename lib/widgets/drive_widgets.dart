@@ -167,11 +167,11 @@ class FolderGridCard extends StatelessWidget {
         Expanded(
           child: Padding(
             padding: const EdgeInsets.only(right: 8.0, left: 8),
-            child: AutoSizeText(
+            child: Text(
               folderName,
               softWrap: true,
               textDirection: TextDirection.rtl,
-              maxLines: 3,
+              maxLines: 2,
               textAlign: TextAlign.center,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(fontSize: 20),

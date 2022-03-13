@@ -45,10 +45,10 @@ const List<String> kHomeScreenCardNames = [
   "الدواوين",
   "كتب النثر",
   "الإذاعة",
-  "كتاب الحضرة",
-  "صوت الحضرة",
+  "الحضرة",
   "الأحاديث",
   "الإنشاد",
+  "التحميلات",
   "المزيد",
   "من نحن",
   "اتصل بنا",
@@ -60,10 +60,10 @@ const List<String> kHomeScreenRouteNames = [
   'diwans',
   'nathr_books',
   'radio',
-  'hadra_book',
-  'hadra_audio',
+   'hadra',
   'ahadeth',
   'inshad',
+  'downloads',
   'more',
   'who_are_we',
   'contact_us',
@@ -77,22 +77,20 @@ const List<String> kAnimatedHomeImgsPath = [
   "assets/lottie_gifs/home_screen/nathr_books.json",
   "assets/lottie_gifs/home_screen/radio.json",
   "assets/lottie_gifs/home_screen/hadra_book.json",
-  "assets/lottie_gifs/home_screen/hadra_audio.json",
   "assets/lottie_gifs/home_screen/ahadeth.json",
   "assets/lottie_gifs/home_screen/inshad.json",
+  "assets/lottie_gifs/home_screen/downloads.json",
   "assets/lottie_gifs/home_screen/more.json",
   "assets/lottie_gifs/home_screen/who_are_we.json",
   "assets/lottie_gifs/home_screen/contact_us.json",
 
 ];
 const List<String> kMoreHomeScreenCardNames = [
-  "التحميلات",
   "الأوراد والأذكار",
   "الصور",
   "نغمات الجوال"
 ];
 const List<String> kMoreHomeScreenRouteNames = [
-  'downloads',
   'azkar&slwat',
   'images',
   'mobile_ringtones'
@@ -100,11 +98,23 @@ const List<String> kMoreHomeScreenRouteNames = [
 ];
 
 const List<String> kMoreAnimatedHomeImgsPath = [
-  "assets/lottie_gifs/home_screen/downloads.json",
   "assets/lottie_gifs/home_screen/azkar&slawat.json",
   "assets/lottie_gifs/home_screen/images.json",
   "assets/lottie_gifs/home_screen/mobile_ringtones.json"
 
+];
+const List<String> kHadraScreenCardNames = [
+  "كتاب الحضرة",
+  "صوت الحضرة",
+];
+const List<String> kHadraScreenRouteNames = [
+  'hadra_book',
+  'hadra_audio',
+];
+
+const List<String> kHadraAnimatedHomeImgsPath = [
+  "assets/lottie_gifs/home_screen/hadra_book.json",
+  "assets/lottie_gifs/home_screen/hadra_audio.json",
 ];
 
 List<String> kWebsitesURLs = [

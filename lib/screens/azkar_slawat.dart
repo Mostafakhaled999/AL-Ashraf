@@ -46,10 +46,15 @@ class DriveBooksScreen extends StatelessWidget {
             delegate: SliverChildBuilderDelegate((context, index) {
               return GridCard(
                 gridCardImage: _cardImage(index),
-                gridCardWidget: ImageCardText(
-                  gridCardName: bookData.content[index].name,
-                  cardNameMaxLines: 1,
-                  cardNameFontSize: 20,
+                gridCardWidget: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Text(
+                     bookData.content[index].name,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    //textAlign: TextAlign.center,
+                    style:TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+                  ),
                 ),
                 //crossAxisAlignment: CrossAxisAlignment.stretch,
                 onPress: () {

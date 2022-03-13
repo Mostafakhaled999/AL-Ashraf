@@ -40,12 +40,6 @@ class _AudioCardsScreenState extends State<AudioCardsScreen> {
   }
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomWidgets.customAppBar(widget.driveFolder.name,
@@ -118,9 +112,9 @@ class AudioCard extends StatelessWidget {
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: AutoSizeText(
+                        child: Text(
                           driveAudio.name.replaceAll('.mp3', ''),
-                          maxLines: 3,
+                          maxLines: 2,
                           textDirection: TextDirection.rtl,
                           style: TextStyle(
                               fontSize: 22, overflow: TextOverflow.ellipsis),
