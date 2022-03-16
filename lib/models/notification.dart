@@ -28,11 +28,11 @@ class LocalNotification {
 
   static Future<void> _subscribeToTopic() async {
     var pref = await SharedPreferences.getInstance();
-    if (!pref.containsKey('testDev')) {
+    if (!pref.containsKey('subscribedToHobAlNabi')) {
       await FirebaseMessaging.instance
-          .subscribeToTopic('testDev')
+          .subscribeToTopic('HobAlNabi')
           .whenComplete(() {
-        pref.setBool('testDev', true);
+        pref.setBool('subscribedToHobAlNabi', true);
       });
     }
   }
@@ -42,19 +42,19 @@ class LocalNotification {
     FirebaseMessaging.instance.getInitialMessage().then((message) {
       if (message != null) {
         Get.to(() => PostsScreen(
-              url: message.data['url'] ?? kMainPostUrl,
+              url: message.data['url'] ,
             ));
       }
     });
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       displayLocalNotification(
-          title: message.notification!.title.toString() ?? '',
-          body: message.notification!.body.toString() ?? '');
+          title: message.notification!.title.toString() ,
+          body: message.notification!.body.toString());
     });
     FirebaseMessaging.onMessageOpenedApp.listen((message) {
-      print('notification URL: ' + message.data['url']);
+      //print('notification URL: ' + message.data['url']);
       Get.to(() => PostsScreen(
-            url: message.data['url'] ?? kMainPostUrl,
+            url: message.data['url'],
           ));
     });
   }

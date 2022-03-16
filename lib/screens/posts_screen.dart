@@ -13,7 +13,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
 class PostsScreen extends StatefulWidget {
-  String url;
+  String? url;
 
   PostsScreen({this.url = kMainPostUrl});
 
@@ -33,7 +33,7 @@ class _PostsScreenState extends State<PostsScreen> {
 
   PostData _postData = PostData();
   late Post _currentPost =
-      Post(url: widget.url == '' ? kMainPostUrl : widget.url);
+      Post(url: widget.url == '' ? kMainPostUrl : widget.url??kMainPostUrl);
   final Completer<WebViewController> _completeController =
       Completer<WebViewController>();
   WebViewController? _webViewController;
@@ -105,7 +105,7 @@ class _PostsScreenState extends State<PostsScreen> {
             elevation: 1,
           ),
           extendBodyBehindAppBar: true,
-          //floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
+          floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
           floatingActionButton: FloatingActionButton(
             child: Icon(
               CupertinoIcons.heart_fill,
