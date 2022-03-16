@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:open_file/open_file.dart';
 
-
 class DownloadsScreen extends StatelessWidget {
   String folderName;
   String folderPath;
@@ -39,15 +38,52 @@ class DownloadsScreen extends StatelessWidget {
                   files: downloadFiles, folderName: folderName);
             }
           } else {
-            return Center(
-                child: Text(
-              'لا يوجد ملفات محملة',
-              style: TextStyle(fontSize: 30),
-            ));
+            return NoDownloadsFoundScreen();
           }
         },
       ),
     ));
+  }
+}
+
+class NoDownloadsFoundScreen extends StatelessWidget {
+  const NoDownloadsFoundScreen({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Center(
+            child: Text(
+          'لا يوجد ملفات محملة',
+          style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),
+        )),
+        Positioned(
+          height: 50,
+          width: 50,
+          top: 10,
+          left: 10,
+          child: Card(
+              elevation: 5,
+              color: Colors.lightGreen,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10))),
+              child: IconButton(
+                icon: Icon(
+                  Icons.adaptive.arrow_back,
+                  size: 25,
+                  color: Colors.white,
+                ),
+                //color: Colors.green,
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              )),
+        ),
+      ],
+    );
   }
 }
 
@@ -133,7 +169,7 @@ class DownloadsContentView extends StatelessWidget {
                         ),
                         subtitle: Text(
                           '${(files[index].statSync().size / (1024 * 1024)).ceil()}'
-                              'mb',
+                          'mb',
                         ),
                         title: Text(files[index]
                             .path

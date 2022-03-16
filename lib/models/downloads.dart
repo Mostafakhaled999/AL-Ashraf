@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:al_ashraf/constants/constants.dart';
 import 'package:al_ashraf/models/google_drive.dart';
@@ -11,6 +10,8 @@ import 'package:http/http.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+
+import 'notification.dart';
 
 class DownloadModel {
   GoogleDrive driveFile;
@@ -70,6 +71,10 @@ class DownloadModel {
           },
           onDone: () async {
             savePath = await _saveDownloadedFile(bytes2);
+            LocalNotification.displayLocalNotification(title: 'تم الانتهاء من تحميل الملف', body: driveFile.name,onSelectLocalNotification: (payload){
+              print('notification pressed');
+              OpenFile.open(savePath);
+            });
           },
           onError: (e) {
             print(e);

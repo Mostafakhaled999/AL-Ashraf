@@ -9,7 +9,6 @@ import 'package:al_ashraf/widgets/loading_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
@@ -106,6 +105,7 @@ class _PostsScreenState extends State<PostsScreen> {
             elevation: 1,
           ),
           extendBodyBehindAppBar: true,
+          //floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
           floatingActionButton: FloatingActionButton(
             child: Icon(
               CupertinoIcons.heart_fill,

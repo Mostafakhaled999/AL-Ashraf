@@ -29,13 +29,13 @@ import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 
-void main() async {
+void main()async{
   WidgetsFlutterBinding.ensureInitialized();
-  LocalNotification.initialize();
   Hive.initFlutter();
   Hive.registerAdapter(PostAdapter());
   AppRating().checkRating();
   GlobalAudioPlayer.initializeBackGroundAudio();
+  await LocalNotification.initialize();
   runApp(const MyApp());
 }
 
