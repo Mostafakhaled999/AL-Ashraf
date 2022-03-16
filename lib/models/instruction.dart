@@ -8,7 +8,7 @@ class Instructions{
   String instructionKey;
   Instructions({required this.instructionKey,required this.instructionText});
 
-  void dontShowPdfInstructions()async{
+  void _dontShowInstructions()async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool(instructionKey, true);
   }
@@ -16,7 +16,10 @@ class Instructions{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var contains = prefs.containsKey(instructionKey);
     if(!contains){
-      showDialog(context: Get.context!, builder: (context) => CustomWidgets.customAlertDialog( instructionText, dontShowPdfInstructions),);
+      _showInstructionsAlertDialog();
     }
+  }
+  void _showInstructionsAlertDialog(){
+    showDialog(context: Get.context!, builder: (context) => CustomWidgets.customAlertDialog( instructionText, _dontShowInstructions),);
   }
 }

@@ -44,7 +44,7 @@ class _FavouritePostsScreenState extends State<FavouritePostsScreen> {
               color: Colors.transparent,
               child: FutureBuilder(
                 future: _postData.getFavouritePosts(),
-                builder: (context, snapshot) {
+                builder: (context, AsyncSnapshot<List<Post>>snapshot) {
                   if (snapshot.hasData) {
                     if (_postData.count == 0) {
                       return Center(
@@ -57,9 +57,9 @@ class _FavouritePostsScreenState extends State<FavouritePostsScreen> {
                     } else {
                       return ListView.builder(
                         itemBuilder: (context, index) {
-                          var favPost = _postData.posts[index];
+                          var favPost = snapshot.data![index];
                           return Dismissible(
-                            key: Key(favPost.url),
+                            key: UniqueKey(),
                             direction: DismissDirection.startToEnd,
                             onDismissed: (direction) {
                               _postData.removeFromFavourites(favPost);

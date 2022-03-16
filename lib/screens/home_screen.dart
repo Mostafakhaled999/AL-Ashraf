@@ -1,9 +1,26 @@
 import 'package:al_ashraf/constants/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:al_ashraf/widgets/cards.dart';
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
-class HomeScreen extends StatelessWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    if(mounted)
+      {
+        //showDialog(context: Get.context!, builder: (context)=>AlertDialog(title: Text('asdsadasd'),));
+      }
+
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,8 +70,24 @@ class HomeScreen extends StatelessWidget {
                     kAnimatedHomeImgsPath[index],
                     fit: BoxFit.cover),
                 onPress: (index) =>
-                    Navigator.pushNamed(context, kScreenRouteNames[index]),
-              )
+                    Navigator.pushNamed(context, kHomeScreenRouteNames[index]),
+              ),
+              SliverList(
+                  delegate: SliverChildListDelegate([
+                    SizedBox(height: 10,)
+                  ])),
+              SliverGrid(
+                delegate: SliverChildListDelegate([
+                  ExtraHomeScreenCards.shareAppCard(),
+                  ExtraHomeScreenCards.rateAppCard(),
+                ]),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                ),
+              ),
+
             ]),
           ),
         ));

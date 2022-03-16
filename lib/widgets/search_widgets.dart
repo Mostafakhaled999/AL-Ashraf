@@ -102,7 +102,7 @@ class SearchScreen extends SearchDelegate<String> {
 
   @override
   Widget buildResults(BuildContext context) {
-    return FutureBuilder(
+    return query.isNotEmpty? FutureBuilder(
           future: bookData.search(query),
           builder: (context,AsyncSnapshot<List<Book>> snapshot) {
             if (snapshot.hasData) {
@@ -125,10 +125,11 @@ class SearchScreen extends SearchDelegate<String> {
             } else if(snapshot.hasError) {
               Get.back();
               return CustomWidgets.customSnackBar('حدث خطأ حاول لاحقا');
+
             }
             else
               return LoadingWidget();
-          });
+          }):ResultsNotFound();
 
     }
 
@@ -150,7 +151,7 @@ class SearchBookTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String completeSearchText = book.searchText!;
+    String completeSearchText = book.completeSearchText!;
     return ListTile(
       tileColor: Colors.white,
       minVerticalPadding: 15,

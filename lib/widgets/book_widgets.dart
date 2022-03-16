@@ -173,7 +173,6 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     instructions.checkForInstructions();
     super.initState();
   }
@@ -182,40 +181,36 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-            //appBar: CustomWidgets.customAppBar(widget.book.title,
-            //     centerTitle: true, fontSize: 25,elevation: 1),
-            // extendBodyBehindAppBar: true,
-            body:Stack(children: [
-
-              SfPdfViewer.asset(
-              widget.book.pdfContentPath,
-              enableTextSelection: false,
-            ), Positioned(
-                height: 50,
-                width: 50,
-                top: 10,
-                left: 10,
-                child: Card(
-                    elevation: 5,
-                    color: Colors.lightGreen,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.adaptive.arrow_back,
-                        size: 25,
-                        color: Colors.white,
-                      ),
-                      //color: Colors.green,
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                    )),
-              ),],
-
-            )
-
-        ));
+            body: Stack(
+      children: [
+        SfPdfViewer.asset(
+          widget.book.pdfContentPath,
+          enableTextSelection: false,
+        ),
+        Positioned(
+          height: 50,
+          width: 50,
+          top: 10,
+          left: 10,
+          child: Card(
+              elevation: 5,
+              color: Colors.lightGreen,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10))),
+              child: IconButton(
+                icon: Icon(
+                  Icons.adaptive.arrow_back,
+                  size: 25,
+                  color: Colors.white,
+                ),
+                //color: Colors.green,
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              )),
+        ),
+      ],
+    )));
   }
 }
 
@@ -229,18 +224,57 @@ class WebViewViewerScreen extends StatefulWidget {
 }
 
 class _WebViewViewerScreenState extends State<WebViewViewerScreen> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
+  late InAppWebViewController _webViewController;
+
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: CustomWidgets.customAppBar(widget.book.title,
-          fontSize: 23, elevation: 1),
+      appBar: AppBar(
+        elevation: 1,
+        backgroundColor: Colors.transparent,
+        centerTitle: true,
+        title: Text(
+          widget.book.title,
+          textDirection: TextDirection.rtl,
+        ),
+        titleTextStyle: TextStyle(
+            color: Colors.white, fontSize: 23, fontWeight: FontWeight.bold),
+        leading: IconButton(
+          icon: Icon(
+            Icons.adaptive.arrow_back,
+            size: 30,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            _webViewController.clearFocus();
+            Get.back();
+          },
+        ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                _webViewController.findNext(forward: false);
+              },
+              icon: Icon(
+                Icons.keyboard_arrow_up,
+                size: 30,
+                color: Colors.white,
+              )),
+          IconButton(
+              onPressed: () {
+                _webViewController.findNext(forward: true);
+              },
+              icon: Icon(
+                Icons.keyboard_arrow_down,
+                size: 30,
+                color: Colors.white,
+              )),
+        ],
+      ),
+      // CustomWidgets.customAppBar(widget.book.title,
+      //     fontSize: 23, elevation: 1),
       extendBodyBehindAppBar: true,
       extendBody: true,
       body: GestureDetector(
@@ -255,7 +289,15 @@ class _WebViewViewerScreenState extends State<WebViewViewerScreen> {
             horizontalScrollBarEnabled: true,
           )),
           onLoadStop: (controller, url) {
-            controller.findAllAsync(find: widget.book.searchText.toString());
+            _webViewController = controller;
+             controller.findAllAsync(
+                find: widget.book.completeSearchText.toString());
+          },
+          onFindResultReceived: (controller, activeMatchOrdinal,
+              numberOfMatches, isDoneCounting){
+            if (isDoneCounting && numberOfMatches == 0) {
+               controller.findAllAsync(find: widget.book.searchQuery.toString());
+            }
           },
         ),
       ),

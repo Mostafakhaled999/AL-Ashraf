@@ -13,7 +13,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
 class PostsScreen extends StatefulWidget {
-  String url;
+  String? url;
 
   PostsScreen({this.url = kMainPostUrl});
 
@@ -33,7 +33,7 @@ class _PostsScreenState extends State<PostsScreen> {
 
   PostData _postData = PostData();
   late Post _currentPost =
-      Post(url: widget.url == '' ? kMainPostUrl : widget.url);
+      Post(url: widget.url == '' ? kMainPostUrl : widget.url??kMainPostUrl);
   final Completer<WebViewController> _completeController =
       Completer<WebViewController>();
   WebViewController? _webViewController;
@@ -67,7 +67,7 @@ class _PostsScreenState extends State<PostsScreen> {
   Future<NavigationDecision> _checkConnectionForNavigation(
       NavigationRequest navigation) async {
     _connectionState = await _checkConnectivity();
-    print('navigation');
+
     if (_connectionState) {
       if (navigation.url.contains(kMainPostUrl)) {
         return NavigationDecision.navigate;
@@ -105,6 +105,7 @@ class _PostsScreenState extends State<PostsScreen> {
             elevation: 1,
           ),
           extendBodyBehindAppBar: true,
+          floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
           floatingActionButton: FloatingActionButton(
             child: Icon(
               CupertinoIcons.heart_fill,
@@ -114,10 +115,15 @@ class _PostsScreenState extends State<PostsScreen> {
             backgroundColor: Colors.white,
             onPressed: () async {
               _connectionState = await _checkConnectivity();
-              await _postData.updatePostFavouriteStatus(_currentPost.url);
               if (_connectionState) {
+                _currentPost.title = await _webViewController!.getTitle();
+                _currentPost.date = await _webViewController!
+                    .runJavascriptReturningResult(
+                        "window.document.getElementsByTagName('time')[0].innerHTML");
+                _currentPost =
+                    await _postData.updateFavouritePostStatus(_currentPost);
                 setState(() {
-                  _currentPost = _postData.getPostByUrl(_currentPost.url);
+                  //_currentPost = _postData.getPostByUrl(_currentPost.url);
                 });
               }
             },
@@ -133,6 +139,8 @@ class _PostsScreenState extends State<PostsScreen> {
                       child: WebView(
                         initialUrl: _currentPost.url,
                         gestureNavigationEnabled: true,
+                        zoomEnabled: true,
+                        javascriptMode: JavascriptMode.unrestricted,
                         onWebViewCreated: (controller) {
                           _completeController.complete(controller);
                           _webViewController = controller;
@@ -148,6 +156,7 @@ class _PostsScreenState extends State<PostsScreen> {
                             });
                           }
                         },
+                        onPageFinished: (url) async {},
                         onWebResourceError: (error) {
                           //Get.to(NoConnectionWidget(restartConnection: ()=>_restartConnection()));
                         },
