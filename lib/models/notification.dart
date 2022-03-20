@@ -27,20 +27,34 @@ class LocalNotification {
   }
 
   static Future<void> _subscribeToTopic() async {
-    var pref = await SharedPreferences.getInstance();
-    if (!pref.containsKey('subscribedToHobAlNabi')) {
+    final pref = await SharedPreferences.getInstance();
+    DateTime currentDate = DateTime.now();
+    if (!pref.containsKey('lastNotificationReceivedDate')) {
       await FirebaseMessaging.instance
-          .subscribeToTopic('HobAlNabi')
+          .subscribeToTopic('testDev')
           .whenComplete(() {
-        pref.setBool('subscribedToHobAlNabi', true);
+            pref.setString('lastNotificationReceivedDate', currentDate.toIso8601String());
       });
+    }else{
+      final lastNotificationReceivedDate = DateTime.parse(pref.getString('lastNotificationReceivedDate')!);
+      final diff = currentDate.difference(lastNotificationReceivedDate).inDays;
+      if(diff >= 2){
+        await FirebaseMessaging.instance
+            .subscribeToTopic('testDev')
+            .whenComplete(() {
+          pref.setString('lastNotificationReceivedDate', currentDate.toIso8601String());
+        });
+      }
     }
   }
 
   static Future _startNotificationListners() async {
+    final pref = await SharedPreferences.getInstance();
+    DateTime currentDate = DateTime.now();
     //FirebaseMessaging.onBackgroundMessage(_messageHandler);
     FirebaseMessaging.instance.getInitialMessage().then((message) {
       if (message != null) {
+        pref.setString('lastNotificationReceivedDate', currentDate.toIso8601String());
         Get.to(() => PostsScreen(
               url: message.data['url'] ,
             ));
@@ -52,6 +66,7 @@ class LocalNotification {
           body: message.notification!.body.toString());
     });
     FirebaseMessaging.onMessageOpenedApp.listen((message) {
+      pref.setString('lastNotificationReceivedDate', currentDate.toIso8601String());
       //print('notification URL: ' + message.data['url']);
       Get.to(() => PostsScreen(
             url: message.data['url'],
