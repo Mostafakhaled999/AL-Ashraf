@@ -184,6 +184,8 @@ class ExtraHomeScreenCards {
           if (Platform.isAndroid) {
             Share.share(
                 'https://play.google.com/store/apps/details?id=com.alabd.alashraf');
+          }else{
+            //TODO: add apple store id for app share
           }
         });
   }

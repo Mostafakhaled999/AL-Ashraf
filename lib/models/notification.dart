@@ -1,4 +1,3 @@
-import 'package:al_ashraf/constants/constants.dart';
 import 'package:al_ashraf/screens/posts_screen.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_core/firebase_core.dart';

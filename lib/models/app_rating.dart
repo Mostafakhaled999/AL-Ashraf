@@ -26,6 +26,7 @@ class AppRating{
   }
   static Future rate()async{
     final InAppReview inAppReview = InAppReview.instance;
+    //TODO: add apple store id for app rating
     inAppReview.openStoreListing(appStoreId: '',);
   }
 }

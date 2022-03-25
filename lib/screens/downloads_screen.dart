@@ -1,19 +1,26 @@
 import 'dart:io';
 
 import 'package:al_ashraf/widgets/drive_widgets.dart';
+import 'package:al_ashraf/widgets/loading_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
 
 class DownloadsScreen extends StatelessWidget {
   String folderName;
-  String folderPath;
+  String? folderPath;
 
   DownloadsScreen(
       {this.folderName = 'أحب محمدا',
-      this.folderPath = '/storage/emulated/0/Download/أحب محمدا'});
-
-  List<FileSystemEntity> _getFiles(String folderPath) {
+      this.folderPath });
+//= '/storage/emulated/0/Download/أحب محمدا'
+  Future<List<FileSystemEntity>> _getFiles(String? folderPath) async {
+    if(folderPath == null){
+     folderPath = Platform.isAndroid?'/storage/emulated/0/Download': (await getApplicationDocumentsDirectory()).path;
+     folderPath += '/أحب محمدا';
+     //print(folderPath);
+    }
     try {
       List<FileSystemEntity> files = Directory(folderPath).listSync();
       return files;
@@ -24,24 +31,29 @@ class DownloadsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: Scaffold(
-      body: Builder(
-        builder: (context) {
-          var downloadFiles = _getFiles(folderPath);
-          if (downloadFiles.isNotEmpty) {
-            if (downloadFiles.first.statSync().type ==
-                FileSystemEntityType.directory) {
-              return DownloadFoldersScreen(
-                  folders: downloadFiles, folderName: folderName);
-            } else {
-              return DownloadsContentView(
-                  files: downloadFiles, folderName: folderName);
+    return SafeArea(
+        child: Scaffold(
+      body: FutureBuilder(
+          future: _getFiles(folderPath),
+          builder: (context, AsyncSnapshot<List<FileSystemEntity>> snapshot) {
+            if (snapshot.hasData) {
+              var downloadFiles = snapshot.data!;
+              if (downloadFiles.isNotEmpty) {
+                if (downloadFiles.first.statSync().type ==
+                    FileSystemEntityType.directory) {
+                  return DownloadFoldersScreen(
+                      folders: downloadFiles, folderName: folderName);
+                } else {
+                  return DownloadsContentView(
+                      files: downloadFiles, folderName: folderName);
+                }
+              } else {
+                return NoDownloadsFoundScreen();
+              }
+            }else{
+              return LoadingWidget();
             }
-          } else {
-            return NoDownloadsFoundScreen();
-          }
-        },
-      ),
+          }),
     ));
   }
 }
@@ -58,7 +70,7 @@ class NoDownloadsFoundScreen extends StatelessWidget {
         Center(
             child: Text(
           'لا يوجد ملفات محملة',
-          style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
         )),
         Positioned(
           height: 50,
@@ -171,9 +183,13 @@ class DownloadsContentView extends StatelessWidget {
                           '${(files[index].statSync().size / (1024 * 1024)).ceil()}'
                           'mb',
                         ),
-                        title: Text(files[index]
-                            .path
-                            .replaceAll(files[index].parent.path + '/', '')),
+                        title: Text(
+                          files[index]
+                              .path
+                              .replaceAll(files[index].parent.path + '/', ''),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                     ),
                     onTap: () {
