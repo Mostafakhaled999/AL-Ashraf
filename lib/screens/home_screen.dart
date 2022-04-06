@@ -23,11 +23,11 @@ class _HomeScreenState extends State<HomeScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.white,
-        body: Directionality(
-          textDirection: TextDirection.rtl,
-          child: SafeArea(
+    return SafeArea(
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          body: Directionality(
+            textDirection: TextDirection.rtl,
             child: CustomScrollView(slivers: [
               SliverAppBar(
                 backgroundColor: Colors.white,
