@@ -10,13 +10,14 @@ class LocalNotification {
   static final FlutterLocalNotificationsPlugin _localNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
+  static FirebaseMessaging messaging = FirebaseMessaging.instance;
   static Future initialize() async {
     await Firebase.initializeApp();
 
     /// Update the iOS foreground notification presentation options to allow
     /// heads up notifications.
     if(Platform.isIOS){
-      FirebaseMessaging messaging = FirebaseMessaging.instance;
+
 
       await messaging.requestPermission(
         alert: true,
@@ -43,7 +44,7 @@ class LocalNotification {
     final pref = await SharedPreferences.getInstance();
     DateTime currentDate = DateTime.now();
     if (!pref.containsKey('lastNotificationReceivedDate')) {
-      await FirebaseMessaging.instance
+      await messaging
           .subscribeToTopic('testDev')
           .whenComplete(() {
             pref.setString('lastNotificationReceivedDate', currentDate.toIso8601String());
@@ -52,7 +53,7 @@ class LocalNotification {
       final lastNotificationReceivedDate = DateTime.parse(pref.getString('lastNotificationReceivedDate')!);
       final diff = currentDate.difference(lastNotificationReceivedDate).inDays;
       if(diff >= 2){
-        await FirebaseMessaging.instance
+        await messaging
             .subscribeToTopic('testDev')
             .whenComplete(() {
           pref.setString('lastNotificationReceivedDate', currentDate.toIso8601String());
@@ -65,7 +66,7 @@ class LocalNotification {
     final pref = await SharedPreferences.getInstance();
     DateTime currentDate = DateTime.now();
     //FirebaseMessaging.onBackgroundMessage(_messageHandler);
-    FirebaseMessaging.instance.getInitialMessage().then((message) {
+    messaging.getInitialMessage().then((message) {
       if (message != null) {
         pref.setString('lastNotificationReceivedDate', currentDate.toIso8601String());
         Get.to(() => PostsScreen(
