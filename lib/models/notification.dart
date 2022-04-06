@@ -15,11 +15,25 @@ class LocalNotification {
 
     /// Update the iOS foreground notification presentation options to allow
     /// heads up notifications.
-    FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
-      alert: true,
-      badge: true,
-      sound: true,
-    );
+    if(Platform.isIOS){
+      FirebaseMessaging messaging = FirebaseMessaging.instance;
+
+      await messaging.requestPermission(
+        alert: true,
+        announcement: false,
+        badge: true,
+        carPlay: false,
+        criticalAlert: false,
+        provisional: false,
+        sound: true,
+      );
+      await messaging.setForegroundNotificationPresentationOptions(
+        alert: true,
+        badge: true,
+        sound: true,
+      );
+    }
+
     await _subscribeToTopic();
 
     await _startNotificationListners();
@@ -108,10 +122,20 @@ class LocalNotification {
       required String body,
       Function onSelectLocalNotification = _onSelectLocalNotification}) async {
     await _initializeLocalNotification(onSelectLocalNotification);
+    const AndroidNotificationChannel channel = AndroidNotificationChannel(
+      'HobAlNabi', // id
+      'Hob Al Nabi', // title
+      // description
+      importance: Importance.max,
+    );
+
+    await _localNotificationsPlugin
+        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(channel);
 
     var platformChannelSpecifics = new NotificationDetails(
-        android: AndroidNotificationDetails('HobAlNabi', 'HOB AL NABI',
-            importance: Importance.max, priority: Priority.high),
+        android: AndroidNotificationDetails('HobAlNabi', 'Hob Al Nabi',
+            importance: Importance.max, priority: Priority.high,),
         iOS: IOSNotificationDetails());
 
     await _localNotificationsPlugin.show(
