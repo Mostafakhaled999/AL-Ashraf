@@ -5,6 +5,8 @@ import 'package:al_ashraf/widgets/custom_widgets.dart';
 import 'package:al_ashraf/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'dart:io';
+import 'ios_book_search_viewer.dart';
 
 class SearchBar extends StatelessWidget {
   BookData bookData;
@@ -199,7 +201,10 @@ class SearchBookTile extends StatelessWidget {
         fit: BoxFit.fitHeight,
       ),
       onTap: () {
-        Get.to(() => WebViewViewerScreen(book: book));
+        if(Platform.isAndroid)
+          Get.to(() => AndroidBookSearchViewScreen(book: book));
+        else
+          Get.to(() => IOSBookSearchViewScreen(book: book));
       },
     );
   }

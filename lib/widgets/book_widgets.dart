@@ -1,10 +1,11 @@
+import 'dart:async';
+import 'dart:io';
 import 'package:al_ashraf/models/instruction.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:al_ashraf/models/book.dart';
 import 'package:get/get.dart';
-import 'package:al_ashraf/widgets/custom_widgets.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
@@ -13,52 +14,52 @@ class BookListScreen extends StatelessWidget {
   Widget widget;
   BookData bookData;
 
-  BookListScreen(
-      {required this.screenTitle,
-      required this.widget,
-      required this.bookData});
+  BookListScreen({required this.screenTitle,
+    required this.widget,
+    required this.bookData});
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      body: CustomScrollView(
-        physics: BouncingScrollPhysics(),
-        slivers: [
-          SliverList(
-              delegate: SliverChildListDelegate([
-            Padding(
-              padding: EdgeInsets.all(12),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    icon: Icon(Icons.adaptive.arrow_back),
-                    iconSize: 40,
-                    //textDirection: TextDirection.ltr,
-                    color: Colors.black,
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  Text(
-                    screenTitle,
-                    textDirection: TextDirection.rtl,
-                    style: TextStyle(fontSize: 45, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            ),
-            widget,
-          ])),
-          SliverList(
-            delegate: SliverChildBuilderDelegate((context, index) {
-              return BookCard(bookData.books[index]);
-            }, childCount: bookData.count),
-          )
-        ],
-      ),
-    ));
+          body: CustomScrollView(
+            physics: BouncingScrollPhysics(),
+            slivers: [
+              SliverList(
+                  delegate: SliverChildListDelegate([
+                    Padding(
+                      padding: EdgeInsets.all(12),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          IconButton(
+                            icon: Icon(Icons.adaptive.arrow_back),
+                            iconSize: 40,
+                            //textDirection: TextDirection.ltr,
+                            color: Colors.black,
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                          Text(
+                            screenTitle,
+                            textDirection: TextDirection.rtl,
+                            style: TextStyle(
+                                fontSize: 45, fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                    ),
+                    widget,
+                  ])),
+              SliverList(
+                delegate: SliverChildBuilderDelegate((context, index) {
+                  return BookCard(bookData.books[index]);
+                }, childCount: bookData.count),
+              )
+            ],
+          ),
+        ));
   }
 }
 
@@ -73,7 +74,8 @@ class BookCard extends StatelessWidget {
       padding: EdgeInsets.only(top: 10, right: 12, left: 12),
       child: GestureDetector(
         onTap: () {
-          Get.to(() => PdfViewerScreen(
+          Get.to(() =>
+              PdfViewerScreen(
                 book: book,
               ));
         },
@@ -88,7 +90,10 @@ class BookCard extends StatelessWidget {
             children: <Widget>[
               Container(
                 height: 150,
-                width: 0.28 * MediaQuery.of(context).size.width,
+                width: 0.28 * MediaQuery
+                    .of(context)
+                    .size
+                    .width,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
@@ -182,48 +187,48 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
     return SafeArea(
         child: Scaffold(
             body: Stack(
-      children: [
-        SfPdfViewer.asset(
-          widget.book.pdfContentPath,
-          enableTextSelection: false,
-        ),
-        Positioned(
-          height: 50,
-          width: 50,
-          top: 10,
-          left: 10,
-          child: Card(
-              elevation: 5,
-              color: Colors.lightGreen,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10))),
-              child: IconButton(
-                icon: Icon(
-                  Icons.adaptive.arrow_back,
-                  size: 25,
-                  color: Colors.white,
+              children: [
+                SfPdfViewer.asset(
+                  widget.book.pdfContentPath,
+                  enableTextSelection: false,
                 ),
-                //color: Colors.green,
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              )),
-        ),
-      ],
-    )));
+                Positioned(
+                  height: 50,
+                  width: 50,
+                  top: 10,
+                  left: 10,
+                  child: Card(
+                      elevation: 5,
+                      color: Colors.lightGreen,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.adaptive.arrow_back,
+                          size: 25,
+                          color: Colors.white,
+                        ),
+                        //color: Colors.green,
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      )),
+                ),
+              ],
+            )));
   }
 }
 
-class WebViewViewerScreen extends StatefulWidget {
+class AndroidBookSearchViewScreen extends StatefulWidget {
   Book book;
 
-  WebViewViewerScreen({required this.book});
+  AndroidBookSearchViewScreen({required this.book});
 
   @override
-  _WebViewViewerScreenState createState() => _WebViewViewerScreenState();
+  _AndroidBookSearchViewScreenState createState() => _AndroidBookSearchViewScreenState();
 }
 
-class _WebViewViewerScreenState extends State<WebViewViewerScreen> {
+class _AndroidBookSearchViewScreenState extends State<AndroidBookSearchViewScreen> {
   late InAppWebViewController _webViewController;
 
 
@@ -231,76 +236,83 @@ class _WebViewViewerScreenState extends State<WebViewViewerScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: AppBar(
-        elevation: 1,
-        backgroundColor: Colors.transparent,
-        centerTitle: true,
-        title: Text(
-          widget.book.title,
-          textDirection: TextDirection.rtl,
-        ),
-        titleTextStyle: TextStyle(
-            color: Colors.white, fontSize: 23, fontWeight: FontWeight.bold),
-        leading: IconButton(
-          icon: Icon(
-            Icons.adaptive.arrow_back,
-            size: 30,
-            color: Colors.white,
+          appBar: AppBar(
+            elevation: 1,
+            backgroundColor: Colors.transparent,
+            centerTitle: true,
+            title: Text(
+              widget.book.title,
+              textDirection: TextDirection.rtl,
+            ),
+            titleTextStyle: TextStyle(
+                color: Colors.white, fontSize: 23, fontWeight: FontWeight.bold),
+            leading: IconButton(
+              icon: Icon(
+                Icons.adaptive.arrow_back,
+                size: 30,
+                color: Colors.white,
+              ),
+              onPressed: () {
+               // _webViewController.clearFocus();
+                Get.back();
+              },
+            ),
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    //_webViewController.findNext(forward: false);
+                  },
+                  icon: Icon(
+                    Icons.keyboard_arrow_up,
+                    size: 30,
+                    color: Colors.white,
+                  )),
+              IconButton(
+                  onPressed: () {
+                    //_webViewController.findNext(forward: true);
+                  },
+                  icon: Icon(
+                    Icons.keyboard_arrow_down,
+                    size: 30,
+                    color: Colors.white,
+                  )),
+            ],
           ),
-          onPressed: () {
-            _webViewController.clearFocus();
-            Get.back();
-          },
-        ),
-        actions: [
-          IconButton(
-              onPressed: () {
-                _webViewController.findNext(forward: false);
-              },
-              icon: Icon(
-                Icons.keyboard_arrow_up,
-                size: 30,
-                color: Colors.white,
-              )),
-          IconButton(
-              onPressed: () {
-                _webViewController.findNext(forward: true);
-              },
-              icon: Icon(
-                Icons.keyboard_arrow_down,
-                size: 30,
-                color: Colors.white,
-              )),
-        ],
-      ),
-      // CustomWidgets.customAppBar(widget.book.title,
-      //     fontSize: 23, elevation: 1),
-      extendBodyBehindAppBar: true,
-      extendBody: true,
-      body: GestureDetector(
-        onLongPress: () {},
-        child: InAppWebView(
-          initialData:
-              InAppWebViewInitialData(data: widget.book.webViewContent),
-          initialOptions: InAppWebViewGroupOptions(
-              crossPlatform: InAppWebViewOptions(
-            supportZoom: true,
-            javaScriptEnabled: false,
-            horizontalScrollBarEnabled: true,
-          )),
-          onLoadStop: (controller, url) {
-            _webViewController = controller;
-             controller.findAllAsync(
-                find: widget.book.completeSearchText.toString());
-          },
-          onFindResultReceived: (controller, activeMatchOrdinal,
-              numberOfMatches, isDoneCounting){
-            if (isDoneCounting && numberOfMatches == 0) {
-               controller.findAllAsync(find: widget.book.searchQuery.toString());
-            }
-          },
-        ),
-      ),
-    ));
+          // CustomWidgets.customAppBar(widget.book.title,
+          //     fontSize: 23, elevation: 1),
+          extendBodyBehindAppBar: true,
+          extendBody: true,
+          body: GestureDetector(
+            onLongPress: () {},
+            child:InAppWebView(
+                  initialData:
+                  InAppWebViewInitialData(data: widget.book.webViewContent),
+                  initialOptions: InAppWebViewGroupOptions(
+                      crossPlatform: InAppWebViewOptions(
+                        supportZoom: true,
+                        javaScriptEnabled: false,
+                        horizontalScrollBarEnabled: true,
+                      )),
+                  onLoadStop: (controller, url) {
+                    _webViewController = controller;
+                             controller.findAllAsync(
+               find: widget.book.completeSearchText.toString());
+                  },
+                  onFindResultReceived: (controller, activeMatchOrdinal,
+                      numberOfMatches, isDoneCounting) {
+                    if (isDoneCounting && numberOfMatches == 0) {
+                      controller.findAllAsync(
+                          find: widget.book.searchQuery.toString());
+                    }
+                  },
+                )
+
+          ),
+        ));
   }
 }
+
+
+
+
+
