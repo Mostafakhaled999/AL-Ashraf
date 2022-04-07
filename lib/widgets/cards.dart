@@ -185,7 +185,7 @@ class ExtraHomeScreenCards {
             Share.share(
                 'https://play.google.com/store/apps/details?id=com.alabd.alashraf');
           }else{
-            Share.share('https://apps.apple.com/app/id1616565241');
+            Share.share('https://apps.apple.com/app/id1616565241').onError((error, stackTrace) => Share.share('https://apps.apple.com/us/app/%D8%A3%D8%AD%D8%A8-%D9%85%D8%AD%D9%85%D8%AF%D8%A7/id1616565241'));
           }
         });
   }
