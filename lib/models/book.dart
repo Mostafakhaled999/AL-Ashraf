@@ -11,6 +11,7 @@ class Book {
   String authorName = 'صلاح الدين القوصى';
   String pdfContentPath;
   String webViewContent;
+  String IOSWebViewContent;
   int? partNumber;
 
   Book({required this.title,
@@ -18,7 +19,8 @@ class Book {
     required this.coverPath,
     this.partNumber,
     required this.pdfContentPath,
-    this.webViewContent = ''});
+    this.webViewContent = '',
+    this.IOSWebViewContent = ''});
 }
 
 class BookData {
@@ -128,6 +130,9 @@ class BookData {
         bookResult.searchQuery = searchText;
         bookResult.webViewContent =
             epubBookWithTashkil!.Content!.Html![subChapter.ContentFileName]!
+                .Content.toString();
+        bookResult.IOSWebViewContent =
+            epubBookWithOutTashkil!.Content!.Html![subChapter.ContentFileName]!
                 .Content.toString();
         searchedBooks.add(bookResult);
       }
