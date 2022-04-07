@@ -12,15 +12,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
-  void initState() {
-    // TODO: implement initState
-    if(mounted)
-      {
-        //showDialog(context: Get.context!, builder: (context)=>AlertDialog(title: Text('asdsadasd'),));
-      }
-
-    super.initState();
-  }
   @override
   Widget build(BuildContext context) {
     return SafeArea(

@@ -45,7 +45,7 @@ class LocalNotification {
     DateTime currentDate = DateTime.now();
     if (!pref.containsKey('lastNotificationReceivedDate')) {
       await messaging
-          .subscribeToTopic('testDev')
+          .subscribeToTopic('HobAlNabi')
           .whenComplete(() {
             pref.setString('lastNotificationReceivedDate', currentDate.toIso8601String());
       });
@@ -54,7 +54,7 @@ class LocalNotification {
       final diff = currentDate.difference(lastNotificationReceivedDate).inDays;
       if(diff >= 2){
         await messaging
-            .subscribeToTopic('testDev')
+            .subscribeToTopic('HobAlNabi')
             .whenComplete(() {
           pref.setString('lastNotificationReceivedDate', currentDate.toIso8601String());
         });
