@@ -56,7 +56,6 @@ class _IOSBookSearchViewScreenState extends State<IOSBookSearchViewScreen> {
                 _completeController.complete(controller);
                 _webViewController = controller;
                 controller.loadHtmlString(widget.book.IOSWebViewContent.replaceFirst(widget.book.completeSearchText.toString(), '<mark>${widget.book.completeSearchText}</mark>'));
-
               },onPageFinished: (url){
                 //_webViewController!.loadHtmlString(widget.book.webViewContent.replaceFirst(widget.book.searchQuery.toString(), '<mark>${widget.book.searchQuery}</mark>'));
                 _webViewController!.runJavascript('window.scrollBy(0, document.evaluate("//*[text()[contains(., \'${widget.book.completeSearchText}\')]]", document.body).iterateNext().getBoundingClientRect().top);');
