@@ -28,32 +28,30 @@ class CardListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        extendBodyBehindAppBar: false,
-        appBar: CustomWidgets.customAppBar(title, appBarColor: Colors.green),
-        body: CustomScrollView(
-          slivers: [
-            SliverList(
-                delegate: SliverChildListDelegate([
-              CustomCircularImage(imagePath: screenImagePath),
-              SizedBox(
-                height: 10,
-              ),
-              widget
-            ])),
-            CardGridList(
-              gridCardNames: cardNames,
-              cardNameDirection: TextDirection.ltr,
-              cardNameMaxLines: 2,
-              cardNameFontSize: 20,
-              gridCardImages: (index) =>
-                  Image(image: AssetImage(cardImagesPath[index])),
-              onPress: (index) => UrlLauncher(cardUrls[index]),
-            )
-          ],
-        ),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      extendBodyBehindAppBar: false,
+      appBar: CustomWidgets.customAppBar(title, appBarColor: Colors.green),
+      body: CustomScrollView(
+        slivers: [
+          SliverList(
+              delegate: SliverChildListDelegate([
+            CustomCircularImage(imagePath: screenImagePath),
+            SizedBox(
+              height: 10,
+            ),
+            widget
+          ])),
+          CardGridList(
+            gridCardNames: cardNames,
+            cardNameDirection: TextDirection.ltr,
+            cardNameMaxLines: 2,
+            cardNameFontSize: 20,
+            gridCardImages: (index) =>
+                Image(image: AssetImage(cardImagesPath[index])),
+            onPress: (index) => UrlLauncher(cardUrls[index]),
+          )
+        ],
       ),
     );
   }

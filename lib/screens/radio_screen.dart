@@ -29,75 +29,73 @@ class _RadioScreenState extends State<RadioScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-          appBar:
-              CustomWidgets.customAppBar('الإذاعة', appBarColor: Colors.green),
-          extendBodyBehindAppBar: false,
-          body: Column(
-              children: [
-            Expanded(
-              child: CustomCircularImage(
-                imagePath: kRadioScreenImgPath,
-              ),
+    return Scaffold(
+        appBar:
+            CustomWidgets.customAppBar('الإذاعة', appBarColor: Colors.green),
+        extendBodyBehindAppBar: false,
+        body: Column(
+            children: [
+          Expanded(
+            child: CustomCircularImage(
+              imagePath: kRadioScreenImgPath,
             ),
-            GridView.builder(
-                shrinkWrap: true,
-                itemCount: 2,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, crossAxisSpacing: 10),
-                itemBuilder: (context, index) => Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Card(
-                        elevation: 5,
-                        color: kCardColor,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15)),
-                        child: Column(children: [
-                          Expanded(
-                            child: Center(
-                              child: AutoSizeText(kRadioChannelsName[index],
-                                  textDirection: TextDirection.rtl,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(fontSize: 45)),
-                            ),
+          ),
+          GridView.builder(
+              shrinkWrap: true,
+              itemCount: 2,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, crossAxisSpacing: 10),
+              itemBuilder: (context, index) => Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Card(
+                      elevation: 5,
+                      color: kCardColor,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15)),
+                      child: Column(children: [
+                        Expanded(
+                          child: Center(
+                            child: AutoSizeText(kRadioChannelsName[index],
+                                textDirection: TextDirection.rtl,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: 45)),
                           ),
-                          ControlButton(
-                            audioId: kRadioChannelsFreq[index],
-                            audioName:kRadioChannelsName[index] ,
-                            initializedAudioId:
-                                globalAudioPlayer.intializedAudioId,
-                            player: globalAudioPlayer.audioPlayer,
-                            playLink: kRadioChannelsFreq[index],
-                            initializeAndPlay: (audioId,audioName,playLink) => _playRadio(audioId,audioName),
-                            iconSize: 60,
-                          )
-                        ])))),
-            SizedBox(
-              height: 15,
+                        ),
+                        ControlButton(
+                          audioId: kRadioChannelsFreq[index],
+                          audioName:kRadioChannelsName[index] ,
+                          initializedAudioId:
+                              globalAudioPlayer.intializedAudioId,
+                          player: globalAudioPlayer.audioPlayer,
+                          playLink: kRadioChannelsFreq[index],
+                          initializeAndPlay: (audioId,audioName,playLink) => _playRadio(audioId,audioName),
+                          iconSize: 60,
+                        )
+                      ])))),
+          SizedBox(
+            height: 15,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Row(
+              children: [
+                Icon(Icons.volume_down),
+                Expanded(
+                  child: Slider(
+                      value: globalAudioPlayer.audioPlayer.volume,
+                      activeColor: Colors.green,
+                      onChanged: (newVolume) {
+                        setState(() {
+                          globalAudioPlayer.audioPlayer.setVolume(newVolume);
+                        });
+                      }),
+                ),
+                Icon(
+                  Icons.volume_up,
+                ),
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: Row(
-                children: [
-                  Icon(Icons.volume_down),
-                  Expanded(
-                    child: Slider(
-                        value: globalAudioPlayer.audioPlayer.volume,
-                        activeColor: Colors.green,
-                        onChanged: (newVolume) {
-                          setState(() {
-                            globalAudioPlayer.audioPlayer.setVolume(newVolume);
-                          });
-                        }),
-                  ),
-                  Icon(
-                    Icons.volume_up,
-                  ),
-                ],
-              ),
-            ),
-          ])),
-    );
+          ),
+        ]));
   }
 }
